@@ -8,4 +8,8 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\dds.net-connector-csharp.lib\dds.net-connector-csharp.lib.csproj" />
+  </ItemGroup>
+
 </Project>
