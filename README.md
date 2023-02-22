@@ -1,4 +1,4 @@
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img src="./.assets/DDS.Net Connector Icon-CS-BG-None.png" width="10%" />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img src="./.assets/DDS.Net Connector Icon-CS-BG-None.png" width="15%" />
 
 
 # DDS.Net C# Connector
