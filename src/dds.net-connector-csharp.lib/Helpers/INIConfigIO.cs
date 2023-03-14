@@ -39,7 +39,7 @@ namespace DDS.Net.Connector.Helpers
 
             if (File.Exists(Filename) == false)
             {
-                _logger?.Warning($"Cannot load configuration file \"{Filename}\"");
+                _logger?.Info($"Cannot load INI file \"{Filename}\"");
                 return;
             }
 
