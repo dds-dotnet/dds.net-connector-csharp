@@ -2,7 +2,7 @@
 
 namespace DDS.Net.Connector.Helpers
 {
-    internal static class IPAddressCheck
+    internal static class ExtIPAddress
     {
         private static Regex ipv4AddressPattern =
             new(@"\s*(\d{1,3})\s*\.\s*(\d{1,3})\s*\.\s*(\d{1,3})\s*\.\s*(\d{1,3})\s*");
