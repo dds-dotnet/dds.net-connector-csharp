@@ -1,6 +1,6 @@
 ﻿namespace DDS.Net.Connector.Helpers
 {
-    public static class ExtFilePath
+    internal static class ExtFilePath
     {
         /// <summary>
         /// Returns trimmed parts of provided string split by given character.
@@ -27,7 +27,7 @@
         /// Creates folder hierarchy for the file name provided.
         /// </summary>
         /// <param name="filename">Path of the file.</param>
-        public static void CreateFoldersForRelativeFilename(this string filename)
+        internal static void CreateFoldersForRelativeFilename(this string filename)
         {
             if (string.IsNullOrEmpty(filename)) return;
 
