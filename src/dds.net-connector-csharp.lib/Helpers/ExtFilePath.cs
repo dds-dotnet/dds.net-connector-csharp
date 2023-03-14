@@ -1,6 +1,6 @@
 ﻿namespace DDS.Net.Connector.Helpers
 {
-    public static class FileExtensions
+    public static class ExtFilePath
     {
         /// <summary>
         /// Returns trimmed parts of provided string split by given character.
