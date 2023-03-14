@@ -1,6 +1,6 @@
 ﻿namespace DDS.Net.Connector.Types
 {
-    public enum PrimitiveType
+    internal enum PrimitiveType
     {
         /// <summary>
         /// Represents a string of characters.
