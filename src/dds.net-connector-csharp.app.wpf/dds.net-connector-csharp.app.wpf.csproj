@@ -12,4 +12,13 @@
     <ProjectReference Include="..\dds.net-connector-csharp.lib\dds.net-connector-csharp.lib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Configuration\server-conf.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configuration\variables-conf.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
