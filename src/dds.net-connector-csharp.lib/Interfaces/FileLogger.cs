@@ -54,20 +54,14 @@ namespace DDS.Net.Connector.Interfaces
 
         public void Error(string message)
         {
-            lock (this)
-            {
-                _writer?.WriteLine($"Error: {message}");
-            }
+            _writer?.WriteLine($"Error: {message}");
         }
 
         public void Info(string message)
         {
             if (_logLevel == LogLevel.Information)
             {
-                lock (this)
-                {
-                    _writer?.WriteLine(message);
-                }
+                _writer?.WriteLine(message);
             }
         }
 
@@ -75,10 +69,7 @@ namespace DDS.Net.Connector.Interfaces
         {
             if (_logLevel != LogLevel.Error)
             {
-                lock (this)
-                {
-                    _writer?.WriteLine($"Warning: {message}");
-                }
+                _writer?.WriteLine($"Warning: {message}");
             }
         }
     }
