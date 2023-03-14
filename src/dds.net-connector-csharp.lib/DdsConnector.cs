@@ -24,6 +24,10 @@ namespace DDS.Net.Connector
             {
                 ServerAddressIPv4 = ServerAddressIPv4.RemoveSpaces();
             }
+
+            Logger.Info(
+                $"Initializing connector version {Settings.CONNECTOR_VERSION} " +
+                $"with server @{ServerAddressIPv4}:{ServerPortTCP}");
         }
 
         public string ServerAddressIPv4 { get; }
