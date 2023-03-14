@@ -15,8 +15,8 @@
             ILogger logger04 = null!,
             ILogger logger05 = null!)
         {
-            this.logger01 = logger01;
-            this.logger02 = logger02;
+            this.logger01 = logger01 ?? throw new ArgumentNullException(nameof(logger01));
+            this.logger02 = logger02 ?? throw new ArgumentNullException(nameof(logger02));
             this.logger03 = logger03;
             this.logger04 = logger04;
             this.logger05 = logger05;
