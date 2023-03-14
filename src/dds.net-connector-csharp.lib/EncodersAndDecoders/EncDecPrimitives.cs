@@ -1,5 +1,4 @@
-﻿using DDS.Net.Connector.EncodersAndDecoders;
-using System.Text;
+﻿using System.Text;
 
 namespace DDS.Net.Connector.EncodersAndDecoders
 {
@@ -644,7 +643,7 @@ namespace DDS.Net.Connector.EncodersAndDecoders
             data.ThrowIfNotHavingRequiredBytes(ref offset, 8);
 
             byte[] converted = BitConverter.GetBytes(value);
-            
+
             if (BitConverter.IsLittleEndian)
             {
                 for (int i = 7; i >= 0; i--)
