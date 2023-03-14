@@ -49,7 +49,7 @@ namespace DDS.Net.Connector.EncodersAndDecoders
         }
 
         /// <summary>
-        /// Size in bytes <c cref="PacketId">PacketId</c> requires on a buffer.
+        /// Size in bytes that <c cref="PacketId">PacketId</c> requires on a buffer.
         /// </summary>
         /// <param name="_"></param>
         /// <returns>Number of bytes required on the buffer</returns>
