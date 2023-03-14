@@ -1,20 +1,20 @@
 ﻿namespace DDS.Net.Connector.Interfaces
 {
     /// <summary>
-    /// Level of log messages.
+    /// Level of log message.
     /// </summary>
     public enum LogLevel
     {
         /// <summary>
-        /// Least important information.
+        /// Status information.
         /// </summary>
         Information,
         /// <summary>
-        /// Medium-level of information.
+        /// Priority information.
         /// </summary>
         Warning,
         /// <summary>
-        /// Critical-level of information.
+        /// Critical information.
         /// </summary>
         Error
     }
