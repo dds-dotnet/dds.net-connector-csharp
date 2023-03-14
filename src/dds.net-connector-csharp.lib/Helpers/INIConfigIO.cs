@@ -3,11 +3,25 @@ using System.Text.RegularExpressions;
 
 namespace DDS.Net.Connector.Helpers
 {
+    /// <summary>
+    /// Class <c>INIConfigIO</c> provides an easy to use interface
+    /// for reading and writing INI files.
+    /// </summary>
     public class INIConfigIO
     {
+        /// <summary>
+        /// The INI file name.
+        /// </summary>
         public string Filename { get; set; }
 
+        /// <summary>
+        /// Holds the Section Names vs their Key=>Value pairs.
+        /// </summary>
         private Dictionary<string, Dictionary<string, string>> _config;
+
+        /// <summary>
+        /// Interface to output logging messages.
+        /// </summary>
         private ILogger? _logger;
 
         public INIConfigIO(string filename, ILogger? logger = null)
