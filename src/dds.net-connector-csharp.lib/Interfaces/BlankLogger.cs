@@ -1,7 +1,7 @@
 ﻿namespace DDS.Net.Connector.Interfaces
 {
     /// <summary>
-    /// Class <c>BlankLogger</c> implements <c>ILogger</c>, though does nothing
+    /// Class <c>BlankLogger</c> implements <c>ILogger</c> interface, though does nothing
     /// with log messages. Use it to discard all the messages.
     /// </summary>
     public class BlankLogger : ILogger
