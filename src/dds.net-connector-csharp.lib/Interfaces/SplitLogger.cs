@@ -1,5 +1,10 @@
 ﻿namespace DDS.Net.Connector.Interfaces
 {
+    /// <summary>
+    /// Class <c>SplitLogger</c> implements <c>ILogger</c> interface, and
+    /// provides a means of splitting log messages to multiple implementations
+    /// of <c>ILogger</c> interface.
+    /// </summary>
     public class SplitLogger : ILogger
     {
         private readonly ILogger logger01;
@@ -8,6 +13,16 @@
         private readonly ILogger logger04;
         private readonly ILogger logger05;
 
+        /// <summary>
+        /// Initializes class <c>SplitLogger</c> for splitting logging messages
+        /// in two to five <c>ILogger</c> interface implementations.
+        /// </summary>
+        /// <param name="logger01">Required first <c>ILogger</c> interface implementation.</param>
+        /// <param name="logger02">Required second <c>ILogger</c> interface implementation.</param>
+        /// <param name="logger03">Optional third <c>ILogger</c> interface implementation.</param>
+        /// <param name="logger04">Optional fourth <c>ILogger</c> interface implementation.</param>
+        /// <param name="logger05">Optional fifth <c>ILogger</c> interface implementation.</param>
+        /// <exception cref="ArgumentNullException"></exception>
         public SplitLogger(
             ILogger logger01,
             ILogger logger02,
