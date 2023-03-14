@@ -2,7 +2,7 @@
 {
     /// <summary>
     /// Class <c>BlankLogger</c> implements <c>ILogger</c>, though does nothing
-    /// with the provided messages. Use it to discard all the messages.
+    /// with log messages. Use it to discard all the messages.
     /// </summary>
     public class BlankLogger : ILogger
     {
