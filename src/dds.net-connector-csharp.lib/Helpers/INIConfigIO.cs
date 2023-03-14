@@ -102,12 +102,18 @@ namespace DDS.Net.Connector.Helpers
             _logger?.Info($"Clearing configuration from file \"{Filename}\"");
             _config.Clear();
         }
+        
         /// <summary>
         /// Saves currently held in-memory configuration values to already specified file.
         /// </summary>
         public void SaveFile()
         {
             _logger?.Info($"Writing configuration to file \"{Filename}\"");
+
+            try
+            {
+                Filename.CreateFoldersForRelativeFilename();
+            } catch { }
 
             using (StreamWriter stream = File.CreateText(Filename))
             {
