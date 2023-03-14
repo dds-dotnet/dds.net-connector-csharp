@@ -1,6 +1,6 @@
 ﻿namespace DDS.Net.Connector.Types
 {
-    public enum VariableType
+    internal enum VariableType
     {
         /// <summary>
         /// Represents the very basic variable type,
