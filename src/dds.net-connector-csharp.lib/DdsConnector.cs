@@ -125,12 +125,42 @@ namespace DDS.Net.Connector
 
         private static bool DataReceptionWork(DdsConnector connector)
         {
-            return false;
+            bool doneAnything = false;
+
+            if (connector.DataFromServer.CanDequeue())
+            {
+                doneAnything = true;
+
+                PacketFromServer packet = connector.DataFromServer.Dequeue();
+
+                //- TODO: Parse packet
+            }
+
+            return doneAnything;
         }
+
+        private void ProcessUpdate(Periodicity periodicity)
+        {
+            //- TODO: Process periodic update
+        }
+
+        private int iterationCounter = 0;
 
         private static void PeriodicUpdateWork(DdsConnector connector)
         {
+            connector.iterationCounter++;
 
+            connector.ProcessUpdate(Periodicity.Highest);
+
+            if (connector.iterationCounter % 2 == 0) connector.ProcessUpdate(Periodicity.High);
+            if (connector.iterationCounter % 4 == 0) connector.ProcessUpdate(Periodicity.Normal);
+            if (connector.iterationCounter % 8 == 0) connector.ProcessUpdate(Periodicity.Low);
+
+            if (connector.iterationCounter % 16 == 0)
+            {
+                connector.ProcessUpdate(Periodicity.Lowest);
+                connector.iterationCounter = 0;
+            }
         }
 
         /***********************************************************************************/
