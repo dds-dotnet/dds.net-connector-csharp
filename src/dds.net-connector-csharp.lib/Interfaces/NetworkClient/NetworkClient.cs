@@ -34,7 +34,26 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
         {
             if (serverIPv4.IsValidIPv4Address())
             {
+                lock (this)
+                {
+                    if (socket == null)
+                    {
+                        try
+                        {
+                            socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                            socket.Connect(
+                                new IPEndPoint(IPAddress.Parse(serverIPv4), portTCP));
+                        }
+                        catch(Exception ex)
+                        {
+                            socket?.Close();
+                            socket?.Dispose();
+                            socket = null!;
 
+                            throw new Exception($"Cannot connect with the server {serverIPv4}:{portTCP} - {ex.Message}");
+                        }
+                    }
+                }
             }
             else
             {
