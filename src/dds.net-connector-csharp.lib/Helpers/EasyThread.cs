@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace DDS.Net.Connector.Helpers
 {
@@ -49,6 +49,8 @@ namespace DDS.Net.Connector.Helpers
         }
 
         private volatile bool isRunning = false;
+        private Timer timer = null!;
+        private Thread thread = null!;
 
         public void Start()
         {
@@ -57,6 +59,16 @@ namespace DDS.Net.Connector.Helpers
                 if (!isRunning)
                 {
                     isRunning = true;
+
+                    if (isPeriodic)
+                    {
+                        timer = new(TimerFunction, null, Timeout.Infinite, Timeout.Infinite);
+                        timer.Change(TimeSpan.FromMilliseconds(timeInterval), Timeout.InfiniteTimeSpan);
+                    }
+                    else
+                    {
+
+                    }
                 }
             }
         }
@@ -68,6 +80,44 @@ namespace DDS.Net.Connector.Helpers
                 if (!isRunning)
                 {
                     isRunning = false;
+
+                    if (isPeriodic)
+                    {
+                        try
+                        {
+                            timer.Dispose();
+                            timer = null!;
+                        }
+                        catch { }
+                    }
+                    else
+                    {
+
+                    }
+                }
+            }
+        }
+
+        private void TimerFunction(object? state)
+        {
+            timer.Change(Timeout.Infinite, Timeout.Infinite);
+
+            periodicFunction.Invoke();
+
+            lock (this)
+            {
+                if (!isRunning)
+                {
+                    try
+                    {
+                        timer.Dispose();
+                        timer = null!;
+                    }
+                    catch { }
+                }
+                else
+                {
+                    timer.Change(TimeSpan.FromMilliseconds(timeInterval), Timeout.InfiniteTimeSpan);
                 }
             }
         }
