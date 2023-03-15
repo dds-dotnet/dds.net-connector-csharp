@@ -94,18 +94,55 @@ namespace DDS.Net.Connector
         /*                                                                                 */
         /***********************************************************************************/
 
+        private EasyThread<DdsConnector> dataReceiverThread = null!;
+        private EasyThread<DdsConnector> periodicUpdateThread = null!;
+
         /// <summary>
         /// Starting the connection activity.
         /// </summary>
         public void Start()
         {
+            NetworkClient.Connect(ServerAddressIPv4, ServerPortTCP);
 
+            if (dataReceiverThread == null)
+            {
+                dataReceiverThread = new(DataReceptionWork, this);
+                dataReceiverThread.Start();
+            }
+
+            if (periodicUpdateThread == null)
+            {
+                periodicUpdateThread = new(PeriodicUpdateWork, this, Settings.BASE_TIME_SLOT_MS);
+                periodicUpdateThread.Start();
+            }
         }
 
         /// <summary>
         /// Stopping the connection activity.
         /// </summary>
         public void Stop()
+        {
+            NetworkClient.Disconnect();
+
+            if (dataReceiverThread != null)
+            {
+                dataReceiverThread.Stop();
+                dataReceiverThread = null!;
+            }
+
+            if (periodicUpdateThread != null)
+            {
+                periodicUpdateThread.Stop();
+                periodicUpdateThread = null!;
+            }
+        }
+
+        private static bool DataReceptionWork(DdsConnector connector)
+        {
+            return false;
+        }
+
+        private static void PeriodicUpdateWork(DdsConnector connector)
         {
 
         }
