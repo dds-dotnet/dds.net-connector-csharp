@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-
-namespace DDS.Net.Connector.Helpers
+﻿namespace DDS.Net.Connector.Helpers
 {
     /// <summary>
     /// Class <c>EasyThread</c> helps in management of thread.
