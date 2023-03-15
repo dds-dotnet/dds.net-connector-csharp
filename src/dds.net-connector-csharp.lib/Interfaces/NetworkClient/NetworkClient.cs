@@ -1,4 +1,5 @@
-﻿using DDS.Net.Connector.Interfaces.SyncQueue;
+﻿using DDS.Net.Connector.Helpers;
+using DDS.Net.Connector.Interfaces.SyncQueue;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,14 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
 
         public void Connect(string serverIPv4, ushort portTCP)
         {
-            throw new NotImplementedException();
+            if (serverIPv4.IsValidIPv4Address())
+            {
+
+            }
+            else
+            {
+                throw new Exception($"Invalid IPv4 address: {serverIPv4}");
+            }
         }
 
         public void Disconnect()
