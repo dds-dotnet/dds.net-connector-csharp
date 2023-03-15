@@ -35,5 +35,21 @@ namespace DDS.Net.Connector
         public string ServerAddressIPv4 { get; }
         public ushort ServerPortTCP { get; }
         private ILogger Logger { get; }
+
+        /// <summary>
+        /// Starting the connection activity.
+        /// </summary>
+        public void Start()
+        {
+
+        }
+
+        /// <summary>
+        /// Stopping the connection activity.
+        /// </summary>
+        public void Stop()
+        {
+
+        }
     }
 }
