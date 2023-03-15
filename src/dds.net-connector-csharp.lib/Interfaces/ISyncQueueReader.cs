@@ -1,5 +1,9 @@
 ﻿namespace DDS.Net.Connector.Interfaces
 {
+    /// <summary>
+    /// Interface <c>ISyncQueueReader</c> represents a reader's end of a synchronized queue.
+    /// </summary>
+    /// <typeparam name="T">Any type.</typeparam>
     internal interface ISyncQueueReader<T>
     {
         /// <summary>
