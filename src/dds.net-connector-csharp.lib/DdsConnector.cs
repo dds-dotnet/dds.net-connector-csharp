@@ -36,6 +36,8 @@ namespace DDS.Net.Connector
         /// Interface with the network.
         /// </summary>
         private IThreadedNetworkClient NetworkClient { get; }
+        private ISyncQueueReader<PacketFromServer> DataFromServer { get; }
+        private ISyncQueueWriter<PacketToServer> DataToServer { get; }
 
         /// <summary>
         /// Initializes class instance for <c>DdsConnector</c> to communicate with DDS.Net Server.
