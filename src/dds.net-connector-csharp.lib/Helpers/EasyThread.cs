@@ -76,6 +76,7 @@
                     else
                     {
                         thread = new(ThreadFunction);
+                        thread.IsBackground = true;
                         thread.Start();
                     }
                 }
