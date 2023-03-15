@@ -2,7 +2,7 @@
 
 namespace DDS.Net.Connector.Interfaces
 {
-    internal class FileLogger : ILogger, IDisposable
+    public class FileLogger : ILogger, IDisposable
     {
         private readonly LogLevel _logLevel;
         private StreamWriter? _writer;
