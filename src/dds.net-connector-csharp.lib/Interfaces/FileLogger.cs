@@ -15,13 +15,10 @@ namespace DDS.Net.Connector.Interfaces
 
                 _writer = File.AppendText(filename);
 
-                _writer.WriteLine($"╔═══════════════════════════════════════════════════════════════════╗");
-                _writer.WriteLine($"║ DDS.Net Connector                                                 ║");
-                _writer.WriteLine($"║-------------------------------------------------------------------║");
-                _writer.WriteLine($"║ Starting@                                                         ║");
-                _writer.WriteLine($"║     Local time: {DateTime.Now,-35}               ║");
-                _writer.WriteLine($"║     UTC time:   {DateTime.UtcNow,-35}               ║");
-                _writer.WriteLine($"╚═══════════════════════════════════════════════════════════════════╝");
+                _writer.WriteLine($"DDS.Net Connector v{DdsConnector.Version}");
+                _writer.WriteLine($"- Starting at {DateTime.Now:yyyy/MMM/dd - hh:mm:ss tt}");
+                _writer.WriteLine($"------------------------------------------------------------------");
+                _writer.WriteLine($"");
 
                 _writer.Flush();
                 _writer.AutoFlush = true;
@@ -39,11 +36,10 @@ namespace DDS.Net.Connector.Interfaces
         {
             if (_writer != null)
             {
-                _writer.WriteLine($"╔═══════════════════════════════════════════════════════════════════╗");
-                _writer.WriteLine($"║ Stopping@                                                         ║");
-                _writer.WriteLine($"║     Local time: {DateTime.Now,-35}               ║");
-                _writer.WriteLine($"║     UTC time:   {DateTime.UtcNow,-35}               ║");
-                _writer.WriteLine($"╚═══════════════════════════════════════════════════════════════════╝");
+                _writer.WriteLine($"");
+                _writer.WriteLine($"------------------------------------------------------------------");
+                _writer.WriteLine($"- Stopping at {DateTime.Now:yyyy/MMM/dd - hh:mm:ss tt}");
+                _writer.WriteLine($"------------------------------------------------------------------");
                 _writer.WriteLine($"");
 
                 _writer.Flush();
