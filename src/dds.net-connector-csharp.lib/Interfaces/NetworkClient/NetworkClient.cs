@@ -37,12 +37,12 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
 
         public ISyncQueueReader<PacketFromServer> GetDataQueueFromServer()
         {
-            throw new NotImplementedException();
+            return dataFromServerQueue;
         }
 
         public ISyncQueueWriter<PacketToServer> GetDataQueueToServer()
         {
-            throw new NotImplementedException();
+            return dataToServerQueue;
         }
     }
 }
