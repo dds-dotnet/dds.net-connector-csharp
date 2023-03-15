@@ -22,6 +22,11 @@ namespace DDS.Net.Connector
         /// </summary>
         public static string Version { get { return Settings.CONNECTOR_VERSION; } }
         /// <summary>
+        /// Application's name.
+        /// </summary>
+        public string ApplicationName { get; }
+
+        /// <summary>
         /// DDS.Net Server's IPv4 address.
         /// </summary>
         public string ServerAddressIPv4 { get; }
@@ -57,10 +62,12 @@ namespace DDS.Net.Connector
         /// <param name="logger">Instance of <c cref="ILogger">ILogger.</c></param>
         /// <exception cref="ArgumentNullException"></exception>
         public DdsConnector(
+            string applicationName,
             string serverIPv4,
             ushort serverPortTCP,
             ILogger logger)
         {
+            ApplicationName = applicationName ?? throw new ArgumentNullException(nameof(applicationName));
             ServerAddressIPv4 = serverIPv4 ?? throw new ArgumentNullException(nameof(serverIPv4));
             ServerPortTCP = serverPortTCP;
 
