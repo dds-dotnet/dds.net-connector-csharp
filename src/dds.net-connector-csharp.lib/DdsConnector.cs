@@ -132,6 +132,11 @@ namespace DDS.Net.Connector
 
         }
 
+        public void UnregisterProvider(string variableName)
+        {
+
+        }
+
         public void RegisterStringConsumer(string variableName, StringConsumer consumer, Periodicity periodicity)
         {
 
@@ -181,6 +186,11 @@ namespace DDS.Net.Connector
 
         }
         public void RegisterRawBytesConsumer(string variableName, RawBytesConsumer consumer, Periodicity periodicity)
+        {
+
+        }
+
+        public void RegisterConsumer(string variableName)
         {
 
         }
