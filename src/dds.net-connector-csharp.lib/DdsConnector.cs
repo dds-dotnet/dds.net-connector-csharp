@@ -10,6 +10,8 @@ namespace DDS.Net.Connector
 {
     public class DdsConnector
     {
+        public string Version { get { return Settings.CONNECTOR_VERSION; } }
+
         public DdsConnector(
             string serverIPv4,
             ushort serverPortTCP,
