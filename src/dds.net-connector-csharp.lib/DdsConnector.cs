@@ -57,5 +57,106 @@ namespace DDS.Net.Connector
         {
 
         }
+        public void RegisterBooleanProvider(string variableName, BooleanProvider provider, Periodicity periodicity)
+        {
+
+        }
+        public void RegisterByteProvider(string variableName, ByteProvider provider, Periodicity periodicity)
+        {
+
+        }
+        public void RegisterWordProvider(string variableName, WordProvider provider, Periodicity periodicity)
+        {
+
+        }
+        public void RegisterDWordProvider(string variableName, DWordProvider provider, Periodicity periodicity)
+        {
+
+        }
+        public void RegisterQWordProvider(string variableName, QWordProvider provider, Periodicity periodicity)
+        {
+
+        }
+        public void RegisterUnsignedByteProvider(string variableName, UnsignedByteProvider provider, Periodicity periodicity)
+        {
+
+        }
+        public void RegisterUnsignedWordProvider(string variableName, UnsignedWordProvider provider, Periodicity periodicity)
+        {
+
+        }
+        public void RegisterUnsignedDWordProvider(string variableName, UnsignedDWordProvider provider, Periodicity periodicity)
+        {
+
+        }
+        public void RegisterUnsignedQWordProvider(string variableName, UnsignedQWordProvider provider, Periodicity periodicity)
+        {
+
+        }
+        public void RegisterSingleProvider(string variableName, SingleProvider provider, Periodicity periodicity)
+        {
+
+        }
+        public void RegisterDoubleProvider(string variableName, DoubleProvider provider, Periodicity periodicity)
+        {
+
+        }
+        public void RegisterRawBytesProvider(string variableName, RawBytesProvider provider, Periodicity periodicity)
+        {
+
+        }
+
+        public void RegisterStringConsumer(string variableName, StringConsumer consumer, Periodicity periodicity)
+        {
+
+        }
+        public void RegisterBooleanConsumer(string variableName, BooleanConsumer consumer, Periodicity periodicity)
+        {
+
+        }
+        public void RegisterByteConsumer(string variableName, ByteConsumer consumer, Periodicity periodicity)
+        {
+
+        }
+        public void RegisterWordConsumer(string variableName, WordConsumer consumer, Periodicity periodicity)
+        {
+
+        }
+        public void RegisterDWordConsumer(string variableName, DWordConsumer consumer, Periodicity periodicity)
+        {
+
+        }
+        public void RegisterQWordConsumer(string variableName, QWordConsumer consumer, Periodicity periodicity)
+        {
+
+        }
+        public void RegisterUnsignedByteConsumer(string variableName, UnsignedByteConsumer consumer, Periodicity periodicity)
+        {
+
+        }
+        public void RegisterUnsignedWordConsumer(string variableName, UnsignedWordConsumer consumer, Periodicity periodicity)
+        {
+
+        }
+        public void RegisterUnsignedDWordConsumer(string variableName, UnsignedDWordConsumer consumer, Periodicity periodicity)
+        {
+
+        }
+        public void RegisterUnsignedQWordConsumer(string variableName, UnsignedQWordConsumer consumer, Periodicity periodicity)
+        {
+
+        }
+        public void RegisterSingleConsumer(string variableName, SingleConsumer consumer, Periodicity periodicity)
+        {
+
+        }
+        public void RegisterDoubleConsumer(string variableName, DoubleConsumer consumer, Periodicity periodicity)
+        {
+
+        }
+        public void RegisterRawBytesConsumer(string variableName, RawBytesConsumer consumer, Periodicity periodicity)
+        {
+
+        }
     }
 }
