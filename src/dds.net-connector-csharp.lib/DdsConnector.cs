@@ -185,16 +185,23 @@ namespace DDS.Net.Connector
         {
             int offset = 0;
 
-            PacketId packetId = data.ReadPacketId(ref offset);
-
-            switch(packetId)
+            try
             {
-                case PacketId.HandShake:
-                    string serverName = data.ReadString(ref offset);
-                    string serverVersion = data.ReadString(ref offset);
+                PacketId packetId = data.ReadPacketId(ref offset);
 
-                    Logger.Info($"Server = {serverName} v{serverVersion}");
-                    break;
+                switch (packetId)
+                {
+                    case PacketId.HandShake:
+                        string serverName = data.ReadString(ref offset);
+                        string serverVersion = data.ReadString(ref offset);
+
+                        Logger.Info($"Server = {serverName} v{serverVersion}");
+                        break;
+                }
+            }
+            catch(Exception e)
+            {
+                Logger.Error($"Packet parsing error: {e.Message}");
             }
         }
         #endregion
