@@ -41,7 +41,7 @@ namespace DDS.Net.Connector.WpfApp
             connector.Start();
         }
 
-        private void OnWindowUnloaded(object sender, RoutedEventArgs e)
+        private void OnWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             connector.Stop();
             logger.Dispose();
