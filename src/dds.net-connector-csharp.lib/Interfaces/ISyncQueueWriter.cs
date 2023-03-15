@@ -1,5 +1,9 @@
 ﻿namespace DDS.Net.Connector.Interfaces
 {
+    /// <summary>
+    /// Interface <c>ISyncQueueWriter</c> represents a writer's end of a synchronized queue.
+    /// </summary>
+    /// <typeparam name="T">Any type.</typeparam>
     internal interface ISyncQueueWriter<T>
     {
         /// <summary>
