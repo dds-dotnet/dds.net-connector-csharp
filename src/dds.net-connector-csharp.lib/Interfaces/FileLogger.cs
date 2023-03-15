@@ -36,15 +36,18 @@ namespace DDS.Net.Connector.Interfaces
         {
             if (_writer != null)
             {
-                _writer.WriteLine($"");
-                _writer.WriteLine($"------------------------------------------------------------------");
-                _writer.WriteLine($"- Stopping at {DateTime.Now:yyyy/MMM/dd - hh:mm:ss tt}");
-                _writer.WriteLine($"------------------------------------------------------------------");
-                _writer.WriteLine($"");
+                lock (this)
+                {
+                    _writer.WriteLine($"");
+                    _writer.WriteLine($"------------------------------------------------------------------");
+                    _writer.WriteLine($"- Stopping at {DateTime.Now:yyyy/MMM/dd - hh:mm:ss tt}");
+                    _writer.WriteLine($"------------------------------------------------------------------");
+                    _writer.WriteLine($"");
 
-                _writer.Flush();
-                _writer.Dispose();
-                _writer = null;
+                    _writer.Flush();
+                    _writer.Dispose();
+                    _writer = null;
+                }
             }
         }
 
