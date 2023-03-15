@@ -11,6 +11,5 @@ namespace DDS.Net.Connector.WpfApp.Configuration
 
         static public readonly string LOG_FILENAME = $"Log/{TIMESTAMP_TEXT}.txt";
         static public readonly string SERVER_CONFIG_FILENAME = "Configuration/server-conf.ini";
-        static public readonly string VARIABLES_CONFIG_FILENAME = "Configuration/variables-conf.ini";
     }
 }
