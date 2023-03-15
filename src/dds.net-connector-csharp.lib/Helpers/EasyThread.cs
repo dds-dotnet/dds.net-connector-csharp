@@ -12,7 +12,9 @@ namespace DDS.Net.Connector.Helpers
     internal class EasyThread
     {
         private readonly bool isPeriodic;                   // True means to run the action at intervals
+
         private readonly Func<bool> threadFunction = null!; // Function to be invoked continuously
+        private readonly int sleepTimeWhenDoneNothing;      // Sleep for milliseconds when the function did nothing
 
         private readonly Action periodicFunction = null!;   // Function to be invoked periodically
         private readonly int timeInterval;                  // Periodic invocation time interval
@@ -21,12 +23,20 @@ namespace DDS.Net.Connector.Helpers
         /// Initializes the instance with continuously invoked thread function.
         /// </summary>
         /// <param name="threadFunction">Target function - returns [True/False] if work is done during the iteration.</param>
+        /// <param name="sleepTimeWhenDoneNothing">Sleep time (milliseconds) when the thread function did nothing.</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public EasyThread(Func<bool> threadFunction)
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public EasyThread(Func<bool> threadFunction, int sleepTimeWhenDoneNothing = 10)
         {
             isPeriodic = false;
 
             this.threadFunction = threadFunction ?? throw new ArgumentNullException(nameof(threadFunction));
+            this.sleepTimeWhenDoneNothing = sleepTimeWhenDoneNothing;
+
+            if (sleepTimeWhenDoneNothing <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(sleepTimeWhenDoneNothing));
+            }
         }
         /// <summary>
         /// Initializes the instance with periodically invoked thread function.
@@ -67,7 +77,8 @@ namespace DDS.Net.Connector.Helpers
                     }
                     else
                     {
-
+                        thread = new(ThreadFunction);
+                        thread.Start();
                     }
                 }
             }
@@ -92,7 +103,12 @@ namespace DDS.Net.Connector.Helpers
                     }
                     else
                     {
-
+                        try
+                        {
+                            thread.Join(100);
+                            thread = null!;
+                        }
+                        catch { }
                     }
                 }
             }
@@ -118,6 +134,19 @@ namespace DDS.Net.Connector.Helpers
                 else
                 {
                     timer.Change(TimeSpan.FromMilliseconds(timeInterval), Timeout.InfiniteTimeSpan);
+                }
+            }
+        }
+
+        private void ThreadFunction(object? _)
+        {
+            while (isRunning)
+            {
+                bool doneAnything = threadFunction.Invoke();
+
+                if (!doneAnything)
+                {
+                    Thread.Sleep(sleepTimeWhenDoneNothing);
                 }
             }
         }
