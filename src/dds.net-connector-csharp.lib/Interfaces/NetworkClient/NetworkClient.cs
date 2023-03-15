@@ -28,6 +28,8 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
             dataFromServerQueue = new(1000);
         }
 
+        private volatile bool isIOThreadStarted = false;
+        private Thread ioThread = null!;
         private Socket socket = null!;
 
         public void Connect(string serverIPv4, ushort portTCP)
@@ -36,19 +38,32 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
             {
                 lock (this)
                 {
-                    if (socket == null)
+                    if (isIOThreadStarted == false)
                     {
                         try
                         {
-                            socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                            socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+                            {
+                                Blocking = false,
+                                ReceiveBufferSize = 4096,
+                                SendBufferSize = 4096,
+                            };
+
                             socket.Connect(
                                 new IPEndPoint(IPAddress.Parse(serverIPv4), portTCP));
+
+                            isIOThreadStarted = true;
+                            ioThread = new Thread(IOThreadFunc);
+                            ioThread.Start();
                         }
                         catch(Exception ex)
                         {
                             socket?.Close();
                             socket?.Dispose();
                             socket = null!;
+
+                            isIOThreadStarted = false;
+                            ioThread = null!;
 
                             throw new Exception($"Cannot connect with the server {serverIPv4}:{portTCP} - {ex.Message}");
                         }
@@ -61,15 +76,37 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
             }
         }
 
+        private void IOThreadFunc(object? obj)
+        {
+            while (isIOThreadStarted)
+            {
+                bool doneAnythingInIteration = false;
+
+                if (!doneAnythingInIteration)
+                {
+                    Thread.Sleep(10);
+                }
+            }
+        }
+
         public void Disconnect()
         {
             lock (this)
             {
-                if (socket != null)
+                if (isIOThreadStarted == true)
                 {
-                    socket.Close();
-                    socket.Dispose();
-                    socket = null!;
+                    try
+                    {
+                        isIOThreadStarted = false;
+
+                        ioThread?.Join(200);
+                        ioThread = null!;
+
+                        socket.Close();
+                        socket.Dispose();
+                        socket = null!;
+                    }
+                    catch { }
                 }
             }
         }
