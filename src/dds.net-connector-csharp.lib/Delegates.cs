@@ -20,6 +20,8 @@
     public delegate float SingleProvider(string variableName);
     public delegate double DoubleProvider(string variableName);
 
+    public delegate byte[] RawBytesProvider(string variableName);
+
     //- 
     //- Consumers
     //- 
@@ -39,4 +41,6 @@
 
     public delegate void SingleConsumer(string variableName, float variableValue);
     public delegate void DoubleConsumer(string variableName, double variableValue);
+
+    public delegate void RawBytesConsumer(string variableName, byte[] variableValue);
 }
