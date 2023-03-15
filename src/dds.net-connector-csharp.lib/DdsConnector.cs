@@ -9,8 +9,15 @@ using System.Threading.Tasks;
 
 namespace DDS.Net.Connector
 {
+    /// <summary>
+    /// Class <c>DdsConnector</c> provides interface for connecting with
+    /// DDS.Net Server.
+    /// </summary>
     public class DdsConnector
     {
+        /// <summary>
+        /// Version number of the connector.
+        /// </summary>
         public static string Version { get { return Settings.CONNECTOR_VERSION; } }
 
         public DdsConnector(
@@ -33,8 +40,15 @@ namespace DDS.Net.Connector
                 $"with target server @{ServerAddressIPv4}:{ServerPortTCP}");
         }
 
+        /// <summary>
+        /// DDS.Net Server's IPv4 address.
+        /// </summary>
         public string ServerAddressIPv4 { get; }
+        /// <summary>
+        /// DDS.Net Server's TCP port.
+        /// </summary>
         public ushort ServerPortTCP { get; }
+
         private ILogger Logger { get; }
 
         /// <summary>
