@@ -32,6 +32,9 @@ namespace DDS.Net.Connector
         /// Logging interface.
         /// </summary>
         private ILogger Logger { get; }
+        /// <summary>
+        /// Interface with the network.
+        /// </summary>
         private IThreadedNetworkClient NetworkClient { get; }
 
         /// <summary>
