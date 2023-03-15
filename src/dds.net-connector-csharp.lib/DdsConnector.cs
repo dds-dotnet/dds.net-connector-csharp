@@ -36,7 +36,13 @@ namespace DDS.Net.Connector
         /// Interface with the network.
         /// </summary>
         private IThreadedNetworkClient NetworkClient { get; }
+        /// <summary>
+        /// Queue of data packets from the server.
+        /// </summary>
         private ISyncQueueReader<PacketFromServer> DataFromServer { get; }
+        /// <summary>
+        /// Queue of data packets to the server.
+        /// </summary>
         private ISyncQueueWriter<PacketToServer> DataToServer { get; }
 
         /// <summary>
@@ -68,6 +74,8 @@ namespace DDS.Net.Connector
             try
             {
                 NetworkClient = new NetworkClient();
+                DataFromServer = NetworkClient.GetDataQueueFromServer();
+                DataToServer = NetworkClient.GetDataQueueToServer();
             }
             catch (Exception ex)
             {
