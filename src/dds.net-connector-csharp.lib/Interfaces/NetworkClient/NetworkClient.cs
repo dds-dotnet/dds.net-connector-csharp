@@ -82,6 +82,22 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
             {
                 bool doneAnythingInIteration = false;
 
+                try
+                {
+                    int dataAvailable = socket.Available;
+
+                    if (dataAvailable > 0)
+                    {
+                        doneAnythingInIteration = true;
+
+                        byte[] data = new byte[dataAvailable];
+                        socket.Receive(data);
+
+                        dataFromServerQueue.Enqueue(new PacketFromServer(data));
+                    }
+                }
+                catch { }
+
                 if (!doneAnythingInIteration)
                 {
                     Thread.Sleep(10);
