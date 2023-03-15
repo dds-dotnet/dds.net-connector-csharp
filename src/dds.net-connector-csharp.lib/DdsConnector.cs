@@ -133,15 +133,10 @@ namespace DDS.Net.Connector
 
                 PacketFromServer packet = connector.DataFromServer.Dequeue();
 
-                //- TODO: Parse packet
+                connector.ParsePacket(packet.Data);
             }
 
             return doneAnything;
-        }
-
-        private void ProcessUpdate(Periodicity periodicity)
-        {
-            //- TODO: Process periodic update
         }
 
         private int iterationCounter = 0;
@@ -161,6 +156,26 @@ namespace DDS.Net.Connector
                 connector.ProcessUpdate(Periodicity.Lowest);
                 connector.iterationCounter = 0;
             }
+        }
+
+        /***********************************************************************************/
+        /*                                                                                 */
+        /* Parsing received packet                                                         */
+        /*                                                                                 */
+        /***********************************************************************************/
+        private void ParsePacket(byte[] data)
+        {
+            //- TODO: Parse received packet data
+        }
+
+        /***********************************************************************************/
+        /*                                                                                 */
+        /* Periodic update                                                                 */
+        /*                                                                                 */
+        /***********************************************************************************/
+        private void ProcessUpdate(Periodicity periodicity)
+        {
+            //- TODO: Process periodic update
         }
 
         /***********************************************************************************/
