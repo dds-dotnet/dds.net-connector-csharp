@@ -11,35 +11,33 @@ namespace DDS.Net.Connector.Helpers
     /// </summary>
     internal class EasyThread<T>
     {
-        private readonly bool isPeriodic;                      // True means to run the action at intervals
+        private readonly bool isPeriodic;                        // True means to run the action at intervals
 
-        private readonly T data;                               // Data to be passed-in to the function
+        private readonly T data;                                 // Data to be passed-in to the function
 
-        private readonly Func<T, bool> threadFunction = null!; // Function to be invoked continuously
-        private readonly int sleepTimeWhenDoneNothing;         // Sleep for milliseconds when the function did nothing
+        private readonly Func<T, bool> threadFunction = null!;   // Function to be invoked continuously
+        public int SleepTimeWhenDoneNothing { get; set; } = 10;  // Sleep for milliseconds when the function did nothing
 
-        private readonly Action<T> periodicFunction = null!;   // Function to be invoked periodically
-        private readonly int timeInterval;                     // Periodic invocation time interval
+        private readonly Action<T> periodicFunction = null!;     // Function to be invoked periodically
+        private readonly int timeInterval;                       // Periodic invocation time interval
 
         /// <summary>
         /// Initializes the instance with continuously invoked thread function.
         /// </summary>
         /// <param name="threadFunction">Target function - returns [True/False] if work is done during the iteration.</param>
         /// <param name="data">Data to be passed to the function.</param>
-        /// <param name="sleepTimeWhenDoneNothing">Sleep time (milliseconds) when the thread function did nothing.</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public EasyThread(Func<T, bool> threadFunction, T data, int sleepTimeWhenDoneNothing = 10)
+        public EasyThread(Func<T, bool> threadFunction, T data)
         {
             isPeriodic = false;
 
             this.threadFunction = threadFunction ?? throw new ArgumentNullException(nameof(threadFunction));
             this.data = data;
-            this.sleepTimeWhenDoneNothing = sleepTimeWhenDoneNothing;
 
-            if (sleepTimeWhenDoneNothing <= 0)
+            if (SleepTimeWhenDoneNothing <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(sleepTimeWhenDoneNothing));
+                throw new ArgumentOutOfRangeException(nameof(SleepTimeWhenDoneNothing));
             }
         }
         /// <summary>
@@ -152,7 +150,7 @@ namespace DDS.Net.Connector.Helpers
 
                 if (!doneAnything)
                 {
-                    Thread.Sleep(sleepTimeWhenDoneNothing);
+                    Thread.Sleep(SleepTimeWhenDoneNothing);
                 }
             }
         }
