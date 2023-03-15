@@ -78,7 +78,7 @@ namespace DDS.Net.Connector
         /* Registering data providers and consumers                                        */
         /*                                                                                 */
         /***********************************************************************************/
-
+        #region Providers
         //- 
         //- Providers
         //- 
@@ -222,8 +222,8 @@ namespace DDS.Net.Connector
         {
 
         }
-
-
+        #endregion
+        #region Consumers
         //- 
         //- Consumers
         //- 
@@ -369,5 +369,6 @@ namespace DDS.Net.Connector
         {
 
         }
+        #endregion
     }
 }
