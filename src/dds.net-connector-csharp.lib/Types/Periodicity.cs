@@ -1,5 +1,8 @@
 ﻿namespace DDS.Net.Connector.Types
 {
+    /// <summary>
+    /// Specifies the periodicity for data updates.
+    /// </summary>
     public enum Periodicity
     {
         /// <summary>
