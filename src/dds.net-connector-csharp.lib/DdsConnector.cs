@@ -90,7 +90,7 @@ namespace DDS.Net.Connector
 
         /***********************************************************************************/
         /*                                                                                 */
-        /* Starting / stopping connection wiht the server                                  */
+        /* Starting / stopping connection with the server                                  */
         /*                                                                                 */
         /***********************************************************************************/
 
