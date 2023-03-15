@@ -1,4 +1,4 @@
-﻿using DDS.Net.Connector.Interfaces.Entities;
+﻿using DDS.Net.Connector.Interfaces.NetworkClient;
 
 namespace DDS.Net.Connector.Interfaces
 {
