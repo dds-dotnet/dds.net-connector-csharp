@@ -29,7 +29,7 @@ namespace DDS.Net.Connector
 
             Logger.Info(
                 $"Initializing connector version {Settings.CONNECTOR_VERSION} " +
-                $"with server @{ServerAddressIPv4}:{ServerPortTCP}");
+                $"with target server @{ServerAddressIPv4}:{ServerPortTCP}");
         }
 
         public string ServerAddressIPv4 { get; }
