@@ -34,5 +34,15 @@ namespace DDS.Net.Connector.WpfApp
                             (ushort)serverConfig.GetInteger("DDS Server/ServerPortTCP"),
                             logger);
         }
+
+        private void OnWindowLoaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OnWindowUnloaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
