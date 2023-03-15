@@ -28,6 +28,8 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
             dataFromServerQueue = new(1000);
         }
 
+        private Socket socket = null!;
+
         public void Connect(string serverIPv4, ushort portTCP)
         {
             if (serverIPv4.IsValidIPv4Address())
@@ -42,7 +44,15 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
 
         public void Disconnect()
         {
-            throw new NotImplementedException();
+            lock (this)
+            {
+                if (socket != null)
+                {
+                    socket.Close();
+                    socket.Dispose();
+                    socket = null!;
+                }
+            }
         }
 
         public ISyncQueueReader<PacketFromServer> GetDataQueueFromServer()
