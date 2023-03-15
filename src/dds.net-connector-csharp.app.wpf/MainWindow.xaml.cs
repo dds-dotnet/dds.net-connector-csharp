@@ -30,6 +30,7 @@ namespace DDS.Net.Connector.WpfApp
             INIConfigIO serverConfig = new(AppConstants.SERVER_CONFIG_FILENAME);
 
             connector = new(
+                            mainWindow.Title,
                             serverConfig.GetString("DDS Server/ServerIPv4"),
                             (ushort)serverConfig.GetInteger("DDS Server/ServerPortTCP"),
                             logger);
