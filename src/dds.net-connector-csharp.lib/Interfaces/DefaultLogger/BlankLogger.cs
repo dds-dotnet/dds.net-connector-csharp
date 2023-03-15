@@ -1,4 +1,4 @@
-﻿namespace DDS.Net.Connector.Interfaces
+﻿namespace DDS.Net.Connector.Interfaces.DefaultLogger
 {
     /// <summary>
     /// Class <c>BlankLogger</c> implements <c>ILogger</c> interface, though does nothing

@@ -1,5 +1,5 @@
 ﻿using DDS.Net.Connector.Helpers;
-using DDS.Net.Connector.Interfaces;
+using DDS.Net.Connector.Interfaces.DefaultLogger;
 using DDS.Net.Connector.WpfApp.Configuration;
 using System;
 using System.Collections.Generic;

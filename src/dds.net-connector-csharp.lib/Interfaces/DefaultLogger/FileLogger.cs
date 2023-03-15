@@ -1,6 +1,6 @@
 ﻿using DDS.Net.Connector.Helpers;
 
-namespace DDS.Net.Connector.Interfaces
+namespace DDS.Net.Connector.Interfaces.DefaultLogger
 {
     public class FileLogger : ILogger, IDisposable
     {
