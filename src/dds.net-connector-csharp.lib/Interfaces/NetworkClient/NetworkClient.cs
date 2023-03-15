@@ -84,6 +84,10 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
 
                 try
                 {
+                    //- 
+                    //- Receiving data
+                    //- 
+
                     int dataAvailable = socket.Available;
 
                     if (dataAvailable > 0)
@@ -94,6 +98,19 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
                         socket.Receive(data);
 
                         dataFromServerQueue.Enqueue(new PacketFromServer(data));
+                    }
+
+                    //- 
+                    //- Transmitting data
+                    //- 
+
+                    if (dataToServerQueue.CanDequeue())
+                    {
+                        doneAnythingInIteration = true;
+
+                        PacketToServer packet = dataToServerQueue.Dequeue();
+
+                        socket.Send(packet.Data, packet.TotalBytesToBeSent, SocketFlags.None);
                     }
                 }
                 catch { }
