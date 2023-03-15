@@ -57,6 +57,7 @@ namespace DDS.Net.Connector
         /// <summary>
         /// Initializes class instance for <c>DdsConnector</c> to communicate with DDS.Net Server.
         /// </summary>
+        /// <param name="applicationName">User application's name.</param>
         /// <param name="serverIPv4">Target server's IPv4 address.</param>
         /// <param name="serverPortTCP">Target server's TCP port number.</param>
         /// <param name="logger">Instance of <c cref="ILogger">ILogger.</c></param>
