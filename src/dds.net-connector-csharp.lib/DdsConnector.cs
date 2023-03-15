@@ -16,6 +16,7 @@ namespace DDS.Net.Connector
     /// </summary>
     public class DdsConnector
     {
+        #region Initialization
         /// <summary>
         /// Version number of the connector.
         /// </summary>
@@ -92,15 +93,13 @@ namespace DDS.Net.Connector
             dataReceiverThread = new(DataReceptionWork, this);
             periodicUpdateThread = new(PeriodicUpdateWork, this, Settings.BASE_TIME_SLOT_MS);
         }
-
-
+        #endregion
         /***********************************************************************************/
         /*                                                                                 */
         /* Starting / stopping connection with the server                                  */
         /*                                                                                 */
         /***********************************************************************************/
-
-
+        #region Start / Stop - Background Work
         /// <summary>
         /// Starting the connection activity.
         /// </summary>
@@ -157,27 +156,29 @@ namespace DDS.Net.Connector
                 connector.iterationCounter = 0;
             }
         }
-
+        #endregion
         /***********************************************************************************/
         /*                                                                                 */
         /* Parsing received packet                                                         */
         /*                                                                                 */
         /***********************************************************************************/
+        #region Packet Parsing
         private void ParsePacket(byte[] data)
         {
             //- TODO: Parse received packet data
         }
-
+        #endregion
         /***********************************************************************************/
         /*                                                                                 */
         /* Periodic update                                                                 */
         /*                                                                                 */
         /***********************************************************************************/
+        #region Periodic Data Update
         private void ProcessUpdate(Periodicity periodicity)
         {
             //- TODO: Process periodic update
         }
-
+        #endregion
         /***********************************************************************************/
         /*                                                                                 */
         /* Registering data providers and consumers                                        */
