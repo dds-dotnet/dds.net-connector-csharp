@@ -1,5 +1,6 @@
 ﻿using DDS.Net.Connector.Helpers;
 using DDS.Net.Connector.Interfaces;
+using DDS.Net.Connector.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,11 @@ namespace DDS.Net.Connector
         /// Stopping the connection activity.
         /// </summary>
         public void Stop()
+        {
+
+        }
+
+        public void RegisterStringProvider(string variableName, StringProvider provider, Periodicity periodicity)
         {
 
         }
