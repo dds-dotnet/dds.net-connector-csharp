@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DDS.Net.Connector.Helpers;
+using DDS.Net.Connector.Interfaces;
+using DDS.Net.Connector.WpfApp.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,9 +20,19 @@ namespace DDS.Net.Connector.WpfApp
 {
     public partial class MainWindow : Window
     {
+        private FileLogger logger = new(AppConstants.LOG_FILENAME);
+        private DdsConnector connector;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            INIConfigIO serverConfig = new(AppConstants.SERVER_CONFIG_FILENAME);
+
+            connector = new(
+                            serverConfig.GetString("DDS Server/ServerIPv4"),
+                            (ushort)serverConfig.GetInteger("DDS Server/ServerPortTCP"),
+                            logger);
         }
     }
 }
