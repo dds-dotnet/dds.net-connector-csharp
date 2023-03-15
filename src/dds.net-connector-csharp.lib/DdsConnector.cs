@@ -183,7 +183,19 @@ namespace DDS.Net.Connector
         #region Packet Parsing
         private void ParsePacket(byte[] data)
         {
-            //- TODO: Parse received packet data
+            int offset = 0;
+
+            PacketId packetId = data.ReadPacketId(ref offset);
+
+            switch(packetId)
+            {
+                case PacketId.HandShake:
+                    string serverName = data.ReadString(ref offset);
+                    string serverVersion = data.ReadString(ref offset);
+
+                    Logger.Info($"Server = {serverName} v{serverVersion}");
+                    break;
+            }
         }
         #endregion
         /***********************************************************************************/
