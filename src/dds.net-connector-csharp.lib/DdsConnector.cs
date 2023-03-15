@@ -1,4 +1,5 @@
-﻿using DDS.Net.Connector.Helpers;
+﻿using DDS.Net.Connector.EncodersAndDecoders;
+using DDS.Net.Connector.Helpers;
 using DDS.Net.Connector.Interfaces;
 using DDS.Net.Connector.Interfaces.NetworkClient;
 using DDS.Net.Connector.Types;
@@ -117,6 +118,15 @@ namespace DDS.Net.Connector
 
             dataReceiverThread.Start();
             periodicUpdateThread.Start();
+
+            byte[] handshake = new byte[100];
+            int offset = 0;
+
+            handshake.WritePacketId(ref offset, PacketId.HandShake);
+            handshake.WriteString(ref offset, ApplicationName);
+            handshake.WriteString(ref offset, Version);
+
+            DataToServer.Enqueue(new(handshake, offset));
         }
 
         /// <summary>
