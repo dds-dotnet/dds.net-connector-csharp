@@ -49,7 +49,7 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
                                 SendBufferSize = 4096,
                             };
 
-                            socket.Connect(
+                            socket.ConnectAsync(
                                 new IPEndPoint(IPAddress.Parse(serverIPv4), portTCP));
 
                             isIOThreadStarted = true;
