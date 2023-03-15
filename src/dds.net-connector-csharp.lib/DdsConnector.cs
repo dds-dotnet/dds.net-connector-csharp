@@ -19,6 +19,18 @@ namespace DDS.Net.Connector
         /// Version number of the connector.
         /// </summary>
         public static string Version { get { return Settings.CONNECTOR_VERSION; } }
+        /// <summary>
+        /// DDS.Net Server's IPv4 address.
+        /// </summary>
+        public string ServerAddressIPv4 { get; }
+        /// <summary>
+        /// DDS.Net Server's TCP port.
+        /// </summary>
+        public ushort ServerPortTCP { get; }
+        /// <summary>
+        /// Logging interface.
+        /// </summary>
+        private ILogger Logger { get; }
 
         public DdsConnector(
             string serverIPv4,
@@ -40,16 +52,6 @@ namespace DDS.Net.Connector
                 $"with target server @{ServerAddressIPv4}:{ServerPortTCP}");
         }
 
-        /// <summary>
-        /// DDS.Net Server's IPv4 address.
-        /// </summary>
-        public string ServerAddressIPv4 { get; }
-        /// <summary>
-        /// DDS.Net Server's TCP port.
-        /// </summary>
-        public ushort ServerPortTCP { get; }
-
-        private ILogger Logger { get; }
 
         /***********************************************************************************/
         /*                                                                                 */
