@@ -1,5 +1,6 @@
 ﻿using DDS.Net.Connector.Helpers;
 using DDS.Net.Connector.Interfaces;
+using DDS.Net.Connector.Interfaces.NetworkClient;
 using DDS.Net.Connector.Types;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,7 @@ namespace DDS.Net.Connector
         /// Logging interface.
         /// </summary>
         private ILogger Logger { get; }
+        private IThreadedNetworkClient NetworkClient { get; }
 
         /// <summary>
         /// Initializes class instance for <c>DdsConnector</c> to communicate with DDS.Net Server.
@@ -57,6 +59,19 @@ namespace DDS.Net.Connector
             Logger.Info(
                 $"Initializing connector version {Settings.CONNECTOR_VERSION} " +
                 $"with target server @{ServerAddressIPv4}:{ServerPortTCP}");
+
+            try
+            {
+                NetworkClient = new NetworkClient();
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = $"Cannot initialize network client - {ex.Message}";
+
+                Logger.Error(errorMessage);
+
+                throw new Exception(errorMessage);
+            }
         }
 
 
