@@ -1,6 +1,6 @@
 ﻿namespace DDS.Net.Connector.Types
 {
-    internal enum Periodicity
+    public enum Periodicity
     {
         /// <summary>
         /// Updates only when changed.
