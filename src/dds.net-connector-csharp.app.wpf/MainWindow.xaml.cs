@@ -37,12 +37,13 @@ namespace DDS.Net.Connector.WpfApp
 
         private void OnWindowLoaded(object sender, RoutedEventArgs e)
         {
-
+            connector.Start();
         }
 
         private void OnWindowUnloaded(object sender, RoutedEventArgs e)
         {
-
+            connector.Stop();
+            logger.Dispose();
         }
     }
 }
