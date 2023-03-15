@@ -45,6 +45,9 @@ namespace DDS.Net.Connector
         /// </summary>
         private ISyncQueueWriter<PacketToServer> DataToServer { get; }
 
+        private EasyThread<DdsConnector> dataReceiverThread;
+        private EasyThread<DdsConnector> periodicUpdateThread;
+
         /// <summary>
         /// Initializes class instance for <c>DdsConnector</c> to communicate with DDS.Net Server.
         /// </summary>
@@ -85,6 +88,9 @@ namespace DDS.Net.Connector
 
                 throw new Exception(errorMessage);
             }
+
+            dataReceiverThread = new(DataReceptionWork, this);
+            periodicUpdateThread = new(PeriodicUpdateWork, this, Settings.BASE_TIME_SLOT_MS);
         }
 
 
@@ -94,8 +100,6 @@ namespace DDS.Net.Connector
         /*                                                                                 */
         /***********************************************************************************/
 
-        private EasyThread<DdsConnector> dataReceiverThread = null!;
-        private EasyThread<DdsConnector> periodicUpdateThread = null!;
 
         /// <summary>
         /// Starting the connection activity.
@@ -104,17 +108,8 @@ namespace DDS.Net.Connector
         {
             NetworkClient.Connect(ServerAddressIPv4, ServerPortTCP);
 
-            if (dataReceiverThread == null)
-            {
-                dataReceiverThread = new(DataReceptionWork, this);
-                dataReceiverThread.Start();
-            }
-
-            if (periodicUpdateThread == null)
-            {
-                periodicUpdateThread = new(PeriodicUpdateWork, this, Settings.BASE_TIME_SLOT_MS);
-                periodicUpdateThread.Start();
-            }
+            dataReceiverThread.Start();
+            periodicUpdateThread.Start();
         }
 
         /// <summary>
@@ -124,17 +119,8 @@ namespace DDS.Net.Connector
         {
             NetworkClient.Disconnect();
 
-            if (dataReceiverThread != null)
-            {
-                dataReceiverThread.Stop();
-                dataReceiverThread = null!;
-            }
-
-            if (periodicUpdateThread != null)
-            {
-                periodicUpdateThread.Stop();
-                periodicUpdateThread = null!;
-            }
+            dataReceiverThread.Stop();
+            periodicUpdateThread.Stop();
         }
 
         private static bool DataReceptionWork(DdsConnector connector)
