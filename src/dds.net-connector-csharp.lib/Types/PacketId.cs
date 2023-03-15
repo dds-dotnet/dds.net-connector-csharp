@@ -1,5 +1,8 @@
 ﻿namespace DDS.Net.Connector.Types
 {
+    /// <summary>
+    /// Denotes a data packet's content.
+    /// </summary>
     internal enum PacketId
     {
         /// <summary>
