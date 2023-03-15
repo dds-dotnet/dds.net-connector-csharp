@@ -51,6 +51,12 @@ namespace DDS.Net.Connector
 
         private ILogger Logger { get; }
 
+        /***********************************************************************************/
+        /*                                                                                 */
+        /* Starting / stopping connection wiht the server                                  */
+        /*                                                                                 */
+        /***********************************************************************************/
+
         /// <summary>
         /// Starting the connection activity.
         /// </summary>
@@ -66,6 +72,12 @@ namespace DDS.Net.Connector
         {
 
         }
+
+        /***********************************************************************************/
+        /*                                                                                 */
+        /* Registering data providers and consumers                                        */
+        /*                                                                                 */
+        /***********************************************************************************/
 
         public void RegisterStringProvider(string variableName, StringProvider provider, Periodicity periodicity)
         {
