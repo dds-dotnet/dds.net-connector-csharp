@@ -3,11 +3,6 @@ using DDS.Net.Connector.Helpers;
 using DDS.Net.Connector.Interfaces;
 using DDS.Net.Connector.Interfaces.NetworkClient;
 using DDS.Net.Connector.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DDS.Net.Connector
 {
@@ -74,7 +69,7 @@ namespace DDS.Net.Connector
             ServerPortTCP = serverPortTCP;
 
             Logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            
+
             if (serverIPv4.IsValidIPv4Address())
             {
                 ServerAddressIPv4 = ServerAddressIPv4.RemoveSpaces();
@@ -199,7 +194,7 @@ namespace DDS.Net.Connector
                         break;
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Logger.Error($"Packet parsing error: {e.Message}");
             }
