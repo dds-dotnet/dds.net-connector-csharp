@@ -25,7 +25,7 @@ namespace DDS.Net.Connector.Interfaces.DefaultLogger
 
                 _writer = File.AppendText(filename);
 
-                _writer.WriteLine($"DDS.Net Connector v{DdsConnector.Version}");
+                _writer.WriteLine($"DDS.Net Connector v{DdsConnector.LibraryVersion}");
                 _writer.WriteLine($"- Starting at {DateTime.Now:yyyy/MMM/dd - hh:mm:ss tt}");
                 _writer.WriteLine($"------------------------------------------------------------------");
                 _writer.WriteLine($"");

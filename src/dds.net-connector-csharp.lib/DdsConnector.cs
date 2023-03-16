@@ -16,7 +16,7 @@ namespace DDS.Net.Connector
         /// <summary>
         /// Version number of the connector.
         /// </summary>
-        public static string Version { get { return Settings.CONNECTOR_VERSION; } }
+        public static string LibraryVersion { get { return Settings.CONNECTOR_VERSION; } }
         /// <summary>
         /// Application's name.
         /// </summary>
@@ -119,7 +119,7 @@ namespace DDS.Net.Connector
 
             handshake.WritePacketId(ref offset, PacketId.HandShake);
             handshake.WriteString(ref offset, ApplicationName);
-            handshake.WriteString(ref offset, Version);
+            handshake.WriteString(ref offset, LibraryVersion);
 
             DataToServer.Enqueue(new(handshake, offset));
         }
