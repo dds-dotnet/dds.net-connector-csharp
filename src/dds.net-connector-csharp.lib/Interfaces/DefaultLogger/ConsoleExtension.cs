@@ -1,7 +1,7 @@
 ﻿namespace DDS.Net.Connector.Interfaces.DefaultLogger
 {
     /// <summary>
-    /// Class <c>ColoredConsoleExtension</c> provides extension methods for
+    /// Class <c>ConsoleExtension</c> provides extension methods for
     /// simple printing of colored console messages.
     /// </summary>
     public static class ConsoleExtension
