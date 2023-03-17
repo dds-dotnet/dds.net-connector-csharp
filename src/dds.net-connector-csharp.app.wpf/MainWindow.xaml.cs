@@ -32,7 +32,7 @@ namespace DDS.Net.Connector.WpfApp
             InitializeComponent();
 
             fileLogger = new(AppConstants.LOG_FILENAME, Interfaces.LogLevel.Information);
-            textBlockLogger = new TextBlockLogger(logTextBlock, Interfaces.LogLevel.Information);
+            textBlockLogger = new TextBlockLogger(logTextBlock, logScrollViewer, Interfaces.LogLevel.Information);
             logger = new(fileLogger, textBlockLogger);
 
             INIConfigIO serverConfig = new(AppConstants.SERVER_CONFIG_FILENAME);
