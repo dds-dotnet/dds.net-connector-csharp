@@ -6,7 +6,7 @@
     /// </summary>
     public static class ColoredConsoleExtension
     {
-        private static Mutex mutex = new Mutex();
+        private static Mutex mutex = new();
 
         /// <summary>
         /// Prints a message line using given colors on standard console.
