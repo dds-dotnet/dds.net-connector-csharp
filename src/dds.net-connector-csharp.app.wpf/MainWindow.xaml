@@ -7,6 +7,15 @@
         mc:Ignorable="d"
         Title="DDS.Net Connected App" Height="450" Width="800" Loaded="OnWindowLoaded" Closing="OnWindowClosing">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Name="logTextBlock" Grid.Row="1"
+                   FontSize="13" Padding="15,5,15,5"
+                   Background="Azure" Foreground="BlueViolet"
+                   />
 
     </Grid>
 </Window>
