@@ -9,7 +9,6 @@ namespace DDS.Net.Connector.WpfApp
     public partial class MainWindow : Window
     {
         private SplitLogger logger;
-
         private DdsConnector connector;
 
         public MainWindow()
