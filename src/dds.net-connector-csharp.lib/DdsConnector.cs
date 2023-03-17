@@ -133,6 +133,8 @@ namespace DDS.Net.Connector
 
             dataReceiverThread.Stop();
             periodicUpdateThread.Stop();
+
+            GC.Collect();
         }
 
         private static bool DataReceptionWork(DdsConnector connector)
