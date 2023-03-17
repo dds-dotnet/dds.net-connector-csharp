@@ -5,13 +5,15 @@ namespace DDS.Net.Connector.WpfApp.InterfaceImpl
 {
     internal class TextBlockLogger : ILogger
     {
-        public TextBlockLogger(TextBlock textBlock, LogLevel logLevel)
+        public TextBlockLogger(TextBlock textBlock, ScrollViewer scrollViewer, LogLevel logLevel)
         {
             TextBlock = textBlock;
+            ScrollViewer = scrollViewer;
             LogLevel = logLevel;
         }
 
         public TextBlock TextBlock { get; }
+        public ScrollViewer ScrollViewer { get; }
         public LogLevel LogLevel { get; }
 
         public void Error(string message)
@@ -21,6 +23,7 @@ namespace DDS.Net.Connector.WpfApp.InterfaceImpl
                 TextBlock.Dispatcher.Invoke(() =>
                 {
                     TextBlock.Text += $"Error: {message}\n";
+                    ScrollViewer.ScrollToBottom();
                 });
             }
         }
@@ -34,6 +37,7 @@ namespace DDS.Net.Connector.WpfApp.InterfaceImpl
                     TextBlock.Dispatcher.Invoke(() =>
                     {
                         TextBlock.Text += $"{message}\n";
+                        ScrollViewer.ScrollToBottom();
                     });
                 }
             }
@@ -48,6 +52,7 @@ namespace DDS.Net.Connector.WpfApp.InterfaceImpl
                     TextBlock.Dispatcher.Invoke(() =>
                     {
                         TextBlock.Text += $"Warning: {message}\n";
+                        ScrollViewer.ScrollToBottom();
                     });
                 }
             }
