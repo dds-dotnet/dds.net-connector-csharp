@@ -22,10 +22,16 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
         /// <summary>
         /// Initializes the client.
         /// </summary>
-        public NetworkClient()
+        /// <param name="dataToServerQueueSize">Total number of
+        ///   <c cref="PacketToServer">PacketToServer</c>
+        ///   objects that the queue can hold.</param>
+        /// <param name="dataFromServerQueueSize">Total number of
+        ///   <c cref="PacketFromServer">PacketFromServer</c>
+        ///   objects that the queue can hold.</param>
+        public NetworkClient(int dataToServerQueueSize = 1000, int dataFromServerQueueSize = 1000)
         {
-            dataToServerQueue = new(1000);
-            dataFromServerQueue = new(1000);
+            dataToServerQueue = new(dataToServerQueueSize);
+            dataFromServerQueue = new(dataFromServerQueueSize);
         }
 
         private volatile bool isIOThreadStarted = false;
