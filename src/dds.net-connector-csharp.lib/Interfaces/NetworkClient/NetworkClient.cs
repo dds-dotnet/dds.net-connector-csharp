@@ -1,12 +1,7 @@
 ﻿using DDS.Net.Connector.Helpers;
 using DDS.Net.Connector.Interfaces.SyncQueue;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DDS.Net.Connector.Interfaces.NetworkClient
 {
@@ -62,7 +57,7 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
                             ioThread = new Thread(IOThreadFunc);
                             ioThread.Start();
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             socket?.Close();
                             socket?.Dispose();
