@@ -1,5 +1,8 @@
 ﻿namespace DDS.Net.Connector.Types
 {
+    /// <summary>
+    /// Specifies a primitive (basic data) type.
+    /// </summary>
     internal enum PrimitiveType
     {
         /// <summary>
