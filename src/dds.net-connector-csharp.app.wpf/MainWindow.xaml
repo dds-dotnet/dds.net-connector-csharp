@@ -12,10 +12,12 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Name="logTextBlock" Grid.Row="1"
-                   FontSize="13" Padding="15,5,15,5"
-                   Background="Azure" Foreground="BlueViolet"
-                   />
+        <ScrollViewer Name="logScrollViewer" Grid.Row="1">
+            <TextBlock Name="logTextBlock"
+                       FontSize="13" Padding="15,5,15,5"
+                       Background="Beige" Foreground="BlueViolet"
+                       />
+        </ScrollViewer>
 
     </Grid>
 </Window>
