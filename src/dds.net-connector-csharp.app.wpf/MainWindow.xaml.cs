@@ -1,6 +1,7 @@
 ﻿using DDS.Net.Connector.Helpers;
 using DDS.Net.Connector.Interfaces.DefaultLogger;
 using DDS.Net.Connector.WpfApp.Configuration;
+using DDS.Net.Connector.WpfApp.InterfaceImpl;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +21,19 @@ namespace DDS.Net.Connector.WpfApp
 {
     public partial class MainWindow : Window
     {
-        private FileLogger logger = new(AppConstants.LOG_FILENAME);
+        private SplitLogger logger;
+        private FileLogger fileLogger;
+        private TextBlockLogger textBlockLogger;
+
         private DdsConnector connector;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            fileLogger = new(AppConstants.LOG_FILENAME, Interfaces.LogLevel.Information);
+            textBlockLogger = new TextBlockLogger(logTextBlock, Interfaces.LogLevel.Information);
+            logger = new(fileLogger, textBlockLogger);
 
             INIConfigIO serverConfig = new(AppConstants.SERVER_CONFIG_FILENAME);
 
@@ -44,7 +52,7 @@ namespace DDS.Net.Connector.WpfApp
         private void OnWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             connector.Stop();
-            logger.Dispose();
+            fileLogger.Dispose();
         }
     }
 }
