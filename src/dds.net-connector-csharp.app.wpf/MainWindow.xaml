@@ -9,7 +9,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="*" MaxHeight="280"/>
         </Grid.RowDefinitions>
 
         <ScrollViewer Name="logScrollViewer" Grid.Row="1">
