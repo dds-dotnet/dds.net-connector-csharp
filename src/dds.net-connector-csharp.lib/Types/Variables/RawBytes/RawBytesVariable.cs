@@ -17,8 +17,7 @@ namespace DDS.Net.Connector.Types.Variables.RawBytes
         /// Updates the data element.
         /// </summary>
         /// <param name="data">New data.</param>
-        /// <returns>True = Data is changed; False = Same value as previous</returns>
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <returns>True = Data is changed; False = Same value as already held.</returns>
         public bool UpdateData(byte[] data)
         {
             if (data == null)
@@ -79,13 +78,7 @@ namespace DDS.Net.Connector.Types.Variables.RawBytes
 
         public override int GetValueSizeOnBuffer()
         {
-            //- 
-            //- We do not have sub-types here unlike the primitive types.
-            //- Thereby, its sub-type will take 0-bytes on the data buffer.
-            //- So, we only return the summed size of internal bytes.
-            //- 
-
-            int total = 4; // Number of bytes required for writing array size on buffer
+            int total = 4; // Number of bytes required for writing array size on the buffer
 
             if (Data != null)
             {
@@ -99,24 +92,17 @@ namespace DDS.Net.Connector.Types.Variables.RawBytes
         {
             //- 
             //- We do not have sub-types here unlike the primitive types.
-            //- Thereby, its sub-type will take 0-bytes on the data buffer.
             //- So, we do not write anything here.
             //- 
         }
 
         public override void WriteValueOnBuffer(ref byte[] buffer, ref int offset)
         {
-            //- 
-            //- We do not have sub-types here unlike the primitive types.
-            //- Thereby, its sub-type will take 0-bytes on the data buffer.
-            //- So, we only write the internal data.
-            //- 
-
             if (offset + GetValueSizeOnBuffer() >= buffer.Length)
             {
                 throw new Exception(
                     $"Cannot fit {GetValueSizeOnBuffer()} bytes " +
-                    $"at offset {offset} on buffer having size {buffer.Length}");
+                    $"at offset {offset} on the buffer with size {buffer.Length}");
             }
 
             if (Data != null)
