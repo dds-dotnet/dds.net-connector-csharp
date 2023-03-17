@@ -1,4 +1,4 @@
-﻿namespace DDS.Net.Connector.Types
+﻿namespace DDS.Net.Connector.Types.Enumerations
 {
     /// <summary>
     /// Denotes a major data type.

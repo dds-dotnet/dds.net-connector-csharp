@@ -1,4 +1,4 @@
-﻿using DDS.Net.Connector.Types;
+﻿using DDS.Net.Connector.Types.Enumerations;
 
 namespace DDS.Net.Connector.EncodersAndDecoders
 {
