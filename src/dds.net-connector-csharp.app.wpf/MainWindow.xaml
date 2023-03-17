@@ -14,7 +14,7 @@
 
         <ScrollViewer Name="logScrollViewer" Grid.Row="1">
             <TextBlock Name="logTextBlock"
-                       FontSize="13" Padding="15,5,15,5"
+                       FontSize="14" Padding="15,5,15,5"
                        Background="Beige" Foreground="BlueViolet"
                        />
         </ScrollViewer>
