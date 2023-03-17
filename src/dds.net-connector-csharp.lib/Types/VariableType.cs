@@ -1,5 +1,9 @@
 ﻿namespace DDS.Net.Connector.Types
 {
+    /// <summary>
+    /// Denotes a major data type.
+    /// Add more major data types before the last (<c>UnknownVariableType</c>) one.
+    /// </summary>
     internal enum VariableType
     {
         /// <summary>
