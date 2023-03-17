@@ -135,7 +135,17 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
 
                         ioThread?.Join(200);
                         ioThread = null!;
+                    }
+                    catch { }
 
+                    try
+                    {
+                        socket.Disconnect(false);
+                    }
+                    catch { }
+
+                    try
+                    {
                         socket.Close();
                         socket.Dispose();
                         socket = null!;
