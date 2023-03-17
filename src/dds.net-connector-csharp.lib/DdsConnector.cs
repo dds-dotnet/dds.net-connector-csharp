@@ -10,7 +10,7 @@ namespace DDS.Net.Connector
     /// Class <c>DdsConnector</c> provides interface for connecting with
     /// DDS.Net Server.
     /// </summary>
-    public class DdsConnector
+    public partial class DdsConnector
     {
         #region Initialization
         /// <summary>
@@ -159,15 +159,15 @@ namespace DDS.Net.Connector
         {
             connector.iterationCounter++;
 
-            connector.ProcessUpdate(Periodicity.Highest);
+            connector.DoPeriodicUpdate(Periodicity.Highest);
 
-            if (connector.iterationCounter % 2 == 0) connector.ProcessUpdate(Periodicity.High);
-            if (connector.iterationCounter % 4 == 0) connector.ProcessUpdate(Periodicity.Normal);
-            if (connector.iterationCounter % 8 == 0) connector.ProcessUpdate(Periodicity.Low);
+            if (connector.iterationCounter % 2 == 0) connector.DoPeriodicUpdate(Periodicity.High);
+            if (connector.iterationCounter % 4 == 0) connector.DoPeriodicUpdate(Periodicity.Normal);
+            if (connector.iterationCounter % 8 == 0) connector.DoPeriodicUpdate(Periodicity.Low);
 
             if (connector.iterationCounter % 16 == 0)
             {
-                connector.ProcessUpdate(Periodicity.Lowest);
+                connector.DoPeriodicUpdate(Periodicity.Lowest);
                 connector.iterationCounter = 0;
             }
         }
@@ -200,17 +200,6 @@ namespace DDS.Net.Connector
             {
                 Logger.Error($"Packet parsing error: {e.Message}");
             }
-        }
-        #endregion
-        /***********************************************************************************/
-        /*                                                                                 */
-        /* Periodic update                                                                 */
-        /*                                                                                 */
-        /***********************************************************************************/
-        #region Periodic Data Update
-        private void ProcessUpdate(Periodicity periodicity)
-        {
-            //- TODO: Process periodic update
         }
         #endregion
         /***********************************************************************************/
