@@ -11,11 +11,11 @@
         /// <summary>
         /// Prints a message line using given colors on standard console.
         /// </summary>
-        /// <param name="message">Line text.</param>
+        /// <param name="text">Line text.</param>
         /// <param name="fgColor">Text color.</param>
         /// <param name="bgColor">Background color for the text.</param>
         public static void PrintConsoleLine(
-            this string message,
+            this string text,
             ConsoleColor fgColor = ConsoleColor.White,
             ConsoleColor bgColor = ConsoleColor.Black)
         {
@@ -27,7 +27,7 @@
                 Console.ForegroundColor = fgColor;
                 Console.BackgroundColor = bgColor;
 
-                Console.WriteLine(message);
+                Console.WriteLine(text);
 
                 Console.ForegroundColor = beforeFG;
                 Console.BackgroundColor = beforeBG;
