@@ -4,7 +4,7 @@
     /// Class <c>ColoredConsoleExtension</c> provides extension methods for
     /// simple printing of colored console messages.
     /// </summary>
-    public static class ColoredConsoleExtension
+    public static class ConsoleExtension
     {
         private static Mutex mutex = new();
 
