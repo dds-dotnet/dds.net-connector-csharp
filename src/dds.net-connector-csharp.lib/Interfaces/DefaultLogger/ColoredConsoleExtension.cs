@@ -14,7 +14,7 @@
         /// <param name="text">Line text.</param>
         /// <param name="fgColor">Text color.</param>
         /// <param name="bgColor">Background color for the text.</param>
-        public static void PrintConsoleLine(
+        public static void WriteLine(
             this string text,
             ConsoleColor fgColor = ConsoleColor.White,
             ConsoleColor bgColor = ConsoleColor.Black)
@@ -39,7 +39,7 @@
         /// <param name="text">The text.</param>
         /// <param name="fgColor">Text color.</param>
         /// <param name="bgColor">Background color for the text.</param>
-        public static void PrintConsole(
+        public static void Write(
             this string text,
             ConsoleColor fgColor = ConsoleColor.White,
             ConsoleColor bgColor = ConsoleColor.Black)

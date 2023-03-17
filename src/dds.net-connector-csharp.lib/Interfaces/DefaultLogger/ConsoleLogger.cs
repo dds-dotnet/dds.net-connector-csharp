@@ -49,7 +49,7 @@
         {
             lock (this)
             {
-                $"Error: {message}".PrintConsoleLine(errorTextColor, errorBackgroundColor);
+                $"Error: {message}".WriteLine(errorTextColor, errorBackgroundColor);
             }
         }
 
@@ -59,7 +59,7 @@
             {
                 lock (this)
                 {
-                    message.PrintConsoleLine(informationTextColor, informationBackgroundColor);
+                    message.WriteLine(informationTextColor, informationBackgroundColor);
                 }
             }
         }
@@ -70,7 +70,7 @@
             {
                 lock (this)
                 {
-                    $"Warning: {message}".PrintConsoleLine(warningTextColor, warningBackgroundColor);
+                    $"Warning: {message}".WriteLine(warningTextColor, warningBackgroundColor);
                 }
             }
         }
