@@ -140,7 +140,7 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
 
                     try
                     {
-                        socket.Disconnect(false);
+                        socket.DisconnectAsync(false);
                     }
                     catch { }
 
