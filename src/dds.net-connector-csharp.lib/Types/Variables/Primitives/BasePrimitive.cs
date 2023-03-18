@@ -11,7 +11,8 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
     {
         public PrimitiveType PrimitiveType { get; private set; }
 
-        public BasePrimitive(string name, PrimitiveType primitiveType) : base(name, VariableType.Primitive)
+        public BasePrimitive(string name, PrimitiveType primitiveType, Periodicity periodicity)
+            : base(name, VariableType.Primitive, periodicity)
         {
             PrimitiveType = primitiveType;
         }
