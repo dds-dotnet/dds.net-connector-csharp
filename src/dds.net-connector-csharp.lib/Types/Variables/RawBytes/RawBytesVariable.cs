@@ -10,6 +10,7 @@ namespace DDS.Net.Connector.Types.Variables.RawBytes
     internal class RawBytesVariable : BaseVariable
     {
         public byte[] Data { get; private set; } = null!;
+
         public RawBytesProvider ValueProvider { get; private set; } = null!;
         public event RawBytesConsumer ValueUpdated = null!;
 
