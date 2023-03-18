@@ -178,11 +178,13 @@ namespace DDS.Net.Connector
         /* Registering data providers and consumers                                        */
         /*                                                                                 */
         /***********************************************************************************/
+        private Dictionary<string, BaseVariable> uploadVariables = new();
+        private Dictionary<string, BaseVariable> downloadVariables = new();
+
         #region Providers
         //- 
         //- Providers
         //- 
-        private Dictionary<string, BaseVariable> uploadVariables = new();
 
         /// <summary>
         /// Registers a provider delegate for providing "String" to the server at given periodicity.
@@ -328,7 +330,6 @@ namespace DDS.Net.Connector
         //- 
         //- Consumers
         //- 
-        private Dictionary<string, BaseVariable> downloadVariables = new();
 
         /// <summary>
         /// Registers a consumer delegate for receiving "String" from the server at given periodicity.
