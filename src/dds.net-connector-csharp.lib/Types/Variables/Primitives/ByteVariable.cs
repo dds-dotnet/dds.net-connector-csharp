@@ -11,9 +11,17 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
     {
         public sbyte Value { get; set; }
 
-        public ByteVariable(string name, Periodicity periodicity)
+        public ByteProvider? ValueProvider { get; private set; }
+        public event ByteConsumer? ValueConsumer;
+
+        public ByteVariable(
+                    string name,
+                    Periodicity periodicity,
+                    ByteProvider byteProvider)
+
             : base(name, PrimitiveType.Byte, periodicity)
         {
+            ValueProvider = byteProvider;
         }
 
         public override int GetValueSizeOnBuffer()
@@ -24,6 +32,22 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
         public override void WriteValueOnBuffer(ref byte[] buffer, ref int offset)
         {
             buffer.WriteByte(ref offset, Value);
+        }
+
+        public override bool RefreshValue()
+        {
+            if (ValueProvider != null)
+            {
+                sbyte newValue = ValueProvider(Name);
+
+                if (Value != newValue)
+                {
+                    Value = newValue;
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
