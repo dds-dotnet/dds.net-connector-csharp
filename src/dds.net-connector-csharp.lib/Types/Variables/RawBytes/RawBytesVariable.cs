@@ -12,7 +12,7 @@ namespace DDS.Net.Connector.Types.Variables.RawBytes
         public byte[] Data { get; private set; } = null!;
 
         public RawBytesProvider? ValueProvider { get; private set; }
-        public event RawBytesConsumer? ValueUpdated;
+        public event RawBytesConsumer? ValueConsumer;
 
         public RawBytesVariable(
                     string name,
