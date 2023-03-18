@@ -59,6 +59,12 @@ namespace DDS.Net.Connector.Types.Variables
             Id = id;
         }
 
+        /// <summary>
+        /// Refreshes the held value by the variable from the provider function.
+        /// </summary>
+        /// <returns>True = Value is changed, False = The last value is retained.</returns>
+        public abstract bool RefreshValue();
+
         /*******************************************************************************/
         /*                                                                             */
         /* Size calculation:                                                           */
