@@ -11,7 +11,8 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
     {
         public bool Value { get; set; }
 
-        public BooleanVariable(string name) : base(name, PrimitiveType.Boolean)
+        public BooleanVariable(string name, Periodicity periodicity)
+            : base(name, PrimitiveType.Boolean, periodicity)
         {
         }
 
