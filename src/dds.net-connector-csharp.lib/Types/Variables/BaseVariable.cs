@@ -36,7 +36,7 @@ namespace DDS.Net.Connector.Types.Variables
         /*******************************************************************************/
         /*                                                                             */
         /* Size calculation:                                                           */
-        /*     - Total bytes that the variable requires on the buffer                  */
+        /*     - Total bytes that the variable requires on a buffer                    */
         /*                                                                             */
         /*******************************************************************************/
 
@@ -66,7 +66,7 @@ namespace DDS.Net.Connector.Types.Variables
         /*******************************************************************************/
         /*                                                                             */
         /* Writing on the buffer:                                                      */
-        /*     - Writing along-with identifiers on the buffer                          */
+        /*     - Writing along-with identifiers on the given buffer                    */
         /*                                                                             */
         /*******************************************************************************/
 
