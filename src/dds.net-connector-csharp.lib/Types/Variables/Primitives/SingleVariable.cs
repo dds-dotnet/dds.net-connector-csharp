@@ -11,9 +11,17 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
     {
         public float Value { get; set; }
 
-        public SingleVariable(string name, Periodicity periodicity)
+        public SingleProvider? ValueProvider { get; private set; }
+        public event SingleConsumer? ValueConsumer;
+
+        public SingleVariable(
+                    string name,
+                    Periodicity periodicity,
+                    SingleProvider singleProvider)
+
             : base(name, PrimitiveType.Single, periodicity)
         {
+            ValueProvider = singleProvider;
         }
 
         public override int GetValueSizeOnBuffer()
@@ -24,6 +32,22 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
         public override void WriteValueOnBuffer(ref byte[] buffer, ref int offset)
         {
             buffer.WriteSingle(ref offset, Value);
+        }
+
+        public override bool RefreshValue()
+        {
+            if (ValueProvider != null)
+            {
+                float newValue = ValueProvider(Name);
+
+                if (Value != newValue)
+                {
+                    Value = newValue;
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
