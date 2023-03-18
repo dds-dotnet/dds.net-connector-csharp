@@ -12,16 +12,18 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
         public short Value { get; set; }
 
         public WordProvider? ValueProvider { get; private set; }
-        public event WordConsumer? ValueConsumer;
+        public WordConsumer? ValueConsumer { get; private set; }
 
         public WordVariable(
                     string name,
                     Periodicity periodicity,
-                    WordProvider wordProvider)
+                    WordProvider wordProvider = null!,
+                    WordConsumer wordConsumer = null!)
 
             : base(name, PrimitiveType.Word, periodicity)
         {
             ValueProvider = wordProvider;
+            ValueConsumer = wordConsumer;
         }
 
         public override int GetValueSizeOnBuffer()
@@ -53,6 +55,11 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
         protected override void ResetValue()
         {
             Value = 0;
+        }
+
+        public override string GetPrintableTypeName()
+        {
+            return "Word";
         }
     }
 }

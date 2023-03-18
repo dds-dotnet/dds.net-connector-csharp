@@ -27,12 +27,13 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
         }
 
         public StringProvider? ValueProvider { get; private set; }
-        public event StringConsumer? ValueConsumer;
+        public StringConsumer? ValueConsumer { get; private set; }
 
         public StringVariable(
                     string name,
                     Periodicity periodicity,
-                    StringProvider stringProvider)
+                    StringProvider stringProvider = null!,
+                    StringConsumer stringConsumer = null!)
 
             : base(name, PrimitiveType.String, periodicity)
         {
@@ -42,6 +43,7 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
             Value = string.Empty;
 
             ValueProvider = stringProvider;
+            ValueConsumer = stringConsumer;
         }
 
         public override int GetValueSizeOnBuffer()
@@ -73,6 +75,11 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
         protected override void ResetValue()
         {
             Value = string.Empty;
+        }
+
+        public override string GetPrintableTypeName()
+        {
+            return "String";
         }
     }
 }

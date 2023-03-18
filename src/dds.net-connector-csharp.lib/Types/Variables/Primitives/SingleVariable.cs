@@ -12,16 +12,18 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
         public float Value { get; set; }
 
         public SingleProvider? ValueProvider { get; private set; }
-        public event SingleConsumer? ValueConsumer;
+        public SingleConsumer? ValueConsumer { get; private set; }
 
         public SingleVariable(
                     string name,
                     Periodicity periodicity,
-                    SingleProvider singleProvider)
+                    SingleProvider singleProvider = null!,
+                    SingleConsumer singleConsumer = null!)
 
             : base(name, PrimitiveType.Single, periodicity)
         {
             ValueProvider = singleProvider;
+            ValueConsumer = singleConsumer;
         }
 
         public override int GetValueSizeOnBuffer()
@@ -53,6 +55,11 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
         protected override void ResetValue()
         {
             Value = 0;
+        }
+
+        public override string GetPrintableTypeName()
+        {
+            return "Single";
         }
     }
 }

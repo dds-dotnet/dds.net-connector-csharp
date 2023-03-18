@@ -12,16 +12,18 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
         public uint Value { get; set; }
 
         public UnsignedDWordProvider? ValueProvider { get; private set; }
-        public event UnsignedDWordConsumer? ValueConsumer;
+        public UnsignedDWordConsumer? ValueConsumer { get; private set; }
 
         public UnsignedDWordVariable(
                     string name,
                     Periodicity periodicity,
-                    UnsignedDWordProvider unsignedDWordProvider)
+                    UnsignedDWordProvider unsignedDWordProvider = null!,
+                    UnsignedDWordConsumer unsignedDWordConsumer = null!)
 
             : base(name, PrimitiveType.UnsignedDWord, periodicity)
         {
             ValueProvider = unsignedDWordProvider;
+            ValueConsumer = unsignedDWordConsumer;
         }
 
         public override int GetValueSizeOnBuffer()
@@ -53,6 +55,11 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
         protected override void ResetValue()
         {
             Value = 0;
+        }
+
+        public override string GetPrintableTypeName()
+        {
+            return "Unsigned DWord";
         }
     }
 }

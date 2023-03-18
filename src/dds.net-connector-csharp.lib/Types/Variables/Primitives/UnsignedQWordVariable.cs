@@ -12,16 +12,18 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
         public ulong Value { get; set; }
 
         public UnsignedQWordProvider? ValueProvider { get; private set; }
-        public event UnsignedQWordConsumer? ValueConsumer;
+        public UnsignedQWordConsumer? ValueConsumer { get; private set; }
 
         public UnsignedQWordVariable(
                     string name,
                     Periodicity periodicity,
-                    UnsignedQWordProvider unsignedQWordProvider)
+                    UnsignedQWordProvider unsignedQWordProvider = null!,
+                    UnsignedQWordConsumer unsignedQWordConsumer = null!)
 
             : base(name, PrimitiveType.UnsignedQWord, periodicity)
         {
             ValueProvider = unsignedQWordProvider;
+            ValueConsumer = unsignedQWordConsumer;
         }
 
         public override int GetValueSizeOnBuffer()
@@ -53,6 +55,11 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
         protected override void ResetValue()
         {
             Value = 0;
+        }
+
+        public override string GetPrintableTypeName()
+        {
+            return "Unsigned QWord";
         }
     }
 }

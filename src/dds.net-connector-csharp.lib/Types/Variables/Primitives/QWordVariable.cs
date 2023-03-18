@@ -12,16 +12,18 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
         public long Value { get; set; }
 
         public QWordProvider? ValueProvider { get; private set; }
-        public event QWordConsumer? ValueConsumer;
+        public QWordConsumer? ValueConsumer { get; private set; }
 
         public QWordVariable(
                     string name,
                     Periodicity periodicity,
-                    QWordProvider qWordProvider)
+                    QWordProvider qWordProvider = null!,
+                    QWordConsumer qWordConsumer = null!)
 
             : base(name, PrimitiveType.QWord, periodicity)
         {
             ValueProvider = qWordProvider;
+            ValueConsumer = qWordConsumer;
         }
 
         public override int GetValueSizeOnBuffer()
@@ -53,6 +55,11 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
         protected override void ResetValue()
         {
             Value = 0;
+        }
+
+        public override string GetPrintableTypeName()
+        {
+            return "QWord";
         }
     }
 }
