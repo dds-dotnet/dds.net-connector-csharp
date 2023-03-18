@@ -72,6 +72,11 @@ namespace DDS.Net.Connector.Types.Variables
         /// </summary>
         protected abstract void ResetValue();
 
+        /// <summary>
+        /// The friendly, printable name of variable's type.
+        /// </summary>
+        /// <returns>The type's friendly name.</returns>
+        public abstract string GetPrintableTypeName();
 
         /// <summary>
         /// Refreshes the held value by the variable from the provider function.
