@@ -4,6 +4,8 @@ using DDS.Net.Connector.Interfaces;
 using DDS.Net.Connector.Interfaces.NetworkClient;
 using DDS.Net.Connector.Types.Enumerations;
 using DDS.Net.Connector.Types.Variables;
+using DDS.Net.Connector.Types.Variables.Primitives;
+using DDS.Net.Connector.Types.Variables.RawBytes;
 
 namespace DDS.Net.Connector
 {
@@ -217,7 +219,20 @@ namespace DDS.Net.Connector
         /// <param name="periodicity">Periodicity.</param>
         public void RegisterStringProvider(string variableName, StringProvider provider, Periodicity periodicity)
         {
-
+            lock (variablesMutex)
+            {
+                if (uploadVariables.ContainsKey(variableName) ||
+                    uploadVariablesToBeRegistered.ContainsKey(variableName))
+                {
+                    throw new Exception(
+                        $"The variable named {variableName} " +
+                        $"has already been registered for provision to the server.");
+                }
+                else
+                {
+                    uploadVariablesToBeRegistered.Add(variableName, new StringVariable(variableName, periodicity, provider));
+                }
+            }
         }
         /// <summary>
         /// Registers a provider delegate for providing "Boolean" to the server at given periodicity.
@@ -227,7 +242,20 @@ namespace DDS.Net.Connector
         /// <param name="periodicity">Periodicity.</param>
         public void RegisterBooleanProvider(string variableName, BooleanProvider provider, Periodicity periodicity)
         {
-
+            lock (variablesMutex)
+            {
+                if (uploadVariables.ContainsKey(variableName) ||
+                    uploadVariablesToBeRegistered.ContainsKey(variableName))
+                {
+                    throw new Exception(
+                        $"The variable named {variableName} " +
+                        $"has already been registered for provision to the server.");
+                }
+                else
+                {
+                    uploadVariablesToBeRegistered.Add(variableName, new BooleanVariable(variableName, periodicity, provider));
+                }
+            }
         }
         /// <summary>
         /// Registers a provider delegate for providing "Signed Byte" to the server at given periodicity.
@@ -237,7 +265,20 @@ namespace DDS.Net.Connector
         /// <param name="periodicity">Periodicity.</param>
         public void RegisterByteProvider(string variableName, ByteProvider provider, Periodicity periodicity)
         {
-
+            lock (variablesMutex)
+            {
+                if (uploadVariables.ContainsKey(variableName) ||
+                    uploadVariablesToBeRegistered.ContainsKey(variableName))
+                {
+                    throw new Exception(
+                        $"The variable named {variableName} " +
+                        $"has already been registered for provision to the server.");
+                }
+                else
+                {
+                    uploadVariablesToBeRegistered.Add(variableName, new ByteVariable(variableName, periodicity, provider));
+                }
+            }
         }
         /// <summary>
         /// Registers a provider delegate for providing "Signed Word" to the server at given periodicity.
@@ -247,7 +288,20 @@ namespace DDS.Net.Connector
         /// <param name="periodicity">Periodicity.</param>
         public void RegisterWordProvider(string variableName, WordProvider provider, Periodicity periodicity)
         {
-
+            lock (variablesMutex)
+            {
+                if (uploadVariables.ContainsKey(variableName) ||
+                    uploadVariablesToBeRegistered.ContainsKey(variableName))
+                {
+                    throw new Exception(
+                        $"The variable named {variableName} " +
+                        $"has already been registered for provision to the server.");
+                }
+                else
+                {
+                    uploadVariablesToBeRegistered.Add(variableName, new WordVariable(variableName, periodicity, provider));
+                }
+            }
         }
         /// <summary>
         /// Registers a provider delegate for providing "Signed Double Word" to the server at given periodicity.
@@ -257,7 +311,20 @@ namespace DDS.Net.Connector
         /// <param name="periodicity">Periodicity.</param>
         public void RegisterDWordProvider(string variableName, DWordProvider provider, Periodicity periodicity)
         {
-
+            lock (variablesMutex)
+            {
+                if (uploadVariables.ContainsKey(variableName) ||
+                    uploadVariablesToBeRegistered.ContainsKey(variableName))
+                {
+                    throw new Exception(
+                        $"The variable named {variableName} " +
+                        $"has already been registered for provision to the server.");
+                }
+                else
+                {
+                    uploadVariablesToBeRegistered.Add(variableName, new DWordVariable(variableName, periodicity, provider));
+                }
+            }
         }
         /// <summary>
         /// Registers a provider delegate for providing "Signed Quad Word" to the server at given periodicity.
@@ -267,7 +334,20 @@ namespace DDS.Net.Connector
         /// <param name="periodicity">Periodicity.</param>
         public void RegisterQWordProvider(string variableName, QWordProvider provider, Periodicity periodicity)
         {
-
+            lock (variablesMutex)
+            {
+                if (uploadVariables.ContainsKey(variableName) ||
+                    uploadVariablesToBeRegistered.ContainsKey(variableName))
+                {
+                    throw new Exception(
+                        $"The variable named {variableName} " +
+                        $"has already been registered for provision to the server.");
+                }
+                else
+                {
+                    uploadVariablesToBeRegistered.Add(variableName, new QWordVariable(variableName, periodicity, provider));
+                }
+            }
         }
         /// <summary>
         /// Registers a provider delegate for providing "Unsigned Byte" to the server at given periodicity.
@@ -277,7 +357,20 @@ namespace DDS.Net.Connector
         /// <param name="periodicity">Periodicity.</param>
         public void RegisterUnsignedByteProvider(string variableName, UnsignedByteProvider provider, Periodicity periodicity)
         {
-
+            lock (variablesMutex)
+            {
+                if (uploadVariables.ContainsKey(variableName) ||
+                    uploadVariablesToBeRegistered.ContainsKey(variableName))
+                {
+                    throw new Exception(
+                        $"The variable named {variableName} " +
+                        $"has already been registered for provision to the server.");
+                }
+                else
+                {
+                    uploadVariablesToBeRegistered.Add(variableName, new UnsignedByteVariable(variableName, periodicity, provider));
+                }
+            }
         }
         /// <summary>
         /// Registers a provider delegate for providing "Unsigned Word" to the server at given periodicity.
@@ -287,7 +380,20 @@ namespace DDS.Net.Connector
         /// <param name="periodicity">Periodicity.</param>
         public void RegisterUnsignedWordProvider(string variableName, UnsignedWordProvider provider, Periodicity periodicity)
         {
-
+            lock (variablesMutex)
+            {
+                if (uploadVariables.ContainsKey(variableName) ||
+                    uploadVariablesToBeRegistered.ContainsKey(variableName))
+                {
+                    throw new Exception(
+                        $"The variable named {variableName} " +
+                        $"has already been registered for provision to the server.");
+                }
+                else
+                {
+                    uploadVariablesToBeRegistered.Add(variableName, new UnsignedWordVariable(variableName, periodicity, provider));
+                }
+            }
         }
         /// <summary>
         /// Registers a provider delegate for providing "Unsigned Double Word" to the server at given periodicity.
@@ -297,7 +403,20 @@ namespace DDS.Net.Connector
         /// <param name="periodicity">Periodicity.</param>
         public void RegisterUnsignedDWordProvider(string variableName, UnsignedDWordProvider provider, Periodicity periodicity)
         {
-
+            lock (variablesMutex)
+            {
+                if (uploadVariables.ContainsKey(variableName) ||
+                    uploadVariablesToBeRegistered.ContainsKey(variableName))
+                {
+                    throw new Exception(
+                        $"The variable named {variableName} " +
+                        $"has already been registered for provision to the server.");
+                }
+                else
+                {
+                    uploadVariablesToBeRegistered.Add(variableName, new UnsignedDWordVariable(variableName, periodicity, provider));
+                }
+            }
         }
         /// <summary>
         /// Registers a provider delegate for providing "Unsigned Quad Word" to the server at given periodicity.
@@ -307,7 +426,20 @@ namespace DDS.Net.Connector
         /// <param name="periodicity">Periodicity.</param>
         public void RegisterUnsignedQWordProvider(string variableName, UnsignedQWordProvider provider, Periodicity periodicity)
         {
-
+            lock (variablesMutex)
+            {
+                if (uploadVariables.ContainsKey(variableName) ||
+                    uploadVariablesToBeRegistered.ContainsKey(variableName))
+                {
+                    throw new Exception(
+                        $"The variable named {variableName} " +
+                        $"has already been registered for provision to the server.");
+                }
+                else
+                {
+                    uploadVariablesToBeRegistered.Add(variableName, new UnsignedQWordVariable(variableName, periodicity, provider));
+                }
+            }
         }
         /// <summary>
         /// Registers a provider delegate for providing "Single - 4 byte floating-point" to the server at given periodicity.
@@ -317,7 +449,20 @@ namespace DDS.Net.Connector
         /// <param name="periodicity">Periodicity.</param>
         public void RegisterSingleProvider(string variableName, SingleProvider provider, Periodicity periodicity)
         {
-
+            lock (variablesMutex)
+            {
+                if (uploadVariables.ContainsKey(variableName) ||
+                    uploadVariablesToBeRegistered.ContainsKey(variableName))
+                {
+                    throw new Exception(
+                        $"The variable named {variableName} " +
+                        $"has already been registered for provision to the server.");
+                }
+                else
+                {
+                    uploadVariablesToBeRegistered.Add(variableName, new SingleVariable(variableName, periodicity, provider));
+                }
+            }
         }
         /// <summary>
         /// Registers a provider delegate for providing "Double - 8 byte floating-point" to the server at given periodicity.
@@ -327,7 +472,20 @@ namespace DDS.Net.Connector
         /// <param name="periodicity">Periodicity.</param>
         public void RegisterDoubleProvider(string variableName, DoubleProvider provider, Periodicity periodicity)
         {
-
+            lock (variablesMutex)
+            {
+                if (uploadVariables.ContainsKey(variableName) ||
+                    uploadVariablesToBeRegistered.ContainsKey(variableName))
+                {
+                    throw new Exception(
+                        $"The variable named {variableName} " +
+                        $"has already been registered for provision to the server.");
+                }
+                else
+                {
+                    uploadVariablesToBeRegistered.Add(variableName, new DoubleVariable(variableName, periodicity, provider));
+                }
+            }
         }
         /// <summary>
         /// Registers a provider delegate for providing "bytes array" to the server at given periodicity.
@@ -337,7 +495,20 @@ namespace DDS.Net.Connector
         /// <param name="periodicity">Periodicity.</param>
         public void RegisterRawBytesProvider(string variableName, RawBytesProvider provider, Periodicity periodicity)
         {
-
+            lock (variablesMutex)
+            {
+                if (uploadVariables.ContainsKey(variableName) ||
+                    uploadVariablesToBeRegistered.ContainsKey(variableName))
+                {
+                    throw new Exception(
+                        $"The variable named {variableName} " +
+                        $"has already been registered for provision to the server.");
+                }
+                else
+                {
+                    uploadVariablesToBeRegistered.Add(variableName, new RawBytesVariable(variableName, periodicity, provider));
+                }
+            }
         }
 
         /// <summary>
@@ -346,7 +517,18 @@ namespace DDS.Net.Connector
         /// <param name="variableName">Variable's name.</param>
         public void UnregisterProvider(string variableName)
         {
+            lock (variablesMutex)
+            {
+                if (uploadVariables.ContainsKey(variableName))
+                {
+                    uploadVariables.Remove(variableName);
+                }
 
+                if (uploadVariablesToBeRegistered.ContainsKey(variableName))
+                {
+                    uploadVariablesToBeRegistered.Remove(variableName);
+                }
+            }
         }
         #endregion
         #region Consumers
