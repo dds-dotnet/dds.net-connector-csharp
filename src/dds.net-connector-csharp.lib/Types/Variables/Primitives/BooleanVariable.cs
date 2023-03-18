@@ -12,7 +12,7 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
         public bool Value { get; set; }
 
         public BooleanProvider? ValueProvider { get; private set; }
-        public event BooleanConsumer? ValueUpdated;
+        public event BooleanConsumer? ValueConsumer;
 
         public BooleanVariable(
                     string name,
