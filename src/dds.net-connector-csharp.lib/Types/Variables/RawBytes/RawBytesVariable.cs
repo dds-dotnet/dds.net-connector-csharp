@@ -12,16 +12,18 @@ namespace DDS.Net.Connector.Types.Variables.RawBytes
         public byte[] Data { get; private set; } = null!;
 
         public RawBytesProvider? ValueProvider { get; private set; }
-        public event RawBytesConsumer? ValueConsumer;
+        public RawBytesConsumer? ValueConsumer { get; private set; }
 
         public RawBytesVariable(
                     string name,
                     Periodicity periodicity,
-                    RawBytesProvider rawBytesProvider = null!)
+                    RawBytesProvider rawBytesProvider = null!,
+                    RawBytesConsumer rawBytesConsumer = null!)
 
             : base(name, VariableType.RawBytes, periodicity)
         {
             ValueProvider = rawBytesProvider;
+            ValueConsumer = rawBytesConsumer;
         }
 
         /// <summary>
@@ -145,6 +147,11 @@ namespace DDS.Net.Connector.Types.Variables.RawBytes
         protected override void ResetValue()
         {
             Data = null!;
+        }
+
+        public override string GetPrintableTypeName()
+        {
+            return "RawBytes";
         }
     }
 }
