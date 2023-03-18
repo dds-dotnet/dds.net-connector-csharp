@@ -1,7 +1,7 @@
 ﻿namespace DDS.Net.Connector
 {
     //- 
-    //- Providers
+    //- Provider delegates
     //- 
     public delegate string StringProvider(string variableName);
 
@@ -23,7 +23,7 @@
     public delegate byte[] RawBytesProvider(string variableName);
 
     //- 
-    //- Consumers
+    //- Consumer delegates
     //- 
     public delegate void StringConsumer(string variableName, string variableValue);
 
