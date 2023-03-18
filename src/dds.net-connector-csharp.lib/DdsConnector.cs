@@ -178,8 +178,13 @@ namespace DDS.Net.Connector
         /* Registering data providers and consumers                                        */
         /*                                                                                 */
         /***********************************************************************************/
+        private Mutex variablesMutex = new();
+
         private Dictionary<string, BaseVariable> uploadVariables = new();
         private Dictionary<string, BaseVariable> downloadVariables = new();
+
+        private Dictionary<string, BaseVariable> uploadVariablesToBeRegistered = new();
+        private Dictionary<string, BaseVariable> downloadVariablesToBeRegistered = new();
 
         #region Providers
         //- 
