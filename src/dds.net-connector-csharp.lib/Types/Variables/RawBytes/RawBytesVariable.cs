@@ -10,10 +10,17 @@ namespace DDS.Net.Connector.Types.Variables.RawBytes
     internal class RawBytesVariable : BaseVariable
     {
         public byte[] Data { get; private set; } = null!;
+        public RawBytesProvider ValueProvider { get; private set; } = null!;
+        public event RawBytesConsumer ValueUpdated = null!;
 
-        public RawBytesVariable(string name, Periodicity periodicity)
+        public RawBytesVariable(
+                    string name,
+                    Periodicity periodicity,
+                    RawBytesProvider rawBytesProvider = null!)
+
             : base(name, VariableType.RawBytes, periodicity)
         {
+            ValueProvider = rawBytesProvider;
         }
 
         /// <summary>
@@ -121,6 +128,17 @@ namespace DDS.Net.Connector.Types.Variables.RawBytes
             {
                 buffer.WriteUnsignedDWord(ref offset, 0); // Size is zero here
             }
+        }
+
+        public override bool RefreshValue()
+        {
+            if (ValueProvider  != null)
+            {
+                byte[] newData = ValueProvider(Name);
+                return UpdateData(newData);
+            }
+
+            return false;
         }
     }
 }
