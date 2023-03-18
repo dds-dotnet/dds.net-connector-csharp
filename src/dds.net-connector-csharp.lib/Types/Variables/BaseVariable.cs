@@ -22,15 +22,6 @@ namespace DDS.Net.Connector.Types.Variables
         public VariableType VariableType { get; protected set; }
 
         /// <summary>
-        /// Number of bytes that ID takes on the buffer.
-        /// </summary>
-        private static readonly int IdSizeOnBuffer = sizeof(short);
-        /// <summary>
-        /// Number of bytes that the main <c>VariableType</c> takes on the buffer.
-        /// </summary>
-        private static readonly int VariableTypeSizeOnBuffer = VariableType.Primitive.GetSizeOnBuffer();
-
-        /// <summary>
         /// Initializes the base elements.
         /// </summary>
         /// <param name="id">Identifier for the variable - provided by the server.</param>
@@ -47,6 +38,15 @@ namespace DDS.Net.Connector.Types.Variables
         /*     - Total bytes that the variable requires on a buffer                    */
         /*                                                                             */
         /*******************************************************************************/
+
+        /// <summary>
+        /// Number of bytes that ID takes on the buffer.
+        /// </summary>
+        private static readonly int IdSizeOnBuffer = sizeof(short);
+        /// <summary>
+        /// Number of bytes that the main <c>VariableType</c> takes on the buffer.
+        /// </summary>
+        private static readonly int VariableTypeSizeOnBuffer = VariableType.Primitive.GetSizeOnBuffer();
 
         /// <summary>
         /// Total size => [ID]-[Variable Type]-[Type]-[Value]
