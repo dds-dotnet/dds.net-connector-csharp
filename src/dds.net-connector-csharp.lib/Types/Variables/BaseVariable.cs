@@ -60,6 +60,20 @@ namespace DDS.Net.Connector.Types.Variables
         }
 
         /// <summary>
+        /// Resets the variable to its initial state.
+        /// </summary>
+        public void Reset()
+        {
+            Id = -1;
+            ResetValue();
+        }
+        /// <summary>
+        /// Resets the variable's value to its initial state.
+        /// </summary>
+        protected abstract void ResetValue();
+
+
+        /// <summary>
         /// Refreshes the held value by the variable from the provider function.
         /// </summary>
         /// <returns>True = Value is changed, False = The last value is retained.</returns>
