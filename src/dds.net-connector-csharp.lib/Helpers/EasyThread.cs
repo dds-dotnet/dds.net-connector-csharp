@@ -57,6 +57,7 @@
         }
 
         private volatile bool isRunning = false;
+        private volatile bool isTimerExitted = false;
         private Timer timer = null!;
         private Thread thread = null!;
 
@@ -70,6 +71,7 @@
 
                     if (isPeriodic)
                     {
+                        isTimerExitted = false;
                         timer = new(TimerFunction, null, Timeout.Infinite, Timeout.Infinite);
                         timer.Change(TimeSpan.FromMilliseconds(timeInterval), Timeout.InfiniteTimeSpan);
                     }
@@ -97,6 +99,19 @@
                         {
                             timer.Dispose();
                             timer = null!;
+
+                            int exitCounter = 0;
+                            while (!isTimerExitted)
+                            {
+                                Thread.Sleep(100);
+
+                                exitCounter++;
+
+                                if (exitCounter == 10)
+                                {
+                                    break;
+                                }
+                            }
                         }
                         catch { }
                     }
@@ -125,6 +140,7 @@
                 {
                     try
                     {
+                        isTimerExitted = true;
                         timer.Dispose();
                         timer = null!;
                     }
