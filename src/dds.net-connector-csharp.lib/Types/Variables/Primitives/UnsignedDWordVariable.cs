@@ -11,7 +11,8 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
     {
         public uint Value { get; set; }
 
-        public UnsignedDWordVariable(string name) : base(name,  PrimitiveType.UnsignedDWord)
+        public UnsignedDWordVariable(string name, Periodicity periodicity)
+            : base(name,  PrimitiveType.UnsignedDWord, periodicity)
         {
         }
 

@@ -26,7 +26,8 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
             }
         }
 
-        public StringVariable(string name) : base(name, PrimitiveType.String)
+        public StringVariable(string name, Periodicity periodicity)
+            : base(name, PrimitiveType.String, periodicity)
         {
             _value = string.Empty;
             _bytes = Encoding.Unicode.GetBytes(_value);

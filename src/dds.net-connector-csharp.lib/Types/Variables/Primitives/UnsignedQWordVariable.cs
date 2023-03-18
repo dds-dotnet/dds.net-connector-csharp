@@ -11,7 +11,8 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
     {
         public ulong Value { get; set; }
 
-        public UnsignedQWordVariable(string name) : base(name, PrimitiveType.UnsignedQWord)
+        public UnsignedQWordVariable(string name, Periodicity periodicity)
+            : base(name, PrimitiveType.UnsignedQWord, periodicity)
         {
         }
 

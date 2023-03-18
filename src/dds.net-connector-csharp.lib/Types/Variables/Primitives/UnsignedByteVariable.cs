@@ -11,7 +11,8 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
     {
         public byte Value { get; set; }
 
-        public UnsignedByteVariable(string name) : base(name, PrimitiveType.UnsignedByte)
+        public UnsignedByteVariable(string name, Periodicity periodicity)
+            : base(name, PrimitiveType.UnsignedByte, periodicity)
         {
         }
 

@@ -11,7 +11,8 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
     {
         public float Value { get; set; }
 
-        public SingleVariable(string name) : base(name, PrimitiveType.Single)
+        public SingleVariable(string name, Periodicity periodicity)
+            : base(name, PrimitiveType.Single, periodicity)
         {
         }
 

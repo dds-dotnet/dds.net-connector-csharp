@@ -11,7 +11,8 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
     {
         public short Value { get; set; }
 
-        public WordVariable(string name) : base(name, PrimitiveType.Word)
+        public WordVariable(string name, Periodicity periodicity)
+            : base(name, PrimitiveType.Word, periodicity)
         {
         }
 
