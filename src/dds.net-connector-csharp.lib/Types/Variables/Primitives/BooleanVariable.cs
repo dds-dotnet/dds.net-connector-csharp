@@ -12,16 +12,18 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
         public bool Value { get; set; }
 
         public BooleanProvider? ValueProvider { get; private set; }
-        public event BooleanConsumer? ValueConsumer;
+        public BooleanConsumer? ValueConsumer { get; private set; }
 
         public BooleanVariable(
                     string name,
                     Periodicity periodicity,
-                    BooleanProvider booleanProvider = null!)
+                    BooleanProvider booleanProvider = null!,
+                    BooleanConsumer booleanConsumer = null!)
 
             : base(name, PrimitiveType.Boolean, periodicity)
         {
             ValueProvider = booleanProvider;
+            ValueConsumer = booleanConsumer;
         }
 
         public override int GetValueSizeOnBuffer()
@@ -53,6 +55,11 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
         protected override void ResetValue()
         {
             Value = false;
+        }
+
+        public override string GetPrintableTypeName()
+        {
+            return "Boolean";
         }
     }
 }

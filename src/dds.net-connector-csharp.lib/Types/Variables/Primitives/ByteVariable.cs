@@ -12,16 +12,18 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
         public sbyte Value { get; set; }
 
         public ByteProvider? ValueProvider { get; private set; }
-        public event ByteConsumer? ValueConsumer;
+        public ByteConsumer? ValueConsumer { get; private set; }
 
         public ByteVariable(
                     string name,
                     Periodicity periodicity,
-                    ByteProvider byteProvider)
+                    ByteProvider byteProvider = null!,
+                    ByteConsumer byteConsumer = null!)
 
             : base(name, PrimitiveType.Byte, periodicity)
         {
             ValueProvider = byteProvider;
+            ValueConsumer = byteConsumer;
         }
 
         public override int GetValueSizeOnBuffer()
@@ -53,6 +55,11 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
         protected override void ResetValue()
         {
             Value = 0;
+        }
+
+        public override string GetPrintableTypeName()
+        {
+            return "Byte";
         }
     }
 }
