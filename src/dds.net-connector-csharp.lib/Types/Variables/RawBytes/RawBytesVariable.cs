@@ -11,7 +11,8 @@ namespace DDS.Net.Connector.Types.Variables.RawBytes
     {
         public byte[] Data { get; private set; } = null!;
 
-        public RawBytesVariable(string name) : base(name, VariableType.RawBytes)
+        public RawBytesVariable(string name, Periodicity periodicity)
+            : base(name, VariableType.RawBytes, periodicity)
         {
         }
 
