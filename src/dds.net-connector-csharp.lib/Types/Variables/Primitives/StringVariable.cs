@@ -4,6 +4,10 @@ using System.Text;
 
 namespace DDS.Net.Connector.Types.Variables.Primitives
 {
+    /// <summary>
+    /// Class <c>StringVariable</c> is a sub-class of <c>BasePrimitive</c> and
+    /// represents <c cref="PrimitiveType.String">PrimitiveType.String</c> handling.
+    /// </summary>
     internal class StringVariable : BasePrimitive
     {
         private string _value;
@@ -22,13 +26,12 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
             }
         }
 
-        public StringVariable(ushort id, string name) : base(id, name)
+        public StringVariable(string name) : base(name, PrimitiveType.String)
         {
             _value = string.Empty;
             _bytes = Encoding.Unicode.GetBytes(_value);
 
             Value = string.Empty;
-            PrimitiveType = PrimitiveType.String;
         }
 
         public override int GetValueSizeOnBuffer()
