@@ -9,9 +9,9 @@ namespace DDS.Net.Connector.Types.Variables
     internal abstract class BaseVariable
     {
         /// <summary>
-        /// Identifier for the variable.
+        /// Identifier for the variable - assigned by the server.
         /// </summary>
-        public ushort Id { get; private set; }
+        public int Id { get; private set; }
         /// <summary>
         /// Name associated with the variable.
         /// </summary>
@@ -24,12 +24,31 @@ namespace DDS.Net.Connector.Types.Variables
         /// <summary>
         /// Initializes the base elements.
         /// </summary>
-        /// <param name="id">Identifier for the variable - provided by the server.</param>
         /// <param name="name">Name of the variable - assigned by users.</param>
-        public BaseVariable(ushort id, string name)
+        public BaseVariable(string name)
         {
-            Id = id;
+            Id = -1;
             Name = name;
+        }
+
+        /// <summary>
+        /// Assigns ID to the variable.
+        /// </summary>
+        /// <param name="id">ID for the variable</param>
+        /// <exception cref="ArgumentException"></exception>
+        public void AssignId(int id)
+        {
+            if (Id != -1)
+            {
+                throw new Exception($"Variable {Name} has already been assigned with an ID");
+            }
+
+            if (id < 0 || id > ushort.MaxValue)
+            {
+                throw new ArgumentException($"Variable {Name} cannot be assigned with out-of-range ID {id}");
+            }
+
+            Id = id;
         }
 
         /*******************************************************************************/
@@ -85,7 +104,7 @@ namespace DDS.Net.Connector.Types.Variables
         /// <param name="offset">Offset in the buffer - updated after writing the data.</param>
         public void WriteOnBuffer(ref byte[] buffer, ref int offset)
         {
-            buffer.WriteUnsignedWord(ref offset, Id);
+            buffer.WriteUnsignedWord(ref offset, (ushort)Id);
             buffer.WriteVariableType(ref offset, VariableType);
 
             WriteSubTypeOnBuffer(ref buffer, ref offset);
