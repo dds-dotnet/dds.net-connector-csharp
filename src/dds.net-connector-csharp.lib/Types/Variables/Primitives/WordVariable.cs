@@ -11,9 +11,17 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
     {
         public short Value { get; set; }
 
-        public WordVariable(string name, Periodicity periodicity)
+        public WordProvider? ValueProvider { get; private set; }
+        public event WordConsumer? ValueConsumer;
+
+        public WordVariable(
+                    string name,
+                    Periodicity periodicity,
+                    WordProvider wordProvider)
+
             : base(name, PrimitiveType.Word, periodicity)
         {
+            ValueProvider = wordProvider;
         }
 
         public override int GetValueSizeOnBuffer()
@@ -24,6 +32,22 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
         public override void WriteValueOnBuffer(ref byte[] buffer, ref int offset)
         {
             buffer.WriteWord(ref offset, Value);
+        }
+
+        public override bool RefreshValue()
+        {
+            if (ValueProvider != null)
+            {
+                short newValue = ValueProvider(Name);
+
+                if (Value != newValue)
+                {
+                    Value = newValue;
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
