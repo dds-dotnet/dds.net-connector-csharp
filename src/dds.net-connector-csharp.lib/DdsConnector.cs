@@ -132,8 +132,26 @@ namespace DDS.Net.Connector
         {
             NetworkClient.Disconnect();
 
-            dataReceiverThread.Stop();
             periodicUpdateThread.Stop();
+            dataReceiverThread.Stop();
+
+            lock (variablesMutex)
+            {
+                foreach (KeyValuePair<string, BaseVariable> v in uploadVariables)
+                {
+                    v.Value.Reset();
+                    uploadVariablesToBeRegistered.Add(v.Key, v.Value);
+                }
+
+                foreach (KeyValuePair<string, BaseVariable> v in downloadVariables)
+                {
+                    v.Value.Reset();
+                    downloadVariablesToBeRegistered.Add(v.Key, v.Value);
+                }
+
+                uploadVariables.Clear();
+                downloadVariables.Clear();
+            }
 
             GC.Collect();
         }
