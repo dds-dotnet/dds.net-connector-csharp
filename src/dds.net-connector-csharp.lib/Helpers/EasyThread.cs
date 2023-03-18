@@ -104,7 +104,7 @@
                     {
                         try
                         {
-                            thread.Join(100);
+                            thread.Join(1000);
                             thread = null!;
                         }
                         catch { }
