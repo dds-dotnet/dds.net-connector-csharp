@@ -3,13 +3,16 @@ using DDS.Net.Connector.Types.Enumerations;
 
 namespace DDS.Net.Connector.Types.Variables.Primitives
 {
+    /// <summary>
+    /// Class <c>BooleanVariable</c> is a sub-class of <c>BasePrimitive</c> and
+    /// represents <c cref="PrimitiveType.Boolean">PrimitiveType.Boolean</c> handling.
+    /// </summary>
     internal class BooleanVariable : BasePrimitive
     {
         public bool Value { get; set; }
 
-        public BooleanVariable(ushort id, string name) : base(id, name)
+        public BooleanVariable(string name) : base(name, PrimitiveType.Boolean)
         {
-            PrimitiveType = PrimitiveType.Boolean;
         }
 
         public override int GetValueSizeOnBuffer()
