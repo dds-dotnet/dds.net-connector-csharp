@@ -133,7 +133,7 @@ namespace DDS.Net.Connector.Types.Variables.RawBytes
 
         public override bool RefreshValue()
         {
-            if (ValueProvider  != null)
+            if (ValueProvider != null)
             {
                 byte[] newData = ValueProvider(Name);
                 return UpdateData(newData);
