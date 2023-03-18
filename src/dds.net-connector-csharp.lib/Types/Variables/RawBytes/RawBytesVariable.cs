@@ -141,5 +141,10 @@ namespace DDS.Net.Connector.Types.Variables.RawBytes
 
             return false;
         }
+
+        protected override void ResetValue()
+        {
+            Data = null!;
+        }
     }
 }
