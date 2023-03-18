@@ -3,14 +3,16 @@ using DDS.Net.Connector.Types.Enumerations;
 
 namespace DDS.Net.Connector.Types.Variables.RawBytes
 {
+    /// <summary>
+    /// Class <c>RawBytesVariable</c> is a sub-class of <c>BaseVariable</c> and
+    /// represents <c cref="VariableType.RawBytes">VariableType.RawBytes</c> handling.
+    /// </summary>
     internal class RawBytesVariable : BaseVariable
     {
-        public byte[] Data { get; private set; }
+        public byte[] Data { get; private set; } = null!;
 
-        public RawBytesVariable(ushort id, string name, byte[] data = null!) : base(id, name)
+        public RawBytesVariable(string name) : base(name, VariableType.RawBytes)
         {
-            VariableType = VariableType.RawBytes;
-            Data = data;
         }
 
         /// <summary>
