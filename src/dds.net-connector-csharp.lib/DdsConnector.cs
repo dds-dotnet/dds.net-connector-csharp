@@ -95,8 +95,8 @@ namespace DDS.Net.Connector
                 throw new Exception(errorMessage);
             }
 
-            dataReceiverThread = new(DataReceptionWork, this);
-            periodicUpdateThread = new(PeriodicUpdateWork, this, Settings.BASE_TIME_SLOT_MS);
+            dataReceiverThread = new(DataReceptionWorker, this);
+            periodicUpdateThread = new(PeriodicUpdateWorker, this, Settings.BASE_TIME_SLOT_MS);
         }
         #endregion
         /***********************************************************************************/
@@ -138,7 +138,7 @@ namespace DDS.Net.Connector
             GC.Collect();
         }
 
-        private static bool DataReceptionWork(DdsConnector connector)
+        private static bool DataReceptionWorker(DdsConnector connector)
         {
             bool doneAnything = false;
 
@@ -156,7 +156,7 @@ namespace DDS.Net.Connector
 
         private int iterationCounter = 0;
 
-        private static void PeriodicUpdateWork(DdsConnector connector)
+        private static void PeriodicUpdateWorker(DdsConnector connector)
         {
             connector.iterationCounter++;
 
