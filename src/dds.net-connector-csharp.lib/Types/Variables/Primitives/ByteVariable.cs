@@ -3,13 +3,16 @@ using DDS.Net.Connector.Types.Enumerations;
 
 namespace DDS.Net.Connector.Types.Variables.Primitives
 {
+    /// <summary>
+    /// Class <c>ByteVariable</c> is a sub-class of <c>BasePrimitive</c> and
+    /// represents <c cref="PrimitiveType.Byte">PrimitiveType.Byte</c> handling.
+    /// </summary>
     internal class ByteVariable : BasePrimitive
     {
         public sbyte Value { get; set; }
 
-        public ByteVariable(ushort id, string name) : base(id, name)
+        public ByteVariable(string name) : base(name, PrimitiveType.Byte)
         {
-            PrimitiveType = PrimitiveType.Byte;
         }
 
         public override int GetValueSizeOnBuffer()
