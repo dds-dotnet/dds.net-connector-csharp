@@ -11,9 +11,17 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
     {
         public bool Value { get; set; }
 
-        public BooleanVariable(string name, Periodicity periodicity)
+        public BooleanProvider? ValueProvider { get; private set; }
+        public event BooleanConsumer? ValueUpdated;
+
+        public BooleanVariable(
+                    string name,
+                    Periodicity periodicity,
+                    BooleanProvider booleanProvider = null!)
+
             : base(name, PrimitiveType.Boolean, periodicity)
         {
+            ValueProvider = booleanProvider;
         }
 
         public override int GetValueSizeOnBuffer()
@@ -24,6 +32,22 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
         public override void WriteValueOnBuffer(ref byte[] buffer, ref int offset)
         {
             buffer.WriteBoolean(ref offset, Value);
+        }
+
+        public override bool RefreshValue()
+        {
+            if (ValueProvider != null)
+            {
+                bool newValue = ValueProvider(Name);
+
+                if (Value != newValue)
+                {
+                    Value = newValue;
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
