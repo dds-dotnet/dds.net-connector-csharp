@@ -3,13 +3,16 @@ using DDS.Net.Connector.Types.Enumerations;
 
 namespace DDS.Net.Connector.Types.Variables.Primitives
 {
+    /// <summary>
+    /// Class <c>UnsignedWordVariable</c> is a sub-class of <c>BasePrimitive</c> and
+    /// represents <c cref="PrimitiveType.UnsignedWord">PrimitiveType.UnsignedWord</c> handling.
+    /// </summary>
     internal class UnsignedWordVariable : BasePrimitive
     {
         public ushort Value { get; set; }
 
-        public UnsignedWordVariable(ushort id, string name) : base(id, name)
+        public UnsignedWordVariable(string name) : base(name, PrimitiveType.UnsignedWord)
         {
-            PrimitiveType = PrimitiveType.UnsignedWord;
         }
 
         public override int GetValueSizeOnBuffer()
