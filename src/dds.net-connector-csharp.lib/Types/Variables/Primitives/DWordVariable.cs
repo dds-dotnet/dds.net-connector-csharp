@@ -49,5 +49,10 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
 
             return false;
         }
+
+        protected override void ResetValue()
+        {
+            Value = 0;
+        }
     }
 }
