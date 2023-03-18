@@ -3,13 +3,17 @@ using DDS.Net.Connector.Types.Enumerations;
 
 namespace DDS.Net.Connector.Types.Variables.Primitives
 {
+    /// <summary>
+    /// Class <c>BasePrimitive</c> is a sub-class of <c>BaseVariable</c> and
+    /// represents <c cref="VariableType.Primitive">VariableType.Primitive</c> handling.
+    /// </summary>
     internal abstract class BasePrimitive : BaseVariable
     {
-        public PrimitiveType PrimitiveType { get; protected set; } = PrimitiveType.UnknownPrimitiveType;
+        public PrimitiveType PrimitiveType { get; private set; }
 
-        public BasePrimitive(ushort id, string name) : base(id, name)
+        public BasePrimitive(string name, PrimitiveType primitiveType) : base(name, VariableType.Primitive)
         {
-            VariableType = VariableType.Primitive;
+            PrimitiveType = primitiveType;
         }
 
         public override int GetSubTypeSizeOnBuffer()
