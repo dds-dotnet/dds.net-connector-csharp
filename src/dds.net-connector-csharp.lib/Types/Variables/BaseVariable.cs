@@ -33,6 +33,13 @@ namespace DDS.Net.Connector.Types.Variables
             Name = name;
         }
 
+        /*******************************************************************************/
+        /*                                                                             */
+        /* Size calculation:                                                           */
+        /*     - Total bytes that the variable requires on the buffer                  */
+        /*                                                                             */
+        /*******************************************************************************/
+
         /// <summary>
         /// Total size => [ID]-[Variable Type]-[Type]-[Value]
         /// </summary>
@@ -45,6 +52,23 @@ namespace DDS.Net.Connector.Types.Variables
                 GetSubTypeSizeOnBuffer() +
                 GetValueSizeOnBuffer();
         }
+        /// <summary>
+        /// Required size of sub-type on the buffer.
+        /// </summary>
+        /// <returns>Total size in bytes that is required to write the sub-type on the buffer.</returns>
+        public abstract int GetSubTypeSizeOnBuffer();
+        /// <summary>
+        /// Required size of value on the buffer.
+        /// </summary>
+        /// <returns>Total number of bytes that are required to write the value on the buffer.</returns>
+        public abstract int GetValueSizeOnBuffer();
+
+        /*******************************************************************************/
+        /*                                                                             */
+        /* Writing on the buffer:                                                      */
+        /*     - Writing along-with identifiers on the buffer                          */
+        /*                                                                             */
+        /*******************************************************************************/
 
         /// <summary>
         /// Write everything including ID, Type and Value on the buffer.
@@ -59,26 +83,12 @@ namespace DDS.Net.Connector.Types.Variables
             WriteSubTypeOnBuffer(ref buffer, ref offset);
             WriteValueOnBuffer(ref buffer, ref offset);
         }
-
-        /// <summary>
-        /// Required size of sub-type on the buffer.
-        /// </summary>
-        /// <returns>Total size in bytes that is required to write the sub-type on the buffer.</returns>
-        public abstract int GetSubTypeSizeOnBuffer();
-
-        /// <summary>
-        /// Required size of value on the buffer.
-        /// </summary>
-        /// <returns>Total number of bytes that are required to write the value on the buffer.</returns>
-        public abstract int GetValueSizeOnBuffer();
-
         /// <summary>
         /// Writes sub-type of the data on the buffer.
         /// </summary>
         /// <param name="buffer">The buffer on which to write.</param>
         /// <param name="offset">Offset in the buffer - updated after writing the sub-type.</param>
         public abstract void WriteSubTypeOnBuffer(ref byte[] buffer, ref int offset);
-
         /// <summary>
         /// Writes value int the buffer.
         /// </summary>
