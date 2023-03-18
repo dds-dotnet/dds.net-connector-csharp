@@ -20,16 +20,23 @@ namespace DDS.Net.Connector.Types.Variables
         /// The main type of the variable i.e., primitive or compound, etc.
         /// </summary>
         public VariableType VariableType { get; private set; }
+        /// <summary>
+        /// Update periodicity for the variable.
+        /// </summary>
+        public Periodicity Periodicity { get; private set; }
 
         /// <summary>
         /// Initializes the base elements.
         /// </summary>
         /// <param name="name">Name of the variable - assigned by users.</param>
-        public BaseVariable(string name, VariableType variableType)
+        /// <param name="variableType">Main type of the variable.</param>
+        /// <param name="periodicity">Periodicity of the variable.</param>
+        public BaseVariable(string name, VariableType variableType, Periodicity periodicity)
         {
             Id = -1;
             Name = name;
             VariableType = variableType;
+            Periodicity = periodicity;
         }
 
         /// <summary>
