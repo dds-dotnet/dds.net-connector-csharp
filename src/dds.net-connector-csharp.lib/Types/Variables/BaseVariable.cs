@@ -3,6 +3,9 @@ using DDS.Net.Connector.Types.Enumerations;
 
 namespace DDS.Net.Connector.Types.Variables
 {
+    /// <summary>
+    /// The base class for all the variables.
+    /// </summary>
     internal abstract class BaseVariable
     {
         /// <summary>
@@ -27,6 +30,11 @@ namespace DDS.Net.Connector.Types.Variables
         /// </summary>
         private static readonly int VariableTypeSizeOnBuffer = VariableType.Primitive.GetSizeOnBuffer();
 
+        /// <summary>
+        /// Initializes the base elements.
+        /// </summary>
+        /// <param name="id">Identifier for the variable - provided by the server.</param>
+        /// <param name="name">Name of the variable - assigned by users.</param>
         public BaseVariable(ushort id, string name)
         {
             Id = id;
