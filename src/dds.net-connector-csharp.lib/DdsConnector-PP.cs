@@ -555,6 +555,18 @@ namespace DDS.Net.Connector
             }
             else if (bpv is BooleanVariable bl)
             {
+                bool conv = v != 0;
+                bool ret = false;
+
+                if (bl.Value != conv)
+                {
+                    bl.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting Byte {v} to {bl.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is ByteVariable bt)
             {
@@ -608,6 +620,18 @@ namespace DDS.Net.Connector
             }
             else if (bpv is BooleanVariable bl)
             {
+                bool conv = v != 0;
+                bool ret = false;
+
+                if (bl.Value != conv)
+                {
+                    bl.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting Word {v} to {bl.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is ByteVariable bt)
             {
@@ -661,6 +685,18 @@ namespace DDS.Net.Connector
             }
             else if (bpv is BooleanVariable bl)
             {
+                bool conv = v != 0;
+                bool ret = false;
+
+                if (bl.Value != conv)
+                {
+                    bl.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting DWord {v} to {bl.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is ByteVariable bt)
             {
@@ -714,6 +750,18 @@ namespace DDS.Net.Connector
             }
             else if (bpv is BooleanVariable bl)
             {
+                bool conv = v != 0;
+                bool ret = false;
+
+                if (bl.Value != conv)
+                {
+                    bl.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting QWord {v} to {bl.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is ByteVariable bt)
             {
@@ -767,6 +815,18 @@ namespace DDS.Net.Connector
             }
             else if (bpv is BooleanVariable bl)
             {
+                bool conv = v != 0;
+                bool ret = false;
+
+                if (bl.Value != conv)
+                {
+                    bl.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting Unsigned Byte {v} to {bl.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is ByteVariable bt)
             {
@@ -820,6 +880,18 @@ namespace DDS.Net.Connector
             }
             else if (bpv is BooleanVariable bl)
             {
+                bool conv = v != 0;
+                bool ret = false;
+
+                if (bl.Value != conv)
+                {
+                    bl.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting Unsigned Word {v} to {bl.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is ByteVariable bt)
             {
@@ -873,6 +945,18 @@ namespace DDS.Net.Connector
             }
             else if (bpv is BooleanVariable bl)
             {
+                bool conv = v != 0;
+                bool ret = false;
+
+                if (bl.Value != conv)
+                {
+                    bl.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting Unsigned DWord {v} to {bl.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is ByteVariable bt)
             {
@@ -926,6 +1010,18 @@ namespace DDS.Net.Connector
             }
             else if (bpv is BooleanVariable bl)
             {
+                bool conv = v != 0;
+                bool ret = false;
+
+                if (bl.Value != conv)
+                {
+                    bl.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting Unsigned QWord {v} to {bl.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is ByteVariable bt)
             {
@@ -979,6 +1075,18 @@ namespace DDS.Net.Connector
             }
             else if (bpv is BooleanVariable bl)
             {
+                bool conv = v != 0;
+                bool ret = false;
+
+                if (bl.Value != conv)
+                {
+                    bl.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting Single {v} to {bl.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is ByteVariable bt)
             {
@@ -1032,6 +1140,18 @@ namespace DDS.Net.Connector
             }
             else if (bpv is BooleanVariable bl)
             {
+                bool conv = v != 0;
+                bool ret = false;
+
+                if (bl.Value != conv)
+                {
+                    bl.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting Double {v} to {bl.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is ByteVariable bt)
             {
