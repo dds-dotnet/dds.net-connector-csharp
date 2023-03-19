@@ -16,33 +16,50 @@ namespace DDS.Net.Connector
                 switch (packetId)
                 {
                     case PacketId.HandShake:
-
+                        /*********************************************************************/
+                        /* Handshake                                                         */
+                        /*********************************************************************/
                         string serverName = data.ReadString(ref offset);
                         string serverVersion = data.ReadString(ref offset);
 
                         Logger.Info($"Server = {serverName} v{serverVersion}");
-
                         break;
 
-
                     case PacketId.VariablesRegistration:
+                        /*********************************************************************/
+                        /* Variables' Registration                                           */
+                        /*********************************************************************/
+                        break;
+
                     case PacketId.VariablesUpdateAtServer:
+                        /*********************************************************************/
+                        /* Variables' Update at the Server                                   */
+                        /*     - Nothing required to be done at the connector end.           */
+                        /*********************************************************************/
+                        break;
+
                     case PacketId.VariablesUpdateFromServer:
+                        /*********************************************************************/
+                        /* Variables' Update from the Server                                 */
+                        /*********************************************************************/
                         break;
 
 
                     case PacketId.ErrorResponseFromServer:
-
+                        /*********************************************************************/
+                        /* Error from the Server                                             */
+                        /*********************************************************************/
                         string errorMessage = data.ReadString(ref offset);
-                        Logger.Error($"Server Error: {errorMessage}");
 
+                        Logger.Error($"Server Error: {errorMessage}");
                         break;
 
 
                     case PacketId.UnknownPacket:
-
+                        /*********************************************************************/
+                        /* Unknown Packet                                                    */
+                        /*********************************************************************/
                         Logger.Error($"Unknown message received from the server.");
-
                         break;
                 }
             }
