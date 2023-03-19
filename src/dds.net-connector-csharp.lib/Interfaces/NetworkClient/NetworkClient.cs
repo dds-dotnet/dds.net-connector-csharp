@@ -45,9 +45,7 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
                         {
                             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
                             {
-                                Blocking = false,
-                                ReceiveBufferSize = 4096,
-                                SendBufferSize = 4096,
+                                Blocking = false
                             };
 
                             socket.ConnectAsync(
