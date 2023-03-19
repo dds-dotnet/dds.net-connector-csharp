@@ -849,12 +849,48 @@ namespace DDS.Net.Connector
             }
             else if (bpv is ByteVariable bt)
             {
+                sbyte conv = (sbyte)v;
+                bool ret = false;
+
+                if (bt.Value != conv)
+                {
+                    bt.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting QWord {v} to {bt.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is WordVariable wrd)
             {
+                short conv = (short)v;
+                bool ret = false;
+
+                if (wrd.Value != conv)
+                {
+                    wrd.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting QWord {v} to {wrd.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is DWordVariable dwrd)
             {
+                int conv = (int)v;
+                bool ret = false;
+
+                if (dwrd.Value != conv)
+                {
+                    dwrd.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting QWord {v} to {dwrd.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is QWordVariable qwrd)
             {
@@ -870,21 +906,90 @@ namespace DDS.Net.Connector
             }
             else if (bpv is UnsignedByteVariable ubt)
             {
+                byte conv = (byte)v;
+                bool ret = false;
+
+                if (ubt.Value != conv)
+                {
+                    ubt.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting QWord {v} to {ubt.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is UnsignedWordVariable uwrd)
             {
+                ushort conv = (ushort)v;
+                bool ret = false;
+
+                if (uwrd.Value != conv)
+                {
+                    uwrd.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting QWord {v} to {uwrd.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is UnsignedDWordVariable udwrd)
             {
+                uint conv = (uint)v;
+                bool ret = false;
+
+                if (udwrd.Value != conv)
+                {
+                    udwrd.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting QWord {v} to {udwrd.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is UnsignedQWordVariable uqwrd)
             {
+                ulong conv = (ulong)v;
+                bool ret = false;
+
+                if (uqwrd.Value != conv)
+                {
+                    uqwrd.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting QWord {v} to {uqwrd.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is SingleVariable sngl)
             {
+                float conv = v;
+                bool ret = false;
+
+                if (sngl.Value != conv)
+                {
+                    sngl.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting QWord {v} to {sngl.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is DoubleVariable dbl)
             {
+                if (dbl.Value != v)
+                {
+                    dbl.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
 
             Logger.Error(
