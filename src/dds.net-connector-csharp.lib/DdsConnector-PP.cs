@@ -111,6 +111,38 @@ namespace DDS.Net.Connector
             return (variableName, variableId, isRegister);
         }
 
+        private void ParseVariablesUpdateAtServer(ref byte[] data, ref int offset)
+        {
+            lock (variablesMutex)
+            {
+                while (offset < data.Length)
+                {
+                    (ushort variableId, string errorMessage) =
+                        ReadVariablesUpdateAtServerElements(ref data, ref offset);
+
+                    foreach (BaseVariable v in uploadVariables.Values)
+                    {
+                        if (v.Id == variableId)
+                        {
+                            Logger.Error(
+                                $"Variable {v.Name} cannot be updated at the server - " +
+                                $"{errorMessage}");
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        private static (ushort variableId, string errorMessage)
+            ReadVariablesUpdateAtServerElements(ref byte[] data, ref int offset)
+        {
+            ushort variableId = data.ReadUnsignedWord(ref offset);
+            string errorMessage = data.ReadString(ref offset);
+
+            return (variableId, errorMessage);
+        }
+
         private void ParseVariablesUpdateFromServer(ref byte[] data, ref int offset)
         {
             lock (variablesMutex)
