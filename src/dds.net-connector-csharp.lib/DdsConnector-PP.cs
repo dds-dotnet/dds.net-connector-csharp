@@ -16,9 +16,6 @@ namespace DDS.Net.Connector
                 switch (packetId)
                 {
                     case PacketId.HandShake:
-                        /*********************************************************************/
-                        /* Handshake                                                         */
-                        /*********************************************************************/
                         string serverName = data.ReadString(ref offset);
                         string serverVersion = data.ReadString(ref offset);
 
@@ -26,39 +23,22 @@ namespace DDS.Net.Connector
                         break;
 
                     case PacketId.VariablesRegistration:
-                        /*********************************************************************/
-                        /* Variables' Registration                                           */
-                        /*********************************************************************/
+                        ParseVariablesRegistration(ref data, ref offset);
                         break;
 
                     case PacketId.VariablesUpdateAtServer:
-                        /*********************************************************************/
-                        /* Variables' Update at the Server                                   */
-                        /*     - Nothing required to be done at the connector end.           */
-                        /*********************************************************************/
                         break;
 
                     case PacketId.VariablesUpdateFromServer:
-                        /*********************************************************************/
-                        /* Variables' Update from the Server                                 */
-                        /*********************************************************************/
+                        ParseVariablesUpdateFromServer(ref data, ref offset);
                         break;
 
-
                     case PacketId.ErrorResponseFromServer:
-                        /*********************************************************************/
-                        /* Error from the Server                                             */
-                        /*********************************************************************/
                         string errorMessage = data.ReadString(ref offset);
-
                         Logger.Error($"Server Error: {errorMessage}");
                         break;
 
-
                     case PacketId.UnknownPacket:
-                        /*********************************************************************/
-                        /* Unknown Packet                                                    */
-                        /*********************************************************************/
                         Logger.Error($"Unknown message received from the server.");
                         break;
                 }
@@ -67,6 +47,16 @@ namespace DDS.Net.Connector
             {
                 Logger.Error($"Packet parsing error: {e.Message}");
             }
+        }
+
+        private void ParseVariablesRegistration(ref byte[] data, ref int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ParseVariablesUpdateFromServer(ref byte[] data, ref int offset)
+        {
+            throw new NotImplementedException();
         }
     }
 }
