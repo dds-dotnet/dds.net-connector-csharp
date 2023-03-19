@@ -323,6 +323,10 @@ namespace DDS.Net.Connector
                     str.Value = v;
                     return true;
                 }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is BooleanVariable bl)
             {
@@ -499,12 +503,30 @@ namespace DDS.Net.Connector
 
         private bool UpdatePrimitiveVariableWithBoolean(BasePrimitive bpv, bool v)
         {
-            if (bpv is BooleanVariable bl)
+            if (bpv is StringVariable str)
+            {
+                string conv = $"{v}";
+
+                if (str.Value != conv)
+                {
+                    str.Value = conv;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else if (bpv is BooleanVariable bl)
             {
                 if (bl.Value != v)
                 {
                     bl.Value = v;
                     return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
 
