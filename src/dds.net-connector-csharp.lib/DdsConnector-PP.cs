@@ -1326,27 +1326,123 @@ namespace DDS.Net.Connector
             }
             else if (bpv is ByteVariable bt)
             {
+                sbyte conv = (sbyte)v;
+                bool ret = false;
+
+                if (bt.Value != conv)
+                {
+                    bt.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting Double {v} to {bt.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is WordVariable wrd)
             {
+                short conv = (short)v;
+                bool ret = false;
+
+                if (wrd.Value != conv)
+                {
+                    wrd.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting Double {v} to {wrd.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is DWordVariable dwrd)
             {
+                int conv = (int)v;
+                bool ret = false;
+
+                if (dwrd.Value != conv)
+                {
+                    dwrd.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting Double {v} to {dwrd.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is QWordVariable qwrd)
             {
+                long conv = (long)v;
+                bool ret = false;
+
+                if (qwrd.Value != conv)
+                {
+                    qwrd.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting Double {v} to {qwrd.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is UnsignedByteVariable ubt)
             {
+                byte conv = (byte)v;
+                bool ret = false;
+
+                if (ubt.Value != conv)
+                {
+                    ubt.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting Double {v} to {ubt.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is UnsignedWordVariable uwrd)
             {
+                ushort conv = (ushort)v;
+                bool ret = false;
+
+                if (uwrd.Value != conv)
+                {
+                    uwrd.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting Double {v} to {uwrd.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is UnsignedDWordVariable udwrd)
             {
+                uint conv = (uint)v;
+                bool ret = false;
+
+                if (udwrd.Value != conv)
+                {
+                    udwrd.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting Double {v} to {udwrd.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is UnsignedQWordVariable uqwrd)
             {
+                ulong conv = (ulong)v;
+                bool ret = false;
+
+                if (uqwrd.Value != conv)
+                {
+                    uqwrd.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting Double {v} to {uqwrd.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is SingleVariable sngl)
             {
