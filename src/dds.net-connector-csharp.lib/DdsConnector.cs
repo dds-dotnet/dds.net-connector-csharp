@@ -544,7 +544,21 @@ namespace DDS.Net.Connector
         /// <param name="periodicity">Periodicity.</param>
         public void RegisterStringConsumer(string variableName, StringConsumer consumer, Periodicity periodicity)
         {
-
+            lock (variablesMutex)
+            {
+                if (downloadVariables.ContainsKey(variableName) ||
+                    downloadVariablesToBeRegistered.ContainsKey(variableName))
+                {
+                    throw new Exception(
+                        $"The variable named {variableName} " +
+                        $"has already been registered for provision from the server.");
+                }
+                else
+                {
+                    downloadVariablesToBeRegistered.Add(
+                        variableName, new StringVariable(variableName, periodicity, null!, consumer));
+                }
+            }
         }
         /// <summary>
         /// Registers a consumer delegate for receiving "Boolean" from the server at given periodicity.
@@ -554,7 +568,21 @@ namespace DDS.Net.Connector
         /// <param name="periodicity">Periodicity.</param>
         public void RegisterBooleanConsumer(string variableName, BooleanConsumer consumer, Periodicity periodicity)
         {
-
+            lock (variablesMutex)
+            {
+                if (downloadVariables.ContainsKey(variableName) ||
+                    downloadVariablesToBeRegistered.ContainsKey(variableName))
+                {
+                    throw new Exception(
+                        $"The variable named {variableName} " +
+                        $"has already been registered for provision from the server.");
+                }
+                else
+                {
+                    downloadVariablesToBeRegistered.Add(
+                        variableName, new BooleanVariable(variableName, periodicity, null!, consumer));
+                }
+            }
         }
         /// <summary>
         /// Registers a consumer delegate for receiving "Signed Byte" from the server at given periodicity.
@@ -564,7 +592,21 @@ namespace DDS.Net.Connector
         /// <param name="periodicity">Periodicity.</param>
         public void RegisterByteConsumer(string variableName, ByteConsumer consumer, Periodicity periodicity)
         {
-
+            lock (variablesMutex)
+            {
+                if (downloadVariables.ContainsKey(variableName) ||
+                    downloadVariablesToBeRegistered.ContainsKey(variableName))
+                {
+                    throw new Exception(
+                        $"The variable named {variableName} " +
+                        $"has already been registered for provision from the server.");
+                }
+                else
+                {
+                    downloadVariablesToBeRegistered.Add(
+                        variableName, new ByteVariable(variableName, periodicity, null!, consumer));
+                }
+            }
         }
         /// <summary>
         /// Registers a consumer delegate for receiving "Signed Word" from the server at given periodicity.
@@ -574,7 +616,21 @@ namespace DDS.Net.Connector
         /// <param name="periodicity">Periodicity.</param>
         public void RegisterWordConsumer(string variableName, WordConsumer consumer, Periodicity periodicity)
         {
-
+            lock (variablesMutex)
+            {
+                if (downloadVariables.ContainsKey(variableName) ||
+                    downloadVariablesToBeRegistered.ContainsKey(variableName))
+                {
+                    throw new Exception(
+                        $"The variable named {variableName} " +
+                        $"has already been registered for provision from the server.");
+                }
+                else
+                {
+                    downloadVariablesToBeRegistered.Add(
+                        variableName, new WordVariable(variableName, periodicity, null!, consumer));
+                }
+            }
         }
         /// <summary>
         /// Registers a consumer delegate for receiving "Signed Double Word" from the server at given periodicity.
@@ -584,7 +640,21 @@ namespace DDS.Net.Connector
         /// <param name="periodicity">Periodicity.</param>
         public void RegisterDWordConsumer(string variableName, DWordConsumer consumer, Periodicity periodicity)
         {
-
+            lock (variablesMutex)
+            {
+                if (downloadVariables.ContainsKey(variableName) ||
+                    downloadVariablesToBeRegistered.ContainsKey(variableName))
+                {
+                    throw new Exception(
+                        $"The variable named {variableName} " +
+                        $"has already been registered for provision from the server.");
+                }
+                else
+                {
+                    downloadVariablesToBeRegistered.Add(
+                        variableName, new DWordVariable(variableName, periodicity, null!, consumer));
+                }
+            }
         }
         /// <summary>
         /// Registers a consumer delegate for receiving "Signed Quad Word" from the server at given periodicity.
@@ -594,7 +664,21 @@ namespace DDS.Net.Connector
         /// <param name="periodicity">Periodicity.</param>
         public void RegisterQWordConsumer(string variableName, QWordConsumer consumer, Periodicity periodicity)
         {
-
+            lock (variablesMutex)
+            {
+                if (downloadVariables.ContainsKey(variableName) ||
+                    downloadVariablesToBeRegistered.ContainsKey(variableName))
+                {
+                    throw new Exception(
+                        $"The variable named {variableName} " +
+                        $"has already been registered for provision from the server.");
+                }
+                else
+                {
+                    downloadVariablesToBeRegistered.Add(
+                        variableName, new QWordVariable(variableName, periodicity, null!, consumer));
+                }
+            }
         }
         /// <summary>
         /// Registers a consumer delegate for receiving "Unsigned Byte" from the server at given periodicity.
@@ -604,7 +688,21 @@ namespace DDS.Net.Connector
         /// <param name="periodicity">Periodicity.</param>
         public void RegisterUnsignedByteConsumer(string variableName, UnsignedByteConsumer consumer, Periodicity periodicity)
         {
-
+            lock (variablesMutex)
+            {
+                if (downloadVariables.ContainsKey(variableName) ||
+                    downloadVariablesToBeRegistered.ContainsKey(variableName))
+                {
+                    throw new Exception(
+                        $"The variable named {variableName} " +
+                        $"has already been registered for provision from the server.");
+                }
+                else
+                {
+                    downloadVariablesToBeRegistered.Add(
+                        variableName, new UnsignedByteVariable(variableName, periodicity, null!, consumer));
+                }
+            }
         }
         /// <summary>
         /// Registers a consumer delegate for receiving "Unsigned Word" from the server at given periodicity.
@@ -614,7 +712,21 @@ namespace DDS.Net.Connector
         /// <param name="periodicity">Periodicity.</param>
         public void RegisterUnsignedWordConsumer(string variableName, UnsignedWordConsumer consumer, Periodicity periodicity)
         {
-
+            lock (variablesMutex)
+            {
+                if (downloadVariables.ContainsKey(variableName) ||
+                    downloadVariablesToBeRegistered.ContainsKey(variableName))
+                {
+                    throw new Exception(
+                        $"The variable named {variableName} " +
+                        $"has already been registered for provision from the server.");
+                }
+                else
+                {
+                    downloadVariablesToBeRegistered.Add(
+                        variableName, new UnsignedWordVariable(variableName, periodicity, null!, consumer));
+                }
+            }
         }
         /// <summary>
         /// Registers a consumer delegate for receiving "Unsigned Double Word" from the server at given periodicity.
@@ -624,7 +736,21 @@ namespace DDS.Net.Connector
         /// <param name="periodicity">Periodicity.</param>
         public void RegisterUnsignedDWordConsumer(string variableName, UnsignedDWordConsumer consumer, Periodicity periodicity)
         {
-
+            lock (variablesMutex)
+            {
+                if (downloadVariables.ContainsKey(variableName) ||
+                    downloadVariablesToBeRegistered.ContainsKey(variableName))
+                {
+                    throw new Exception(
+                        $"The variable named {variableName} " +
+                        $"has already been registered for provision from the server.");
+                }
+                else
+                {
+                    downloadVariablesToBeRegistered.Add(
+                        variableName, new UnsignedDWordVariable(variableName, periodicity, null!, consumer));
+                }
+            }
         }
         /// <summary>
         /// Registers a consumer delegate for receiving "Unsigned Quad Word" from the server at given periodicity.
@@ -634,7 +760,21 @@ namespace DDS.Net.Connector
         /// <param name="periodicity">Periodicity.</param>
         public void RegisterUnsignedQWordConsumer(string variableName, UnsignedQWordConsumer consumer, Periodicity periodicity)
         {
-
+            lock (variablesMutex)
+            {
+                if (downloadVariables.ContainsKey(variableName) ||
+                    downloadVariablesToBeRegistered.ContainsKey(variableName))
+                {
+                    throw new Exception(
+                        $"The variable named {variableName} " +
+                        $"has already been registered for provision from the server.");
+                }
+                else
+                {
+                    downloadVariablesToBeRegistered.Add(
+                        variableName, new UnsignedQWordVariable(variableName, periodicity, null!, consumer));
+                }
+            }
         }
         /// <summary>
         /// Registers a consumer delegate for receiving "Single - 4 byte floating-point number"
@@ -645,7 +785,21 @@ namespace DDS.Net.Connector
         /// <param name="periodicity">Periodicity.</param>
         public void RegisterSingleConsumer(string variableName, SingleConsumer consumer, Periodicity periodicity)
         {
-
+            lock (variablesMutex)
+            {
+                if (downloadVariables.ContainsKey(variableName) ||
+                    downloadVariablesToBeRegistered.ContainsKey(variableName))
+                {
+                    throw new Exception(
+                        $"The variable named {variableName} " +
+                        $"has already been registered for provision from the server.");
+                }
+                else
+                {
+                    downloadVariablesToBeRegistered.Add(
+                        variableName, new SingleVariable(variableName, periodicity, null!, consumer));
+                }
+            }
         }
         /// <summary>
         /// Registers a consumer delegate for receiving "Double - 8 byte floating-point number"
@@ -656,7 +810,21 @@ namespace DDS.Net.Connector
         /// <param name="periodicity">Periodicity.</param>
         public void RegisterDoubleConsumer(string variableName, DoubleConsumer consumer, Periodicity periodicity)
         {
-
+            lock (variablesMutex)
+            {
+                if (downloadVariables.ContainsKey(variableName) ||
+                    downloadVariablesToBeRegistered.ContainsKey(variableName))
+                {
+                    throw new Exception(
+                        $"The variable named {variableName} " +
+                        $"has already been registered for provision from the server.");
+                }
+                else
+                {
+                    downloadVariablesToBeRegistered.Add(
+                        variableName, new DoubleVariable(variableName, periodicity, null!, consumer));
+                }
+            }
         }
         /// <summary>
         /// Registers a consumer delegate for receiving "bytes array" from the server at given periodicity.
@@ -666,7 +834,21 @@ namespace DDS.Net.Connector
         /// <param name="periodicity">Periodicity.</param>
         public void RegisterRawBytesConsumer(string variableName, RawBytesConsumer consumer, Periodicity periodicity)
         {
-
+            lock (variablesMutex)
+            {
+                if (downloadVariables.ContainsKey(variableName) ||
+                    downloadVariablesToBeRegistered.ContainsKey(variableName))
+                {
+                    throw new Exception(
+                        $"The variable named {variableName} " +
+                        $"has already been registered for provision from the server.");
+                }
+                else
+                {
+                    downloadVariablesToBeRegistered.Add(
+                        variableName, new RawBytesVariable(variableName, periodicity, null!, consumer));
+                }
+            }
         }
 
         /// <summary>
@@ -675,7 +857,18 @@ namespace DDS.Net.Connector
         /// <param name="variableName">Variable's name.</param>
         public void UnregisterConsumer(string variableName)
         {
+            lock (variablesMutex)
+            {
+                if (downloadVariables.ContainsKey(variableName))
+                {
+                    downloadVariables.Remove(variableName);
+                }
 
+                if (downloadVariablesToBeRegistered.ContainsKey(variableName))
+                {
+                    downloadVariablesToBeRegistered.Remove(variableName);
+                }
+            }
         }
         #endregion
     }
