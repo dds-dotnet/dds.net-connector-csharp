@@ -312,6 +312,10 @@ namespace DDS.Net.Connector
 
             } // lock (variablesMutex)
 
+            foreach (BaseVariable v in updatedVariables)
+            {
+                Task.Run(() => { v.InvokeValueAwaiter(); });
+            }
         }
 
         private bool UpdatePrimitiveVariableWithString(BasePrimitive bpv, string v)
