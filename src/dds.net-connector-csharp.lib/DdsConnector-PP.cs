@@ -324,12 +324,175 @@ namespace DDS.Net.Connector
                     return true;
                 }
             }
-            else
+            else if (bpv is BooleanVariable bl)
             {
-                Logger.Error(
-                    $"Received string {v} cannot be assigned to " +
-                    $"the variable {bpv.Name} of type {bpv.GetPrintableTypeName()}");
+                if (bool.TryParse(v, out bool val))
+                {
+                    if (bl.Value != val)
+                    {
+                        bl.Value = val;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
             }
+            else if (bpv is ByteVariable bt)
+            {
+                if (sbyte.TryParse(v, out sbyte val))
+                {
+                    if (bt.Value != val)
+                    {
+                        bt.Value = val;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            else if (bpv is WordVariable wrd)
+            {
+                if (short.TryParse(v, out short val))
+                {
+                    if (wrd.Value != val)
+                    {
+                        wrd.Value = val;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            else if (bpv is DWordVariable dwrd)
+            {
+                if (int.TryParse(v, out int val))
+                {
+                    if (dwrd.Value != val)
+                    {
+                        dwrd.Value = val;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            else if (bpv is QWordVariable qwrd)
+            {
+                if (long.TryParse(v, out long val))
+                {
+                    if (qwrd.Value != val)
+                    {
+                        qwrd.Value = val;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            else if (bpv is UnsignedByteVariable ubt)
+            {
+                if (byte.TryParse(v, out byte val))
+                {
+                    if (ubt.Value != val)
+                    {
+                        ubt.Value = val;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            else if (bpv is UnsignedWordVariable uwrd)
+            {
+                if (ushort.TryParse(v, out ushort val))
+                {
+                    if (uwrd.Value != val)
+                    {
+                        uwrd.Value = val;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            else if (bpv is UnsignedDWordVariable udwrd)
+            {
+                if (uint.TryParse(v, out uint val))
+                {
+                    if (udwrd.Value != val)
+                    {
+                        udwrd.Value = val;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            else if (bpv is UnsignedQWordVariable uqwrd)
+            {
+                if (ulong.TryParse(v, out ulong val))
+                {
+                    if (uqwrd.Value != val)
+                    {
+                        uqwrd.Value = val;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            else if (bpv is SingleVariable sngl)
+            {
+                if (float.TryParse(v, out float val))
+                {
+                    if (sngl.Value != val)
+                    {
+                        sngl.Value = val;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            else if (bpv is DoubleVariable dbl)
+            {
+                if (double.TryParse(v, out double val))
+                {
+                    if (dbl.Value != val)
+                    {
+                        dbl.Value = val;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            Logger.Error(
+                $"Received string {v} cannot be assigned to " +
+                $"the variable {bpv.Name} of type {bpv.GetPrintableTypeName()}");
 
             return false;
         }
@@ -344,12 +507,10 @@ namespace DDS.Net.Connector
                     return true;
                 }
             }
-            else
-            {
-                Logger.Error(
-                    $"Received Boolean {v} cannot be assigned to " +
-                    $"the variable {bpv.Name} of type {bpv.GetPrintableTypeName()}");
-            }
+
+            Logger.Error(
+                $"Received Boolean {v} cannot be assigned to " +
+                $"the variable {bpv.Name} of type {bpv.GetPrintableTypeName()}");
 
             return false;
         }
