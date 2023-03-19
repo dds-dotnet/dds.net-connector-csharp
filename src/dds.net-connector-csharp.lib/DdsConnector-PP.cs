@@ -34,7 +34,7 @@ namespace DDS.Net.Connector
                     case PacketId.ErrorResponseFromServer:
 
                         string errorMessage = data.ReadString(ref offset);
-                        Logger.Error($"Server: {errorMessage}");
+                        Logger.Error($"Server Error: {errorMessage}");
 
                         break;
 
