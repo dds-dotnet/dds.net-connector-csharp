@@ -247,8 +247,11 @@ namespace DDS.Net.Connector
                     {
 
                     }
-                }
-            }
+
+                } // while (offset < data.Length)
+
+            } // lock (variablesMutex)
+
         }
         #endregion
     }
