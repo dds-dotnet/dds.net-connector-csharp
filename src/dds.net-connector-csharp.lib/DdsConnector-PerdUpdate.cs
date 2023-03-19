@@ -51,33 +51,6 @@ namespace DDS.Net.Connector
             }
         }
 
-        private void SendUpdatedValuesToServer(List<BaseVariable> vals)
-        {
-            int sizeRequired = 0;
-
-            foreach (BaseVariable v in vals)
-            {
-                sizeRequired += v.GetSizeOnBuffer();
-            }
-
-            if (sizeRequired > 0)
-            {
-                sizeRequired += PacketId.VariablesUpdateAtServer.GetSizeOnBuffer();
-
-                byte[] buffer = new byte[sizeRequired];
-                int bufferOffset = 0;
-
-                buffer.WritePacketId(ref bufferOffset, PacketId.VariablesUpdateAtServer);
-
-                foreach (BaseVariable v in vals)
-                {
-                    v.WriteOnBuffer(ref buffer, ref bufferOffset);
-                }
-
-                DataToServer.Enqueue(new PacketToServer(buffer, bufferOffset));
-            }
-        }
-
         private void RegisterAwaitingVariablesWithServer()
         {
             lock (variablesMutex)
@@ -183,6 +156,33 @@ namespace DDS.Net.Connector
 
                     DataToServer.Enqueue(new PacketToServer(buffer, bufferOffset));
                 }
+            }
+        }
+
+        private void SendUpdatedValuesToServer(List<BaseVariable> vals)
+        {
+            int sizeRequired = 0;
+
+            foreach (BaseVariable v in vals)
+            {
+                sizeRequired += v.GetSizeOnBuffer();
+            }
+
+            if (sizeRequired > 0)
+            {
+                sizeRequired += PacketId.VariablesUpdateAtServer.GetSizeOnBuffer();
+
+                byte[] buffer = new byte[sizeRequired];
+                int bufferOffset = 0;
+
+                buffer.WritePacketId(ref bufferOffset, PacketId.VariablesUpdateAtServer);
+
+                foreach (BaseVariable v in vals)
+                {
+                    v.WriteOnBuffer(ref buffer, ref bufferOffset);
+                }
+
+                DataToServer.Enqueue(new PacketToServer(buffer, bufferOffset));
             }
         }
     }
