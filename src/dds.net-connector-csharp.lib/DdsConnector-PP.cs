@@ -1275,6 +1275,15 @@ namespace DDS.Net.Connector
             }
             else if (bpv is DoubleVariable dbl)
             {
+                if (dbl.Value != v)
+                {
+                    dbl.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
 
             Logger.Error(
