@@ -3,6 +3,7 @@ using DDS.Net.Connector.Interfaces.DefaultLogger;
 using DDS.Net.Connector.WpfApp.Configuration;
 using DDS.Net.Connector.WpfApp.InterfaceImpl;
 using System;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -16,6 +17,8 @@ namespace DDS.Net.Connector.WpfApp
         public MainWindow()
         {
             InitializeComponent();
+
+            OnWindowResized(this, null!);
 
             logger = new(
                 new FileLogger(AppConstants.LOG_FILENAME, Interfaces.LogLevel.Information),
@@ -123,6 +126,12 @@ namespace DDS.Net.Connector.WpfApp
         {
             connector.Stop();
             logger.Dispose();
+        }
+
+        private void OnWindowResized(object sender, SizeChangedEventArgs e)
+        {
+            maxX = theCanvas.ActualWidth;
+            maxY = theCanvas.ActualHeight;
         }
     }
 }
