@@ -57,8 +57,8 @@ namespace DDS.Net.Connector.WpfApp
             }
         }
 
-        double maxX = 200;
-        double maxY = 200;
+        double maxX = 500;
+        double maxY = 180;
         double x = 0;
         double y = 0;
         bool isXIncreasing = true;
@@ -70,11 +70,11 @@ namespace DDS.Net.Connector.WpfApp
             {
                 if (isXIncreasing)
                 {
-                    x += 4.5;
+                    x += 10;
                 }
                 else
                 {
-                    x -= 4.5;
+                    x -= 10;
                 }
 
                 if (x >= maxX)
@@ -92,11 +92,11 @@ namespace DDS.Net.Connector.WpfApp
             {
                 if (isYIncreasing)
                 {
-                    y += 5.8;
+                    y += 10;
                 }
                 else
                 {
-                    y -= 5.8;
+                    y -= 10;
                 }
 
                 if (y >= maxY)
