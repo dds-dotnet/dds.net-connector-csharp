@@ -12,6 +12,13 @@
             <RowDefinition Height="*" MaxHeight="280"/>
         </Grid.RowDefinitions>
 
+        <Canvas>
+            <Ellipse x:Name="testCircle"
+                     Canvas.Left="0" Canvas.Right="0"
+                     Width="50" Height="50"
+                     Fill="Bisque" />
+        </Canvas>
+
         <ScrollViewer Name="logScrollViewer" Grid.Row="1">
             <TextBlock Name="logTextBlock"
                        FontSize="14" Padding="15,5,15,5"
