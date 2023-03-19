@@ -153,5 +153,13 @@ namespace DDS.Net.Connector.Types.Variables.RawBytes
         {
             return "RawBytes";
         }
+
+        public override void InvokeValueAwaiter()
+        {
+            if (ValueConsumer != null)
+            {
+                ValueConsumer(Name, Data);
+            }
+        }
     }
 }
