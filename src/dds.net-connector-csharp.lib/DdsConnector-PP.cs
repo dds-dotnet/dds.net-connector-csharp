@@ -541,6 +541,17 @@ namespace DDS.Net.Connector
         {
             if (bpv is StringVariable str)
             {
+                string conv = $"{v}";
+
+                if (str.Value != conv)
+                {
+                    str.Value = conv;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is BooleanVariable bl)
             {
@@ -583,6 +594,17 @@ namespace DDS.Net.Connector
         {
             if (bpv is StringVariable str)
             {
+                string conv = $"{v}";
+
+                if (str.Value != conv)
+                {
+                    str.Value = conv;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is BooleanVariable bl)
             {
@@ -625,6 +647,17 @@ namespace DDS.Net.Connector
         {
             if (bpv is StringVariable str)
             {
+                string conv = $"{v}";
+
+                if (str.Value != conv)
+                {
+                    str.Value = conv;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is BooleanVariable bl)
             {
@@ -667,6 +700,17 @@ namespace DDS.Net.Connector
         {
             if (bpv is StringVariable str)
             {
+                string conv = $"{v}";
+
+                if (str.Value != conv)
+                {
+                    str.Value = conv;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is BooleanVariable bl)
             {
@@ -709,6 +753,17 @@ namespace DDS.Net.Connector
         {
             if (bpv is StringVariable str)
             {
+                string conv = $"{v}";
+
+                if (str.Value != conv)
+                {
+                    str.Value = conv;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is BooleanVariable bl)
             {
@@ -751,6 +806,17 @@ namespace DDS.Net.Connector
         {
             if (bpv is StringVariable str)
             {
+                string conv = $"{v}";
+
+                if (str.Value != conv)
+                {
+                    str.Value = conv;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is BooleanVariable bl)
             {
@@ -793,6 +859,17 @@ namespace DDS.Net.Connector
         {
             if (bpv is StringVariable str)
             {
+                string conv = $"{v}";
+
+                if (str.Value != conv)
+                {
+                    str.Value = conv;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is BooleanVariable bl)
             {
@@ -835,6 +912,17 @@ namespace DDS.Net.Connector
         {
             if (bpv is StringVariable str)
             {
+                string conv = $"{v}";
+
+                if (str.Value != conv)
+                {
+                    str.Value = conv;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is BooleanVariable bl)
             {
@@ -877,6 +965,17 @@ namespace DDS.Net.Connector
         {
             if (bpv is StringVariable str)
             {
+                string conv = $"{v}";
+
+                if (str.Value != conv)
+                {
+                    str.Value = conv;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is BooleanVariable bl)
             {
@@ -919,6 +1018,17 @@ namespace DDS.Net.Connector
         {
             if (bpv is StringVariable str)
             {
+                string conv = $"{v}";
+
+                if (str.Value != conv)
+                {
+                    str.Value = conv;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is BooleanVariable bl)
             {
