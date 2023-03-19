@@ -131,5 +131,59 @@ namespace DDS.Net.Connector
                 }
             }
         }
+
+        private void UnregisterVariablesFromServer()
+        {
+            lock (variablesMutex)
+            {
+                int sizeRequired = 0;
+
+                foreach (KeyValuePair<string, BaseVariable> v in uploadVariables)
+                {
+                    sizeRequired +=
+                        2 + Encoding.Unicode.GetBytes(v.Key).Length + // Variable name
+                        Periodicity.Normal.GetSizeOnBuffer() +        // Periodicity
+                        1 +                                           // Provider/Consumer
+                        1;                                            // Register/Unregister
+                }
+
+                foreach (KeyValuePair<string, BaseVariable> v in downloadVariables)
+                {
+                    sizeRequired +=
+                        2 + Encoding.Unicode.GetBytes(v.Key).Length + // Variable name
+                        Periodicity.Normal.GetSizeOnBuffer() +        // Periodicity
+                        1 +                                           // Provider/Consumer
+                        1;                                            // Register/Unregister
+                }
+
+                if (sizeRequired > 0)
+                {
+                    sizeRequired += PacketId.VariablesRegistration.GetSizeOnBuffer();
+
+                    byte[] buffer = new byte[sizeRequired];
+                    int bufferOffset = 0;
+
+                    buffer.WritePacketId(ref bufferOffset, PacketId.VariablesRegistration);
+
+                    foreach (KeyValuePair<string, BaseVariable> v in uploadVariables)
+                    {
+                        buffer.WriteString(ref bufferOffset, v.Key);
+                        buffer.WritePeriodicity(ref bufferOffset, v.Value.Periodicity);
+                        buffer.WriteBoolean(ref bufferOffset, true); // Client is provider of data
+                        buffer.WriteBoolean(ref bufferOffset, false); // Do register
+                    }
+
+                    foreach (KeyValuePair<string, BaseVariable> v in downloadVariables)
+                    {
+                        buffer.WriteString(ref bufferOffset, v.Key);
+                        buffer.WritePeriodicity(ref bufferOffset, v.Value.Periodicity);
+                        buffer.WriteBoolean(ref bufferOffset, false); // Client is consumer of data
+                        buffer.WriteBoolean(ref bufferOffset, false); // Do register
+                    }
+
+                    DataToServer.Enqueue(new PacketToServer(buffer, bufferOffset));
+                }
+            }
+        }
     }
 }
