@@ -20,6 +20,9 @@ namespace DDS.Net.Connector.WpfApp
 
             OnWindowResized(this, null!);
 
+            circleWidth = theCircle.Width;
+            circleHeight = theCircle.Height;
+
             logger = new(
                 new FileLogger(AppConstants.LOG_FILENAME, Interfaces.LogLevel.Information),
                 new TextBlockLogger(logTextBlock, logScrollViewer, Interfaces.LogLevel.Warning));
@@ -38,6 +41,9 @@ namespace DDS.Net.Connector.WpfApp
             connector.RegisterDoubleConsumer("TESTX", MyDoubleConsumer, Types.Enumerations.Periodicity.OnChange);
             connector.RegisterDoubleConsumer("TESTY", MyDoubleConsumer, Types.Enumerations.Periodicity.OnChange);
         }
+
+        private readonly double circleWidth;
+        private readonly double circleHeight;
 
         double circleX = 0;
         double circleY = 0;
@@ -80,7 +86,7 @@ namespace DDS.Net.Connector.WpfApp
                     x -= 10;
                 }
 
-                if (x >= maxX)
+                if (x >= (maxX - circleWidth))
                 {
                     isXIncreasing = false;
                 }
@@ -102,7 +108,7 @@ namespace DDS.Net.Connector.WpfApp
                     y -= 10;
                 }
 
-                if (y >= maxY)
+                if (y >= (maxY - circleHeight))
                 {
                     isYIncreasing = false;
                 }
