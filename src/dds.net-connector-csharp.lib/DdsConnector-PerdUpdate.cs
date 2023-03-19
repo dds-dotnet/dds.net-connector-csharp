@@ -19,11 +19,11 @@ namespace DDS.Net.Connector
             {
                 List<BaseVariable> refreshed = new();
 
-                if (periodicity == Periodicity.Highest)
+                if (periodicity == Periodicity.High)
                 {
                     foreach (KeyValuePair<string, BaseVariable> v in uploadVariables)
                     {
-                        if (v.Value.Periodicity == Periodicity.Highest ||
+                        if (v.Value.Periodicity == periodicity ||
                             v.Value.Periodicity == Periodicity.OnChange)
                         {
                             if (v.Value.RefreshValue())
