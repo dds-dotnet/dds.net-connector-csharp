@@ -135,6 +135,10 @@ namespace DDS.Net.Connector
             NetworkClient.Disconnect();
 
             periodicUpdateThread.Stop();
+
+            UnregisterVariablesFromServer();
+            Thread.Sleep(100);
+
             dataReceiverThread.Stop();
 
             lock (variablesMutex)
