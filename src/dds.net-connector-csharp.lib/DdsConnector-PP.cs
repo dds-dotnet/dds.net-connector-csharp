@@ -618,15 +618,63 @@ namespace DDS.Net.Connector
             }
             else if (bpv is UnsignedByteVariable ubt)
             {
+                byte conv = (byte)v;
+                bool ret = false;
+
+                if (ubt.Value != conv)
+                {
+                    ubt.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting Byte {v} to {ubt.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is UnsignedWordVariable uwrd)
             {
+                ushort conv = (ushort)v;
+                bool ret = false;
+
+                if (uwrd.Value != conv)
+                {
+                    uwrd.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting Byte {v} to {uwrd.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is UnsignedDWordVariable udwrd)
             {
+                uint conv = (uint)v;
+                bool ret = false;
+
+                if (udwrd.Value != conv)
+                {
+                    udwrd.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting Byte {v} to {udwrd.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is UnsignedQWordVariable uqwrd)
             {
+                ulong conv = (ulong)v;
+                bool ret = false;
+
+                if (uqwrd.Value != conv)
+                {
+                    uqwrd.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting Byte {v} to {uqwrd.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is SingleVariable sngl)
             {
