@@ -570,15 +570,51 @@ namespace DDS.Net.Connector
             }
             else if (bpv is ByteVariable bt)
             {
+                if (bt.Value != v)
+                {
+                    bt.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is WordVariable wrd)
             {
+                if (wrd.Value != v)
+                {
+                    wrd.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is DWordVariable dwrd)
             {
+                if (dwrd.Value != v)
+                {
+                    dwrd.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is QWordVariable qwrd)
             {
+                if (qwrd.Value != v)
+                {
+                    qwrd.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is UnsignedByteVariable ubt)
             {
@@ -594,10 +630,32 @@ namespace DDS.Net.Connector
             }
             else if (bpv is SingleVariable sngl)
             {
+                if (sngl.Value != v)
+                {
+                    sngl.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is DoubleVariable dbl)
             {
+                if (dbl.Value != v)
+                {
+                    dbl.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
+            
+            Logger.Error(
+                $"Received Byte {v} cannot be assigned to " +
+                $"the variable {bpv.Name} of type {bpv.GetPrintableTypeName()}");
 
             return false;
         }
@@ -638,6 +696,15 @@ namespace DDS.Net.Connector
             }
             else if (bpv is WordVariable wrd)
             {
+                if (wrd.Value != v)
+                {
+                    wrd.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is DWordVariable dwrd)
             {
@@ -663,6 +730,10 @@ namespace DDS.Net.Connector
             else if (bpv is DoubleVariable dbl)
             {
             }
+
+            Logger.Error(
+                $"Received Word {v} cannot be assigned to " +
+                $"the variable {bpv.Name} of type {bpv.GetPrintableTypeName()}");
 
             return false;
         }
@@ -706,6 +777,15 @@ namespace DDS.Net.Connector
             }
             else if (bpv is DWordVariable dwrd)
             {
+                if (dwrd.Value != v)
+                {
+                    dwrd.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is QWordVariable qwrd)
             {
@@ -728,6 +808,10 @@ namespace DDS.Net.Connector
             else if (bpv is DoubleVariable dbl)
             {
             }
+
+            Logger.Error(
+                $"Received DWord {v} cannot be assigned to " +
+                $"the variable {bpv.Name} of type {bpv.GetPrintableTypeName()}");
 
             return false;
         }
@@ -774,6 +858,15 @@ namespace DDS.Net.Connector
             }
             else if (bpv is QWordVariable qwrd)
             {
+                if (qwrd.Value != v)
+                {
+                    qwrd.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is UnsignedByteVariable ubt)
             {
@@ -793,6 +886,10 @@ namespace DDS.Net.Connector
             else if (bpv is DoubleVariable dbl)
             {
             }
+
+            Logger.Error(
+                $"Received QWord {v} cannot be assigned to " +
+                $"the variable {bpv.Name} of type {bpv.GetPrintableTypeName()}");
 
             return false;
         }
@@ -842,6 +939,15 @@ namespace DDS.Net.Connector
             }
             else if (bpv is UnsignedByteVariable ubt)
             {
+                if (ubt.Value != v)
+                {
+                    ubt.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is UnsignedWordVariable uwrd)
             {
@@ -858,6 +964,10 @@ namespace DDS.Net.Connector
             else if (bpv is DoubleVariable dbl)
             {
             }
+
+            Logger.Error(
+                $"Received Unsigned Byte {v} cannot be assigned to " +
+                $"the variable {bpv.Name} of type {bpv.GetPrintableTypeName()}");
 
             return false;
         }
@@ -910,6 +1020,15 @@ namespace DDS.Net.Connector
             }
             else if (bpv is UnsignedWordVariable uwrd)
             {
+                if (uwrd.Value != v)
+                {
+                    uwrd.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is UnsignedDWordVariable udwrd)
             {
@@ -923,6 +1042,10 @@ namespace DDS.Net.Connector
             else if (bpv is DoubleVariable dbl)
             {
             }
+
+            Logger.Error(
+                $"Received Unsigned Word {v} cannot be assigned to " +
+                $"the variable {bpv.Name} of type {bpv.GetPrintableTypeName()}");
 
             return false;
         }
@@ -978,6 +1101,15 @@ namespace DDS.Net.Connector
             }
             else if (bpv is UnsignedDWordVariable udwrd)
             {
+                if (udwrd.Value != v)
+                {
+                    udwrd.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is UnsignedQWordVariable uqwrd)
             {
@@ -988,6 +1120,10 @@ namespace DDS.Net.Connector
             else if (bpv is DoubleVariable dbl)
             {
             }
+
+            Logger.Error(
+                $"Received Unsigned DWord {v} cannot be assigned to " +
+                $"the variable {bpv.Name} of type {bpv.GetPrintableTypeName()}");
 
             return false;
         }
@@ -1046,6 +1182,15 @@ namespace DDS.Net.Connector
             }
             else if (bpv is UnsignedQWordVariable uqwrd)
             {
+                if (uqwrd.Value != v)
+                {
+                    uqwrd.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is SingleVariable sngl)
             {
@@ -1053,6 +1198,10 @@ namespace DDS.Net.Connector
             else if (bpv is DoubleVariable dbl)
             {
             }
+
+            Logger.Error(
+                $"Received Unsigned QWord {v} cannot be assigned to " +
+                $"the variable {bpv.Name} of type {bpv.GetPrintableTypeName()}");
 
             return false;
         }
@@ -1114,10 +1263,23 @@ namespace DDS.Net.Connector
             }
             else if (bpv is SingleVariable sngl)
             {
+                if (sngl.Value != v)
+                {
+                    sngl.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is DoubleVariable dbl)
             {
             }
+
+            Logger.Error(
+                $"Received Single {v} cannot be assigned to " +
+                $"the variable {bpv.Name} of type {bpv.GetPrintableTypeName()}");
 
             return false;
         }
@@ -1182,7 +1344,20 @@ namespace DDS.Net.Connector
             }
             else if (bpv is DoubleVariable dbl)
             {
+                if (dbl.Value != v)
+                {
+                    dbl.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
+
+            Logger.Error(
+                $"Received Double {v} cannot be assigned to " +
+                $"the variable {bpv.Name} of type {bpv.GetPrintableTypeName()}");
 
             return false;
         }
