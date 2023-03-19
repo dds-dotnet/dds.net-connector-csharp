@@ -61,5 +61,13 @@ namespace DDS.Net.Connector.Types.Variables.Primitives
         {
             return "Unsigned Word";
         }
+
+        public override void InvokeValueAwaiter()
+        {
+            if (ValueConsumer != null)
+            {
+                ValueConsumer(Name, Value);
+            }
+        }
     }
 }
