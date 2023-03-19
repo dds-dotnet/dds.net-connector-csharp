@@ -113,7 +113,10 @@ namespace DDS.Net.Connector
 
         private void ParseVariablesUpdateFromServer(ref byte[] data, ref int offset)
         {
-            throw new NotImplementedException();
+            lock (variablesMutex)
+            {
+                while (offset < data.Length) ;
+            }
         }
     }
 }
