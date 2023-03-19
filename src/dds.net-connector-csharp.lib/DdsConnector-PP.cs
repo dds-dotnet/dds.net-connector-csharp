@@ -50,7 +50,7 @@ namespace DDS.Net.Connector
                 Logger.Error($"Packet parsing error: {e.Message}");
             }
         }
-
+        #region Variables' Registration
         private void ParseVariablesRegistration(ref byte[] data, ref int offset)
         {
             lock (variablesMutex)
@@ -111,7 +111,8 @@ namespace DDS.Net.Connector
 
             return (variableName, variableId, isRegister);
         }
-
+        #endregion
+        #region Variables' Update at Server
         private void ParseVariablesUpdateAtServer(ref byte[] data, ref int offset)
         {
             lock (variablesMutex)
@@ -143,7 +144,8 @@ namespace DDS.Net.Connector
 
             return (variableId, errorMessage);
         }
-
+        #endregion
+        #region Variables' Update from Server
         private void ParseVariablesUpdateFromServer(ref byte[] data, ref int offset)
         {
             lock (variablesMutex)
@@ -154,5 +156,6 @@ namespace DDS.Net.Connector
                 }
             }
         }
+        #endregion
     }
 }
