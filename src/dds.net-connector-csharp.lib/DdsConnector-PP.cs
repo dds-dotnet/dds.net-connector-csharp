@@ -279,7 +279,7 @@ namespace DDS.Net.Connector
                         //- 
                         //- Processing the variable value when we have local primitive variable.
                         //- 
-                        if (var != null && var is BasePrimitive bpv)
+                        else if (var != null && var is BasePrimitive bpv)
                         {
                             PrimitiveType pt = data.ReadPrimitiveType(ref offset);
                             bool valueUpdated = false;
