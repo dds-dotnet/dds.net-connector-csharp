@@ -13,7 +13,7 @@
         </Grid.RowDefinitions>
 
         <Canvas x:Name="theCanvas">
-            <Ellipse x:Name="testCircle"
+            <Ellipse x:Name="theCircle"
                      Canvas.Left="0" Canvas.Right="0"
                      Width="50" Height="50"
                      Fill="Bisque" />
