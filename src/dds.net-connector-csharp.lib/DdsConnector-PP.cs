@@ -336,41 +336,19 @@ namespace DDS.Net.Connector
 
         private bool UpdatePrimitiveVariableWithBoolean(BasePrimitive bpv, bool v)
         {
-            if (bpv is StringVariable str)
+            if (bpv is BooleanVariable bl)
             {
+                if (bl.Value != v)
+                {
+                    bl.Value = v;
+                    return true;
+                }
             }
-            else if (bpv is BooleanVariable bl)
+            else
             {
-            }
-            else if (bpv is ByteVariable bt)
-            {
-            }
-            else if (bpv is WordVariable wrd)
-            {
-            }
-            else if (bpv is DWordVariable dwrd)
-            {
-            }
-            else if (bpv is QWordVariable qwrd)
-            {
-            }
-            else if (bpv is UnsignedByteVariable ubt)
-            {
-            }
-            else if (bpv is UnsignedWordVariable uwrd)
-            {
-            }
-            else if (bpv is UnsignedDWordVariable udwrd)
-            {
-            }
-            else if (bpv is UnsignedQWordVariable uqwrd)
-            {
-            }
-            else if (bpv is SingleVariable sngl)
-            {
-            }
-            else if (bpv is DoubleVariable dbl)
-            {
+                Logger.Error(
+                    $"Received Boolean {v} cannot be assigned to " +
+                    $"the variable {bpv.Name} of type {bpv.GetPrintableTypeName()}");
             }
 
             return false;
