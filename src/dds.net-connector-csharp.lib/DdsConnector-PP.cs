@@ -1005,18 +1005,72 @@ namespace DDS.Net.Connector
             }
             else if (bpv is ByteVariable bt)
             {
+                sbyte conv = (sbyte)v;
+                bool ret = false;
+
+                if (bt.Value != conv)
+                {
+                    bt.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting Unsigned Word {v} to {bt.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is WordVariable wrd)
             {
+                short conv = (short)v;
+                bool ret = false;
+
+                if (wrd.Value != conv)
+                {
+                    wrd.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting Unsigned Word {v} to {wrd.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is DWordVariable dwrd)
             {
+                if (dwrd.Value != v)
+                {
+                    dwrd.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is QWordVariable qwrd)
             {
+                if (qwrd.Value != v)
+                {
+                    qwrd.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is UnsignedByteVariable ubt)
             {
+                byte conv = (byte)v;
+                bool ret = false;
+
+                if (ubt.Value != conv)
+                {
+                    ubt.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting Unsigned Word {v} to {ubt.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is UnsignedWordVariable uwrd)
             {
@@ -1032,15 +1086,51 @@ namespace DDS.Net.Connector
             }
             else if (bpv is UnsignedDWordVariable udwrd)
             {
+                if (udwrd.Value != v)
+                {
+                    udwrd.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is UnsignedQWordVariable uqwrd)
             {
+                if (uqwrd.Value != v)
+                {
+                    uqwrd.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is SingleVariable sngl)
             {
+                if (sngl.Value != v)
+                {
+                    sngl.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is DoubleVariable dbl)
             {
+                if (dbl.Value != v)
+                {
+                    dbl.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
 
             Logger.Error(
