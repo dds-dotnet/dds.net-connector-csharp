@@ -1341,6 +1341,18 @@ namespace DDS.Net.Connector
             }
             else if (bpv is SingleVariable sngl)
             {
+                float conv = (float)v;
+                bool ret = false;
+
+                if (sngl.Value != conv)
+                {
+                    sngl.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting Double {v} to {sngl.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is DoubleVariable dbl)
             {
