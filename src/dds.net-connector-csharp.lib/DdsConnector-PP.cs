@@ -28,6 +28,7 @@ namespace DDS.Net.Connector
                         break;
 
                     case PacketId.VariablesUpdateAtServer:
+                        ParseVariablesUpdateAtServer(ref data, ref offset);
                         break;
 
                     case PacketId.VariablesUpdateFromServer:
@@ -147,7 +148,10 @@ namespace DDS.Net.Connector
         {
             lock (variablesMutex)
             {
-                while (offset < data.Length) ;
+                while (offset < data.Length)
+                {
+
+                }
             }
         }
     }
