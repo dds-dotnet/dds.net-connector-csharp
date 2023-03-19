@@ -16,10 +16,33 @@ namespace DDS.Net.Connector
                 switch (packetId)
                 {
                     case PacketId.HandShake:
+
                         string serverName = data.ReadString(ref offset);
                         string serverVersion = data.ReadString(ref offset);
 
                         Logger.Info($"Server = {serverName} v{serverVersion}");
+
+                        break;
+
+
+                    case PacketId.VariablesRegistration:
+                    case PacketId.VariablesUpdateAtServer:
+                    case PacketId.VariablesUpdateFromServer:
+                        break;
+
+
+                    case PacketId.ErrorResponseFromServer:
+
+                        string errorMessage = data.ReadString(ref offset);
+                        Logger.Error($"Server: {errorMessage}");
+
+                        break;
+
+
+                    case PacketId.UnknownPacket:
+
+                        Logger.Error($"Unknown message received from the server.");
+
                         break;
                 }
             }
