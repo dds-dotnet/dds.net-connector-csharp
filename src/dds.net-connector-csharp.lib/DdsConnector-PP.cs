@@ -275,12 +275,547 @@ namespace DDS.Net.Connector
                                 Logger.Error($"Cannot assign a {pt} value to a non-primitive local variable");
                             }
                         }
+
+                        //- 
+                        //- Processing the variable value when we have local primitive variable.
+                        //- 
+                        if (var != null && var is BasePrimitive bpv)
+                        {
+                            PrimitiveType pt = data.ReadPrimitiveType(ref offset);
+                            bool valueUpdated = false;
+
+                            switch (pt)
+                            {
+                                case PrimitiveType.String:        valueUpdated = UpdatePrimitiveVariableWithString(bpv, data.ReadString(ref offset));               break;
+                                case PrimitiveType.Boolean:       valueUpdated = UpdatePrimitiveVariableWithBoolean(bpv, data.ReadBoolean(ref offset));             break;
+                                case PrimitiveType.Byte:          valueUpdated = UpdatePrimitiveVariableWithByte(bpv, data.ReadByte(ref offset));                   break;
+                                case PrimitiveType.Word:          valueUpdated = UpdatePrimitiveVariableWithWord(bpv, data.ReadWord(ref offset));                   break;
+                                case PrimitiveType.DWord:         valueUpdated = UpdatePrimitiveVariableWithDWord(bpv, data.ReadDWord(ref offset));                 break;
+                                case PrimitiveType.QWord:         valueUpdated = UpdatePrimitiveVariableWithQWord(bpv, data.ReadQWord(ref offset));                 break;
+                                case PrimitiveType.UnsignedByte:  valueUpdated = UpdatePrimitiveVariableWithUnsignedByte(bpv, data.ReadUnsignedByte(ref offset));   break;
+                                case PrimitiveType.UnsignedWord:  valueUpdated = UpdatePrimitiveVariableWithUnsignedWord(bpv, data.ReadUnsignedWord(ref offset));   break;
+                                case PrimitiveType.UnsignedDWord: valueUpdated = UpdatePrimitiveVariableWithUnsignedDWord(bpv, data.ReadUnsignedDWord(ref offset)); break;
+                                case PrimitiveType.UnsignedQWord: valueUpdated = UpdatePrimitiveVariableWithUnsignedQWord(bpv, data.ReadUnsignedQWord(ref offset)); break;
+                                case PrimitiveType.Single:        valueUpdated = UpdatePrimitiveVariableWithSingle(bpv, data.ReadSingle(ref offset));               break;
+                                case PrimitiveType.Double:        valueUpdated = UpdatePrimitiveVariableWithDouble(bpv, data.ReadDouble(ref offset));               break;
+                                case PrimitiveType.UnknownPrimitiveType:                                                                                            break;
+                            }
+
+                            if (valueUpdated)
+                            {
+                                updatedVariables.Add(var);
+                            }
+                        }
                     }
 
                 } // while (offset < data.Length)
 
             } // lock (variablesMutex)
 
+        }
+
+        private bool UpdatePrimitiveVariableWithString(BasePrimitive bpv, string v)
+        {
+            if (bpv is StringVariable str)
+            {
+            }
+            else if (bpv is BooleanVariable bl)
+            {
+            }
+            else if (bpv is ByteVariable bt)
+            {
+            }
+            else if (bpv is WordVariable wrd)
+            {
+            }
+            else if (bpv is DWordVariable dwrd)
+            {
+            }
+            else if (bpv is QWordVariable qwrd)
+            {
+            }
+            else if (bpv is UnsignedByteVariable ubt)
+            {
+            }
+            else if (bpv is UnsignedWordVariable uwrd)
+            {
+            }
+            else if (bpv is UnsignedDWordVariable udwrd)
+            {
+            }
+            else if (bpv is UnsignedQWordVariable uqwrd)
+            {
+            }
+            else if (bpv is SingleVariable sngl)
+            {
+            }
+            else if (bpv is DoubleVariable dbl)
+            {
+            }
+
+            return false;
+        }
+
+        private bool UpdatePrimitiveVariableWithBoolean(BasePrimitive bpv, bool v)
+        {
+            if (bpv is StringVariable str)
+            {
+            }
+            else if (bpv is BooleanVariable bl)
+            {
+            }
+            else if (bpv is ByteVariable bt)
+            {
+            }
+            else if (bpv is WordVariable wrd)
+            {
+            }
+            else if (bpv is DWordVariable dwrd)
+            {
+            }
+            else if (bpv is QWordVariable qwrd)
+            {
+            }
+            else if (bpv is UnsignedByteVariable ubt)
+            {
+            }
+            else if (bpv is UnsignedWordVariable uwrd)
+            {
+            }
+            else if (bpv is UnsignedDWordVariable udwrd)
+            {
+            }
+            else if (bpv is UnsignedQWordVariable uqwrd)
+            {
+            }
+            else if (bpv is SingleVariable sngl)
+            {
+            }
+            else if (bpv is DoubleVariable dbl)
+            {
+            }
+
+            return false;
+        }
+
+        private bool UpdatePrimitiveVariableWithByte(BasePrimitive bpv, sbyte v)
+        {
+            if (bpv is StringVariable str)
+            {
+            }
+            else if (bpv is BooleanVariable bl)
+            {
+            }
+            else if (bpv is ByteVariable bt)
+            {
+            }
+            else if (bpv is WordVariable wrd)
+            {
+            }
+            else if (bpv is DWordVariable dwrd)
+            {
+            }
+            else if (bpv is QWordVariable qwrd)
+            {
+            }
+            else if (bpv is UnsignedByteVariable ubt)
+            {
+            }
+            else if (bpv is UnsignedWordVariable uwrd)
+            {
+            }
+            else if (bpv is UnsignedDWordVariable udwrd)
+            {
+            }
+            else if (bpv is UnsignedQWordVariable uqwrd)
+            {
+            }
+            else if (bpv is SingleVariable sngl)
+            {
+            }
+            else if (bpv is DoubleVariable dbl)
+            {
+            }
+
+            return false;
+        }
+
+        private bool UpdatePrimitiveVariableWithWord(BasePrimitive bpv, short v)
+        {
+            if (bpv is StringVariable str)
+            {
+            }
+            else if (bpv is BooleanVariable bl)
+            {
+            }
+            else if (bpv is ByteVariable bt)
+            {
+            }
+            else if (bpv is WordVariable wrd)
+            {
+            }
+            else if (bpv is DWordVariable dwrd)
+            {
+            }
+            else if (bpv is QWordVariable qwrd)
+            {
+            }
+            else if (bpv is UnsignedByteVariable ubt)
+            {
+            }
+            else if (bpv is UnsignedWordVariable uwrd)
+            {
+            }
+            else if (bpv is UnsignedDWordVariable udwrd)
+            {
+            }
+            else if (bpv is UnsignedQWordVariable uqwrd)
+            {
+            }
+            else if (bpv is SingleVariable sngl)
+            {
+            }
+            else if (bpv is DoubleVariable dbl)
+            {
+            }
+
+            return false;
+        }
+
+        private bool UpdatePrimitiveVariableWithDWord(BasePrimitive bpv, int v)
+        {
+            if (bpv is StringVariable str)
+            {
+            }
+            else if (bpv is BooleanVariable bl)
+            {
+            }
+            else if (bpv is ByteVariable bt)
+            {
+            }
+            else if (bpv is WordVariable wrd)
+            {
+            }
+            else if (bpv is DWordVariable dwrd)
+            {
+            }
+            else if (bpv is QWordVariable qwrd)
+            {
+            }
+            else if (bpv is UnsignedByteVariable ubt)
+            {
+            }
+            else if (bpv is UnsignedWordVariable uwrd)
+            {
+            }
+            else if (bpv is UnsignedDWordVariable udwrd)
+            {
+            }
+            else if (bpv is UnsignedQWordVariable uqwrd)
+            {
+            }
+            else if (bpv is SingleVariable sngl)
+            {
+            }
+            else if (bpv is DoubleVariable dbl)
+            {
+            }
+
+            return false;
+        }
+
+        private bool UpdatePrimitiveVariableWithQWord(BasePrimitive bpv, long v)
+        {
+            if (bpv is StringVariable str)
+            {
+            }
+            else if (bpv is BooleanVariable bl)
+            {
+            }
+            else if (bpv is ByteVariable bt)
+            {
+            }
+            else if (bpv is WordVariable wrd)
+            {
+            }
+            else if (bpv is DWordVariable dwrd)
+            {
+            }
+            else if (bpv is QWordVariable qwrd)
+            {
+            }
+            else if (bpv is UnsignedByteVariable ubt)
+            {
+            }
+            else if (bpv is UnsignedWordVariable uwrd)
+            {
+            }
+            else if (bpv is UnsignedDWordVariable udwrd)
+            {
+            }
+            else if (bpv is UnsignedQWordVariable uqwrd)
+            {
+            }
+            else if (bpv is SingleVariable sngl)
+            {
+            }
+            else if (bpv is DoubleVariable dbl)
+            {
+            }
+
+            return false;
+        }
+
+        private bool UpdatePrimitiveVariableWithUnsignedByte(BasePrimitive bpv, byte v)
+        {
+            if (bpv is StringVariable str)
+            {
+            }
+            else if (bpv is BooleanVariable bl)
+            {
+            }
+            else if (bpv is ByteVariable bt)
+            {
+            }
+            else if (bpv is WordVariable wrd)
+            {
+            }
+            else if (bpv is DWordVariable dwrd)
+            {
+            }
+            else if (bpv is QWordVariable qwrd)
+            {
+            }
+            else if (bpv is UnsignedByteVariable ubt)
+            {
+            }
+            else if (bpv is UnsignedWordVariable uwrd)
+            {
+            }
+            else if (bpv is UnsignedDWordVariable udwrd)
+            {
+            }
+            else if (bpv is UnsignedQWordVariable uqwrd)
+            {
+            }
+            else if (bpv is SingleVariable sngl)
+            {
+            }
+            else if (bpv is DoubleVariable dbl)
+            {
+            }
+
+            return false;
+        }
+
+        private bool UpdatePrimitiveVariableWithUnsignedWord(BasePrimitive bpv, ushort v)
+        {
+            if (bpv is StringVariable str)
+            {
+            }
+            else if (bpv is BooleanVariable bl)
+            {
+            }
+            else if (bpv is ByteVariable bt)
+            {
+            }
+            else if (bpv is WordVariable wrd)
+            {
+            }
+            else if (bpv is DWordVariable dwrd)
+            {
+            }
+            else if (bpv is QWordVariable qwrd)
+            {
+            }
+            else if (bpv is UnsignedByteVariable ubt)
+            {
+            }
+            else if (bpv is UnsignedWordVariable uwrd)
+            {
+            }
+            else if (bpv is UnsignedDWordVariable udwrd)
+            {
+            }
+            else if (bpv is UnsignedQWordVariable uqwrd)
+            {
+            }
+            else if (bpv is SingleVariable sngl)
+            {
+            }
+            else if (bpv is DoubleVariable dbl)
+            {
+            }
+
+            return false;
+        }
+
+        private bool UpdatePrimitiveVariableWithUnsignedDWord(BasePrimitive bpv, uint v)
+        {
+            if (bpv is StringVariable str)
+            {
+            }
+            else if (bpv is BooleanVariable bl)
+            {
+            }
+            else if (bpv is ByteVariable bt)
+            {
+            }
+            else if (bpv is WordVariable wrd)
+            {
+            }
+            else if (bpv is DWordVariable dwrd)
+            {
+            }
+            else if (bpv is QWordVariable qwrd)
+            {
+            }
+            else if (bpv is UnsignedByteVariable ubt)
+            {
+            }
+            else if (bpv is UnsignedWordVariable uwrd)
+            {
+            }
+            else if (bpv is UnsignedDWordVariable udwrd)
+            {
+            }
+            else if (bpv is UnsignedQWordVariable uqwrd)
+            {
+            }
+            else if (bpv is SingleVariable sngl)
+            {
+            }
+            else if (bpv is DoubleVariable dbl)
+            {
+            }
+
+            return false;
+        }
+
+        private bool UpdatePrimitiveVariableWithUnsignedQWord(BasePrimitive bpv, ulong v)
+        {
+            if (bpv is StringVariable str)
+            {
+            }
+            else if (bpv is BooleanVariable bl)
+            {
+            }
+            else if (bpv is ByteVariable bt)
+            {
+            }
+            else if (bpv is WordVariable wrd)
+            {
+            }
+            else if (bpv is DWordVariable dwrd)
+            {
+            }
+            else if (bpv is QWordVariable qwrd)
+            {
+            }
+            else if (bpv is UnsignedByteVariable ubt)
+            {
+            }
+            else if (bpv is UnsignedWordVariable uwrd)
+            {
+            }
+            else if (bpv is UnsignedDWordVariable udwrd)
+            {
+            }
+            else if (bpv is UnsignedQWordVariable uqwrd)
+            {
+            }
+            else if (bpv is SingleVariable sngl)
+            {
+            }
+            else if (bpv is DoubleVariable dbl)
+            {
+            }
+
+            return false;
+        }
+
+        private bool UpdatePrimitiveVariableWithSingle(BasePrimitive bpv, float v)
+        {
+            if (bpv is StringVariable str)
+            {
+            }
+            else if (bpv is BooleanVariable bl)
+            {
+            }
+            else if (bpv is ByteVariable bt)
+            {
+            }
+            else if (bpv is WordVariable wrd)
+            {
+            }
+            else if (bpv is DWordVariable dwrd)
+            {
+            }
+            else if (bpv is QWordVariable qwrd)
+            {
+            }
+            else if (bpv is UnsignedByteVariable ubt)
+            {
+            }
+            else if (bpv is UnsignedWordVariable uwrd)
+            {
+            }
+            else if (bpv is UnsignedDWordVariable udwrd)
+            {
+            }
+            else if (bpv is UnsignedQWordVariable uqwrd)
+            {
+            }
+            else if (bpv is SingleVariable sngl)
+            {
+            }
+            else if (bpv is DoubleVariable dbl)
+            {
+            }
+
+            return false;
+        }
+
+        private bool UpdatePrimitiveVariableWithDouble(BasePrimitive bpv, double v)
+        {
+            if (bpv is StringVariable str)
+            {
+            }
+            else if (bpv is BooleanVariable bl)
+            {
+            }
+            else if (bpv is ByteVariable bt)
+            {
+            }
+            else if (bpv is WordVariable wrd)
+            {
+            }
+            else if (bpv is DWordVariable dwrd)
+            {
+            }
+            else if (bpv is QWordVariable qwrd)
+            {
+            }
+            else if (bpv is UnsignedByteVariable ubt)
+            {
+            }
+            else if (bpv is UnsignedWordVariable uwrd)
+            {
+            }
+            else if (bpv is UnsignedDWordVariable udwrd)
+            {
+            }
+            else if (bpv is UnsignedQWordVariable uqwrd)
+            {
+            }
+            else if (bpv is SingleVariable sngl)
+            {
+            }
+            else if (bpv is DoubleVariable dbl)
+            {
+            }
+
+            return false;
         }
         #endregion
     }
