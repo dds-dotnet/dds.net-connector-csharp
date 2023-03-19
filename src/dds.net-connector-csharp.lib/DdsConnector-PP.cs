@@ -1194,9 +1194,33 @@ namespace DDS.Net.Connector
             }
             else if (bpv is SingleVariable sngl)
             {
+                float conv = v;
+                bool ret = false;
+
+                if (sngl.Value != conv)
+                {
+                    sngl.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting Unsigned QWord {v} to {sngl.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is DoubleVariable dbl)
             {
+                double conv = v;
+                bool ret = false;
+
+                if (dbl.Value != conv)
+                {
+                    dbl.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting Unsigned QWord {v} to {dbl.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
 
             Logger.Error(
