@@ -1,6 +1,7 @@
 ﻿using DDS.Net.Connector.EncodersAndDecoders;
 using DDS.Net.Connector.Types.Enumerations;
 using DDS.Net.Connector.Types.Variables;
+using DDS.Net.Connector.Types.Variables.Primitives;
 using DDS.Net.Connector.Types.Variables.RawBytes;
 
 namespace DDS.Net.Connector
@@ -245,7 +246,35 @@ namespace DDS.Net.Connector
                     /************************************************************************/
                     else if (mainType == VariableType.Primitive)
                     {
+                        //- 
+                        //- Discarding the value when we do not have locally registered variable.
+                        //- 
+                        if (var == null || var is not BasePrimitive)
+                        {
+                            PrimitiveType pt = data.ReadPrimitiveType(ref offset);
 
+                            switch (pt)
+                            {
+                                case PrimitiveType.String:        data.ReadString(ref offset);        break;
+                                case PrimitiveType.Boolean:       data.ReadBoolean(ref offset);       break;
+                                case PrimitiveType.Byte:          data.ReadByte(ref offset);          break;
+                                case PrimitiveType.Word:          data.ReadWord(ref offset);          break;
+                                case PrimitiveType.DWord:         data.ReadDWord(ref offset);         break;
+                                case PrimitiveType.QWord:         data.ReadQWord(ref offset);         break;
+                                case PrimitiveType.UnsignedByte:  data.ReadUnsignedByte(ref offset);  break;
+                                case PrimitiveType.UnsignedWord:  data.ReadUnsignedWord(ref offset);  break;
+                                case PrimitiveType.UnsignedDWord: data.ReadUnsignedDWord(ref offset); break;
+                                case PrimitiveType.UnsignedQWord: data.ReadUnsignedQWord(ref offset); break;
+                                case PrimitiveType.Single:        data.ReadSingle(ref offset);        break;
+                                case PrimitiveType.Double:        data.ReadDouble(ref offset);        break;
+                                case PrimitiveType.UnknownPrimitiveType:                              break;
+                            }
+
+                            if (var != null && var is not BasePrimitive)
+                            {
+                                Logger.Error($"Cannot assign a {pt} value to a non-primitive local variable");
+                            }
+                        }
                     }
 
                 } // while (offset < data.Length)
