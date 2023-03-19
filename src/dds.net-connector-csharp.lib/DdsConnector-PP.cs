@@ -927,15 +927,54 @@ namespace DDS.Net.Connector
             }
             else if (bpv is ByteVariable bt)
             {
+                sbyte conv = (sbyte)v;
+                bool ret = false;
+
+                if (bt.Value != conv)
+                {
+                    bt.Value = conv;
+                    ret = true;
+                }
+
+                Logger.Warning($"Possible loss of received data - converting Unsigned Byte {v} to {bt.GetPrintableTypeName()} {conv}");
+
+                return ret;
             }
             else if (bpv is WordVariable wrd)
             {
+                if (wrd.Value != v)
+                {
+                    wrd.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is DWordVariable dwrd)
             {
+                if (dwrd.Value != v)
+                {
+                    dwrd.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is QWordVariable qwrd)
             {
+                if (qwrd.Value != v)
+                {
+                    qwrd.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is UnsignedByteVariable ubt)
             {
@@ -951,18 +990,63 @@ namespace DDS.Net.Connector
             }
             else if (bpv is UnsignedWordVariable uwrd)
             {
+                if (uwrd.Value != v)
+                {
+                    uwrd.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is UnsignedDWordVariable udwrd)
             {
+                if (udwrd.Value != v)
+                {
+                    udwrd.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is UnsignedQWordVariable uqwrd)
             {
+                if (uqwrd.Value != v)
+                {
+                    uqwrd.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is SingleVariable sngl)
             {
+                if (sngl.Value != v)
+                {
+                    sngl.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (bpv is DoubleVariable dbl)
             {
+                if (dbl.Value != v)
+                {
+                    dbl.Value = v;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
 
             Logger.Error(
