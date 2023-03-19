@@ -1,6 +1,7 @@
 ﻿using DDS.Net.Connector.EncodersAndDecoders;
 using DDS.Net.Connector.Types.Enumerations;
 using DDS.Net.Connector.Types.Variables;
+using DDS.Net.Connector.Types.Variables.RawBytes;
 
 namespace DDS.Net.Connector
 {
@@ -148,11 +149,104 @@ namespace DDS.Net.Connector
         #region Variables' Update from Server
         private void ParseVariablesUpdateFromServer(ref byte[] data, ref int offset)
         {
+            List<BaseVariable> updatedVariables = new();
+
             lock (variablesMutex)
             {
+                Periodicity periodicity = data.ReadPeriodicity(ref offset);
+
                 while (offset < data.Length)
                 {
+                    ushort id = data.ReadUnsignedWord(ref offset);
+                    VariableType mainType = data.ReadVariableType(ref offset);
+                    BaseVariable var = null!;
 
+                    foreach (BaseVariable v in downloadVariables.Values)
+                    {
+                        if (id == v.Id)
+                        {
+                            var = v;
+                            break;
+                        }
+                    }
+
+                    /************************************************************************/
+                    /*                                                                      */
+                    /* Processing RawBytes variable                                         */
+                    /*                                                                      */
+                    /************************************************************************/
+                    if (mainType == VariableType.RawBytes)
+                    {
+                        int totalBytes = (int)data.ReadUnsignedDWord(ref offset);
+
+                        //- 
+                        //- The input value is not null
+                        //- 
+                        if (totalBytes > 0)
+                        {
+                            //- 
+                            //- Not enough data is available
+                            //- 
+                            if (totalBytes + offset >= data.Length)
+                            {
+                                if (var != null)
+                                {
+                                    throw new Exception($"Insufficient data provided for {var.Name}");
+                                }
+                                else
+                                {
+                                    throw new Exception($"Insufficient data provided for unknown RawBytes variable");
+                                }
+                            }
+
+                            //- 
+                            //- Data is available and the types are matching
+                            //- 
+                            if (var is RawBytesVariable rbv)
+                            {
+                                byte[] bytes = new byte[totalBytes];
+
+                                for (int i = 0; i < totalBytes; i++)
+                                {
+                                    bytes[i] = data[offset++];
+                                }
+
+                                if (rbv.UpdateData(bytes))
+                                {
+                                    updatedVariables.Add(var);
+                                }
+                            }
+                            //- 
+                            //- Data is available but the types are not matching
+                            //- 
+                            else
+                            {
+                                offset += totalBytes;
+                            }
+                        }
+                        //- 
+                        //- The input value is null
+                        //- 
+                        else
+                        {
+                            if (var is RawBytesVariable rbv)
+                            {
+                                if (rbv.UpdateData(null!))
+                                {
+                                    updatedVariables.Add(var);
+                                }
+                            }
+                        }
+                    }
+                    /************************************************************************/
+                    /*                                                                      */
+                    /* Processing Primitive variable                                         */
+                    /*                                                                      */
+                    /************************************************************************/
+                    else if (mainType == VariableType.Primitive)
+                    {
+
+                    }
                 }
             }
         }
