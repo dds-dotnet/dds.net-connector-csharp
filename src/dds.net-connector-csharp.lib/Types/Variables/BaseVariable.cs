@@ -84,6 +84,11 @@ namespace DDS.Net.Connector.Types.Variables
         /// <returns>True = Value is changed, False = The last value is retained.</returns>
         public abstract bool RefreshValue();
 
+        /// <summary>
+        /// Invokes the consumer function.
+        /// </summary>
+        public abstract void InvokeValueAwaiter();
+
         /*******************************************************************************/
         /*                                                                             */
         /* Size calculation:                                                           */
