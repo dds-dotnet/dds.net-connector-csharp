@@ -318,39 +318,17 @@ namespace DDS.Net.Connector
         {
             if (bpv is StringVariable str)
             {
+                if (str.Value != v)
+                {
+                    str.Value = v;
+                    return true;
+                }
             }
-            else if (bpv is BooleanVariable bl)
+            else
             {
-            }
-            else if (bpv is ByteVariable bt)
-            {
-            }
-            else if (bpv is WordVariable wrd)
-            {
-            }
-            else if (bpv is DWordVariable dwrd)
-            {
-            }
-            else if (bpv is QWordVariable qwrd)
-            {
-            }
-            else if (bpv is UnsignedByteVariable ubt)
-            {
-            }
-            else if (bpv is UnsignedWordVariable uwrd)
-            {
-            }
-            else if (bpv is UnsignedDWordVariable udwrd)
-            {
-            }
-            else if (bpv is UnsignedQWordVariable uqwrd)
-            {
-            }
-            else if (bpv is SingleVariable sngl)
-            {
-            }
-            else if (bpv is DoubleVariable dbl)
-            {
+                Logger.Error(
+                    $"Received string {v} cannot be assigned to " +
+                    $"the variable {bpv.Name} of type {bpv.GetPrintableTypeName()}");
             }
 
             return false;
