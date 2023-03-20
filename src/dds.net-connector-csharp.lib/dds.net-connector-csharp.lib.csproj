@@ -5,6 +5,21 @@
     <RootNamespace>DDS.Net.Connector</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageId>CronBlocks.DDS.Net.Connector</PackageId>
+    <Title>DDS.Net.Connector</Title>
+    <Version>1.1.0</Version>
+    <Authors>CronBlocks</Authors>
+    <Description>DDS.Net C# Connector intends to be a lightweight and performant connector for connecting distributed C# applications through DDS.Net Server.</Description>
+    <Copyright>CronBlocks</Copyright>
+    <PackageProjectUrl>https://github.com/dds-dotnet/dds.net-connector-csharp</PackageProjectUrl>
+    <PackageIcon>DDS.Net Connector Icon-CS-BG-None.png</PackageIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="D:\VMs\VMs Share\DDS.Net Icon\DDS.Net Connector Icon-CS-BG-None.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
