@@ -166,13 +166,13 @@ namespace DDS.Net.Connector
         {
             bool doneAnything = false;
 
-            if (connector.DataFromServer.CanDequeue())
+            while (connector.DataFromServer.CanDequeue())
             {
                 doneAnything = true;
 
                 PacketFromServer packet = connector.DataFromServer.Dequeue();
 
-                connector.ParsePacket(packet.Data, packet.Size);
+                connector.ParsePacket(packet.Data);
             }
 
             return doneAnything;

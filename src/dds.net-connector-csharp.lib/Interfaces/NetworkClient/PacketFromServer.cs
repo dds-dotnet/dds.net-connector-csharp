@@ -3,12 +3,10 @@
     internal class PacketFromServer
     {
         public byte[] Data { get; }
-        public int Size { get; }
 
-        public PacketFromServer(byte[] data, int size)
+        public PacketFromServer(byte[] data)
         {
             Data = data;
-            Size = size;
         }
     }
 }
