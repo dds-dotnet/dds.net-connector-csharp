@@ -4,9 +4,13 @@ namespace DDS.Net.Connector.EncodersAndDecoders
 {
     internal static class PacketPreprocessor
     {
-        internal static byte[] GetSingleMessage(PacketFromServer packet)
+        internal static void AddData(PacketFromServer packet)
         {
-            return null;
+        }
+
+        internal static byte[] GetSingleMessage()
+        {
+            return null!;
         }
     }
 }

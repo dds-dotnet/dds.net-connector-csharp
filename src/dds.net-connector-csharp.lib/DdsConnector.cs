@@ -176,11 +176,20 @@ namespace DDS.Net.Connector
             {
                 doneAnything = true;
 
-                byte[] message = PacketPreprocessor.GetSingleMessage(connector.DataFromServer.Dequeue());
+                PacketPreprocessor.AddData(connector.DataFromServer.Dequeue());
 
-                if (message != null)
+                while (true)
                 {
-                    connector.ParsePacket(message);
+                    byte[] message = PacketPreprocessor.GetSingleMessage();
+
+                    if (message != null)
+                    {
+                        connector.ParsePacket(message);
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
             }
 
