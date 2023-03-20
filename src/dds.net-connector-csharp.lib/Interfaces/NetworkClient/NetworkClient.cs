@@ -11,6 +11,9 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
     /// </summary>
     internal class NetworkClient : IThreadedNetworkClient
     {
+        public event Action? ConnectedWithServer;
+        public event Action? DisonnectedFromServer;
+
         private SyncQueue<PacketToServer> dataToServerQueue;
         private SyncQueue<PacketFromServer> dataFromServerQueue;
 
@@ -75,8 +78,13 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
                     }
                     catch (Exception)
                     {
-                        socket?.Close();
-                        socket?.Dispose();
+                        try
+                        {
+                            socket?.Close();
+                            socket?.Dispose();
+                        }
+                        catch { }
+
                         socket = null!;
                     }
                 }
@@ -87,6 +95,7 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
                         try
                         {
                             socket.ConnectAsync(targetEndPoint);
+                            ConnectedWithServer?.Invoke();
                         }
                         catch
                         {
@@ -129,6 +138,8 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
                         }
                         catch
                         {
+                            DisonnectedFromServer?.Invoke();
+
                             try
                             {
                                 socket?.Close();
