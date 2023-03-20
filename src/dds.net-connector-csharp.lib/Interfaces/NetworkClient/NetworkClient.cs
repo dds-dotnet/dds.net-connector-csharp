@@ -32,46 +32,31 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
         private volatile bool isIOThreadStarted = false;
         private Thread ioThread = null!;
         private Socket socket = null!;
+        private IPEndPoint targetEndPoint = null!;
 
         public void Connect(string serverIPv4, ushort portTCP)
         {
-            if (serverIPv4.IsValidIPv4Address())
+            lock (this)
             {
-                lock (this)
+                if (isIOThreadStarted)
                 {
-                    if (isIOThreadStarted == false)
-                    {
-                        try
-                        {
-                            socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
-                            {
-                                Blocking = false
-                            };
-
-                            socket.ConnectAsync(
-                                new IPEndPoint(IPAddress.Parse(serverIPv4), portTCP));
-
-                            isIOThreadStarted = true;
-                            ioThread = new Thread(IOThreadFunc);
-                            ioThread.Start();
-                        }
-                        catch (Exception ex)
-                        {
-                            socket?.Close();
-                            socket?.Dispose();
-                            socket = null!;
-
-                            isIOThreadStarted = false;
-                            ioThread = null!;
-
-                            throw new Exception($"Cannot connect with the server {serverIPv4}:{portTCP} - {ex.Message}");
-                        }
-                    }
+                    throw new Exception($"Connection routine has already been started");
                 }
-            }
-            else
-            {
-                throw new Exception($"Invalid IPv4 address: {serverIPv4}");
+                else
+                {
+                    if (serverIPv4.IsValidIPv4Address())
+                    {
+                        targetEndPoint = new IPEndPoint(IPAddress.Parse(serverIPv4), portTCP);
+                    }
+                    else
+                    {
+                        throw new Exception($"Invalid IPv4 address: {serverIPv4}");
+                    }
+                    
+                    isIOThreadStarted = true;
+                    ioThread = new Thread(IOThreadFunc);
+                    ioThread.Start();
+                }
             }
         }
 
@@ -79,45 +64,103 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
         {
             while (isIOThreadStarted)
             {
-                bool doneAnythingInIteration = false;
-
-                try
+                if (socket == null)
                 {
-                    //- 
-                    //- Receiving data
-                    //- 
-
-                    if (socket.Available > 0)
+                    try
                     {
-                        doneAnythingInIteration = true;
-
-                        byte[] bytes = new byte[socket.Available];
-
-                        int totalReceived = socket.Receive(bytes, SocketFlags.None);
-
-                        dataFromServerQueue.Enqueue(new PacketFromServer(bytes));
+                        socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+                        {
+                            Blocking = false
+                        };
                     }
-
-                    //- 
-                    //- Transmitting data
-                    //- 
-
-                    while (dataToServerQueue.CanDequeue())
+                    catch (Exception)
                     {
-                        doneAnythingInIteration = true;
-
-                        PacketToServer packet = dataToServerQueue.Dequeue();
-
-                        socket.Send(packet.Data, packet.TotalBytesToBeSent, SocketFlags.None);
+                        socket?.Close();
+                        socket?.Dispose();
+                        socket = null!;
                     }
                 }
-                catch { }
-
-                if (!doneAnythingInIteration)
+                else
                 {
-                    Thread.Sleep(10);
+                    if (!socket.Connected)
+                    {
+                        try
+                        {
+                            socket.ConnectAsync(targetEndPoint);
+                        }
+                        catch
+                        {
+                            Thread.Sleep(100);
+                        }
+                    }
+                    else
+                    {
+                        bool doneAnythingInIteration = false;
+
+                        try
+                        {
+                            //- 
+                            //- Receiving data
+                            //- 
+
+                            if (socket.Available > 0)
+                            {
+                                doneAnythingInIteration = true;
+
+                                byte[] bytes = new byte[socket.Available];
+
+                                int totalReceived = socket.Receive(bytes, SocketFlags.None);
+
+                                dataFromServerQueue.Enqueue(new PacketFromServer(bytes));
+                            }
+
+                            //- 
+                            //- Transmitting data
+                            //- 
+
+                            while (dataToServerQueue.CanDequeue())
+                            {
+                                doneAnythingInIteration = true;
+
+                                PacketToServer packet = dataToServerQueue.Dequeue();
+
+                                socket.Send(packet.Data, packet.TotalBytesToBeSent, SocketFlags.None);
+                            }
+                        }
+                        catch
+                        {
+                            try
+                            {
+                                socket?.Close();
+                                socket?.Dispose();
+                            }
+                            catch { }
+
+                            socket = null!;
+                        }
+
+                        if (!doneAnythingInIteration)
+                        {
+                            Thread.Sleep(10);
+                        }
+                    }
                 }
+            } // while (isIOThreadStarted)
+
+            try
+            {
+                socket?.DisconnectAsync(false);
             }
+            catch { }
+
+            try
+            {
+                socket?.Close();
+                socket?.Dispose();
+            }
+            catch { }
+
+            socket = null!;
         }
 
         public void Disconnect()
@@ -130,22 +173,8 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
                     {
                         isIOThreadStarted = false;
 
-                        ioThread?.Join(200);
+                        ioThread?.Join(500);
                         ioThread = null!;
-                    }
-                    catch { }
-
-                    try
-                    {
-                        socket.DisconnectAsync(false);
-                    }
-                    catch { }
-
-                    try
-                    {
-                        socket.Close();
-                        socket.Dispose();
-                        socket = null!;
                     }
                     catch { }
                 }
