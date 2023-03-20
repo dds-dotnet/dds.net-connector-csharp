@@ -6,6 +6,7 @@ using DDS.Net.Connector.Types.Enumerations;
 using DDS.Net.Connector.Types.Variables;
 using DDS.Net.Connector.Types.Variables.Primitives;
 using DDS.Net.Connector.Types.Variables.RawBytes;
+using System.Text;
 
 namespace DDS.Net.Connector
 {
@@ -117,9 +118,14 @@ namespace DDS.Net.Connector
             dataReceiverThread.Start();
             periodicUpdateThread.Start();
 
-            byte[] handshake = new byte[100];
+            byte[] handshake = new byte[
+                        EncDecMessageHeader.GetMessageHeaderSizeOnBuffer() +
+                        PacketId.HandShake.GetSizeOnBuffer() +
+                        2 + Encoding.Unicode.GetBytes(ApplicationName).Length +
+                        2 + Encoding.Unicode.GetBytes(LibraryVersion).Length];
             int offset = 0;
 
+            handshake.WriteMessageHeader(ref offset, handshake.Length - EncDecMessageHeader.GetMessageHeaderSizeOnBuffer());
             handshake.WritePacketId(ref offset, PacketId.HandShake);
             handshake.WriteString(ref offset, ApplicationName);
             handshake.WriteString(ref offset, LibraryVersion);

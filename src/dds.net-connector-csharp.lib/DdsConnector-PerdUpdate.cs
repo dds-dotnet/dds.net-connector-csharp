@@ -77,11 +77,13 @@ namespace DDS.Net.Connector
 
                 if (sizeRequired > 0)
                 {
+                    sizeRequired += EncDecMessageHeader.GetMessageHeaderSizeOnBuffer();
                     sizeRequired += PacketId.VariablesRegistration.GetSizeOnBuffer();
 
                     byte[] buffer = new byte[sizeRequired];
                     int bufferOffset = 0;
 
+                    buffer.WriteMessageHeader(ref bufferOffset, buffer.Length - EncDecMessageHeader.GetMessageHeaderSizeOnBuffer());
                     buffer.WritePacketId(ref bufferOffset, PacketId.VariablesRegistration);
 
                     foreach (KeyValuePair<string, BaseVariable> v in uploadVariablesToBeRegistered)
@@ -131,11 +133,13 @@ namespace DDS.Net.Connector
 
                 if (sizeRequired > 0)
                 {
+                    sizeRequired += EncDecMessageHeader.GetMessageHeaderSizeOnBuffer();
                     sizeRequired += PacketId.VariablesRegistration.GetSizeOnBuffer();
 
                     byte[] buffer = new byte[sizeRequired];
                     int bufferOffset = 0;
 
+                    buffer.WriteMessageHeader(ref bufferOffset, buffer.Length - EncDecMessageHeader.GetMessageHeaderSizeOnBuffer());
                     buffer.WritePacketId(ref bufferOffset, PacketId.VariablesRegistration);
 
                     foreach (KeyValuePair<string, BaseVariable> v in uploadVariables)
@@ -170,11 +174,13 @@ namespace DDS.Net.Connector
 
             if (sizeRequired > 0)
             {
+                sizeRequired += EncDecMessageHeader.GetMessageHeaderSizeOnBuffer();
                 sizeRequired += PacketId.VariablesUpdateAtServer.GetSizeOnBuffer();
 
                 byte[] buffer = new byte[sizeRequired];
                 int bufferOffset = 0;
 
+                buffer.WriteMessageHeader(ref bufferOffset, buffer.Length - EncDecMessageHeader.GetMessageHeaderSizeOnBuffer());
                 buffer.WritePacketId(ref bufferOffset, PacketId.VariablesUpdateAtServer);
 
                 foreach (BaseVariable v in vals)
