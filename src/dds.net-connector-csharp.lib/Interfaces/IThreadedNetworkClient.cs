@@ -14,7 +14,7 @@ namespace DDS.Net.Connector.Interfaces
         /// <summary>
         /// The event is invoked when client disconnects from the server.
         /// </summary>
-        public event Action? DisonnectedFromServer;
+        public event Action? DisconnectedFromServer;
 
         /// <summary>
         /// Connects with specified server.

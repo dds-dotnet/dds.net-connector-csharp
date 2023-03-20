@@ -35,7 +35,7 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
         private IPEndPoint targetEndPoint = null!;
 
         public event Action? ConnectedWithServer;
-        public event Action? DisonnectedFromServer;
+        public event Action? DisconnectedFromServer;
 
         public void Connect(string serverIPv4, ushort portTCP)
         {
@@ -138,7 +138,7 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
                         }
                         catch
                         {
-                            DisonnectedFromServer?.Invoke();
+                            DisconnectedFromServer?.Invoke();
 
                             try
                             {
