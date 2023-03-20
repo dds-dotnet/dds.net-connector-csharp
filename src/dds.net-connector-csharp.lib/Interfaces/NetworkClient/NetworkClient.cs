@@ -87,23 +87,22 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
                     //- Receiving data
                     //- 
 
-                    int dataAvailable = socket.Available;
-
-                    if (dataAvailable > 0)
+                    while (socket.Available > 0)
                     {
                         doneAnythingInIteration = true;
 
-                        byte[] data = new byte[dataAvailable];
-                        socket.Receive(data);
+                        byte[] bytes = new byte[Settings.MAX_RECEIVE_PACKET_SIZE];
 
-                        dataFromServerQueue.Enqueue(new PacketFromServer(data));
+                        int totalReceived = socket.Receive(bytes, SocketFlags.None);
+
+                        dataFromServerQueue.Enqueue(new PacketFromServer(bytes, totalReceived));
                     }
 
                     //- 
                     //- Transmitting data
                     //- 
 
-                    if (dataToServerQueue.CanDequeue())
+                    while (dataToServerQueue.CanDequeue())
                     {
                         doneAnythingInIteration = true;
 
