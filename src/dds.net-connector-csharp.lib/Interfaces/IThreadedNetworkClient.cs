@@ -8,6 +8,15 @@ namespace DDS.Net.Connector.Interfaces
     internal interface IThreadedNetworkClient
     {
         /// <summary>
+        /// The event is invoked when client connects with the server.
+        /// </summary>
+        public event Action? ConnectedWithServer;
+        /// <summary>
+        /// The event is invoked when client disconnects from the server.
+        /// </summary>
+        public event Action? DisonnectedFromServer;
+
+        /// <summary>
         /// Connects with specified server.
         /// </summary>
         /// <param name="serverIPv4">Address of target server in IP v4 format.</param>

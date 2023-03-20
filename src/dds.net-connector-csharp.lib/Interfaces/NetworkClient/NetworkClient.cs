@@ -11,9 +11,6 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
     /// </summary>
     internal class NetworkClient : IThreadedNetworkClient
     {
-        public event Action? ConnectedWithServer;
-        public event Action? DisonnectedFromServer;
-
         private SyncQueue<PacketToServer> dataToServerQueue;
         private SyncQueue<PacketFromServer> dataFromServerQueue;
 
@@ -36,6 +33,9 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
         private Thread ioThread = null!;
         private Socket socket = null!;
         private IPEndPoint targetEndPoint = null!;
+
+        public event Action? ConnectedWithServer;
+        public event Action? DisonnectedFromServer;
 
         public void Connect(string serverIPv4, ushort portTCP)
         {
