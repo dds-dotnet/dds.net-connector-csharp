@@ -115,6 +115,20 @@
             }
         }
 
+        public void Clear()
+        {
+            lock (_mutex)
+            {
+                for (int i = 0; i < _queue.Length; i++)
+                {
+                    _queue[i] = null!;
+                }
+
+                _nextWriteIndex = 0;
+                _nextReadIndex = 0;
+            }
+        }
+
         public void Dispose()
         {
 
