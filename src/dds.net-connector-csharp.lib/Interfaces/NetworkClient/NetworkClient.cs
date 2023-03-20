@@ -95,6 +95,10 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
                         try
                         {
                             socket.ConnectAsync(targetEndPoint);
+                            
+                            dataToServerQueue.Clear();
+                            dataFromServerQueue.Clear();
+
                             ConnectedWithServer?.Invoke();
                         }
                         catch
