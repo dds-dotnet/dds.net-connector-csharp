@@ -1,4 +1,6 @@
-﻿namespace DDS.Net.Connector.EncodersAndDecoders
+﻿using System.Diagnostics;
+
+namespace DDS.Net.Connector.EncodersAndDecoders
 {
     internal static class EncDecMessageHeader
     {
@@ -14,12 +16,10 @@
         /// <param name="offset">Offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <returns>Total bytes in the message if started with specified prefix.</returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
-        /// <exception cref="Exception"></exception>
         internal static int ReadTotalBytesInMessage(this byte[] data, ref int offset)
         {
-            data.ThrowIfNotHavingRequiredBytes(ref offset, 6);
+            Debug.Assert(data != null);
+            Debug.Assert(offset + 6 <= data.Length);
 
             if (data[offset] == '#' && data[offset + 1] == '#')
             {
@@ -44,11 +44,10 @@
         /// <param name="offset">Offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <param name="totalBytes">Total bytes that the message needs to contain.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static void WriteMessageHeader(this byte[] data, ref int offset, int totalBytes)
         {
-            data.ThrowIfNotHavingRequiredBytes(ref offset, 6);
+            Debug.Assert(data != null);
+            Debug.Assert(offset + 6 <= data.Length);
 
             data[offset++] = (byte)'#';
             data[offset++] = (byte)'#';

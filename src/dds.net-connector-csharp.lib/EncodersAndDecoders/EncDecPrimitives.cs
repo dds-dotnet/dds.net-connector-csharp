@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Diagnostics;
+using System.Text;
 
 namespace DDS.Net.Connector.EncodersAndDecoders
 {
@@ -16,12 +17,11 @@ namespace DDS.Net.Connector.EncodersAndDecoders
         /// <param name="offset">Offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <returns>string read from the data buffer</returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="Exception"></exception>
         internal static string ReadString(this byte[] data, ref int offset)
         {
-            data.ThrowIfNotHavingRequiredBytes(ref offset, 2);
+            Debug.Assert(data != null);
+            Debug.Assert(offset + 2 <= data.Length);
 
             int length = data[offset++];
             length = (length << 8) | data[offset++];
@@ -29,7 +29,7 @@ namespace DDS.Net.Connector.EncodersAndDecoders
             if (offset + length > data.Length)
             {
                 throw new Exception($"String should be {length} bytes long " +
-                                    $"but {offset + length - data.Length} bytes are available");
+                                    $"but {data.Length - offset} bytes are available");
             }
 
             string retval = Encoding.Unicode.GetString(data, offset, length);
@@ -45,16 +45,11 @@ namespace DDS.Net.Connector.EncodersAndDecoders
         /// <param name="offset">Offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <param name="value">String to be written to the given buffer.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="Exception"></exception>
         internal static void WriteString(this byte[] data, ref int offset, string value)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
-
+            Debug.Assert(data != null);
+            
             int size = 0;
             byte[] bytes = null!;
 
@@ -62,11 +57,9 @@ namespace DDS.Net.Connector.EncodersAndDecoders
             {
                 bytes = Encoding.Unicode.GetBytes(value);
                 size = bytes.Length;
+                
+                Debug.Assert(offset + 2 + bytes.Length <= data.Length);
 
-                if (offset < 0 || offset + 1 + bytes.Length >= data.Length)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(offset));
-                }
                 if (size > 65535)
                 {
                     throw new Exception($"String too long - having {size} bytes");
@@ -74,14 +67,12 @@ namespace DDS.Net.Connector.EncodersAndDecoders
             }
             else
             {
-                if (offset < 0 || offset + 1 >= data.Length)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(offset));
-                }
+                Debug.Assert(offset + 2 <= data.Length);
             }
 
             data[offset + 1] = (byte)(size & 0x0ff);
             data[offset + 0] = (byte)((size >> 8) & 0x0ff);
+
             offset += 2;
 
             if (size > 0)
@@ -108,11 +99,10 @@ namespace DDS.Net.Connector.EncodersAndDecoders
         /// <param name="offset">Offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <returns>Boolean value [True / False]</returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static bool ReadBoolean(this byte[] data, ref int offset)
         {
-            data.ThrowIfNotHavingRequiredBytes(ref offset, 1);
+            Debug.Assert(data != null);
+            Debug.Assert(offset + 1 <= data.Length);
 
             return data[offset++] != 0;
         }
@@ -124,11 +114,10 @@ namespace DDS.Net.Connector.EncodersAndDecoders
         /// <param name="offset">Offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <param name="value">The Boolean value</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static void WriteBoolean(this byte[] data, ref int offset, bool value)
         {
-            data.ThrowIfNotHavingRequiredBytes(ref offset, 1);
+            Debug.Assert(data != null);
+            Debug.Assert(offset + 1 <= data.Length);
 
             data[offset++] = (byte)(value ? 1 : 0);
         }
@@ -148,11 +137,10 @@ namespace DDS.Net.Connector.EncodersAndDecoders
         /// <param name="offset">Offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <returns>Byte (1-byte Signed Integer)</returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static sbyte ReadByte(this byte[] data, ref int offset)
         {
-            data.ThrowIfNotHavingRequiredBytes(ref offset, 1);
+            Debug.Assert(data != null);
+            Debug.Assert(offset + 1 <= data.Length);
 
             return (sbyte)data[offset++];
         }
@@ -164,11 +152,10 @@ namespace DDS.Net.Connector.EncodersAndDecoders
         /// <param name="offset">Offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <param name="value">1-byte Signed Integer to be written to the data buffer.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static void WriteByte(this byte[] data, ref int offset, sbyte value)
         {
-            data.ThrowIfNotHavingRequiredBytes(ref offset, 1);
+            Debug.Assert(data != null);
+            Debug.Assert(offset + 1 <= data.Length);
 
             data[offset++] = (byte)value;
         }
@@ -188,11 +175,10 @@ namespace DDS.Net.Connector.EncodersAndDecoders
         /// <param name="offset">Offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <returns>Word (2-byte Signed Integer)</returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static short ReadWord(this byte[] data, ref int offset)
         {
-            data.ThrowIfNotHavingRequiredBytes(ref offset, 2);
+            Debug.Assert(data != null);
+            Debug.Assert(offset + 2 <= data.Length);
 
             int value = data[offset++];
             value = (value << 8) | data[offset++];
@@ -207,11 +193,10 @@ namespace DDS.Net.Connector.EncodersAndDecoders
         /// <param name="offset">Offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <param name="value">2-byte Signed Integer to be written to the data buffer.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static void WriteWord(this byte[] data, ref int offset, short value)
         {
-            data.ThrowIfNotHavingRequiredBytes(ref offset, 2);
+            Debug.Assert(data != null);
+            Debug.Assert(offset + 2 <= data.Length);
 
             data[offset++] = (byte)((value >> 8) & 0x0ff);
             data[offset++] = (byte)(value & 0x0ff);
@@ -232,11 +217,10 @@ namespace DDS.Net.Connector.EncodersAndDecoders
         /// <param name="offset">Offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <returns>DWord (4-byte Signed Integer)</returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static int ReadDWord(this byte[] data, ref int offset)
         {
-            data.ThrowIfNotHavingRequiredBytes(ref offset, 4);
+            Debug.Assert(data != null);
+            Debug.Assert(offset + 4 <= data.Length);
 
             int value = data[offset++];
             value = (value << 8) | data[offset++];
@@ -253,11 +237,10 @@ namespace DDS.Net.Connector.EncodersAndDecoders
         /// <param name="offset">Offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <param name="value">4-byte Signed Integer to be written to the data buffer.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static void WriteDWord(this byte[] data, ref int offset, int value)
         {
-            data.ThrowIfNotHavingRequiredBytes(ref offset, 4);
+            Debug.Assert(data != null);
+            Debug.Assert(offset + 4 <= data.Length);
 
             data[offset++] = (byte)((value >> 24) & 0x0ff);
             data[offset++] = (byte)((value >> 16) & 0x0ff);
@@ -280,11 +263,10 @@ namespace DDS.Net.Connector.EncodersAndDecoders
         /// <param name="offset">Offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <returns>QWord (8-byte Signed Integer)</returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static long ReadQWord(this byte[] data, ref int offset)
         {
-            data.ThrowIfNotHavingRequiredBytes(ref offset, 8);
+            Debug.Assert(data != null);
+            Debug.Assert(offset + 8 <= data.Length);
 
             long value = data[offset++];
             value = (value << 8) | data[offset++];
@@ -305,11 +287,10 @@ namespace DDS.Net.Connector.EncodersAndDecoders
         /// <param name="offset">Offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <param name="value">8-byte Signed Integer to be written to the data buffer.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static void WriteQWord(this byte[] data, ref int offset, long value)
         {
-            data.ThrowIfNotHavingRequiredBytes(ref offset, 8);
+            Debug.Assert(data != null);
+            Debug.Assert(offset + 8 <= data.Length);
 
             data[offset++] = (byte)((value >> 56) & 0x0ff);
             data[offset++] = (byte)((value >> 48) & 0x0ff);
@@ -336,11 +317,10 @@ namespace DDS.Net.Connector.EncodersAndDecoders
         /// <param name="offset">Offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <returns>Unsigned Byte (1-byte Unsigned Integer)</returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static byte ReadUnsignedByte(this byte[] data, ref int offset)
         {
-            data.ThrowIfNotHavingRequiredBytes(ref offset, 1);
+            Debug.Assert(data != null);
+            Debug.Assert(offset + 1 <= data.Length);
 
             return data[offset++];
         }
@@ -352,11 +332,10 @@ namespace DDS.Net.Connector.EncodersAndDecoders
         /// <param name="offset">Offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <param name="value">1-byte Unsigned Integer to be written to the data buffer.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static void WriteUnsignedByte(this byte[] data, ref int offset, byte value)
         {
-            data.ThrowIfNotHavingRequiredBytes(ref offset, 1);
+            Debug.Assert(data != null);
+            Debug.Assert(offset + 1 <= data.Length);
 
             data[offset++] = value;
         }
@@ -376,11 +355,10 @@ namespace DDS.Net.Connector.EncodersAndDecoders
         /// <param name="offset">Offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <returns>Unsigned Word (2-byte Unsigned Integer)</returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static ushort ReadUnsignedWord(this byte[] data, ref int offset)
         {
-            data.ThrowIfNotHavingRequiredBytes(ref offset, 2);
+            Debug.Assert(data != null);
+            Debug.Assert(offset + 2 <= data.Length);
 
             int value = data[offset++];
             value = (value << 8) | data[offset++];
@@ -395,11 +373,10 @@ namespace DDS.Net.Connector.EncodersAndDecoders
         /// <param name="offset">Offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <param name="value">2-byte Unsigned Integer to be written to the data buffer.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static void WriteUnsignedWord(this byte[] data, ref int offset, ushort value)
         {
-            data.ThrowIfNotHavingRequiredBytes(ref offset, 2);
+            Debug.Assert(data != null);
+            Debug.Assert(offset + 2 <= data.Length);
 
             data[offset++] = (byte)((value >> 8) & 0x0ff);
             data[offset++] = (byte)((value >> 0) & 0x0ff);
@@ -420,11 +397,10 @@ namespace DDS.Net.Connector.EncodersAndDecoders
         /// <param name="offset">Offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <returns>Unsigned DWord (4-byte Unsigned Integer)</returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static uint ReadUnsignedDWord(this byte[] data, ref int offset)
         {
-            data.ThrowIfNotHavingRequiredBytes(ref offset, 4);
+            Debug.Assert(data != null);
+            Debug.Assert(offset + 4 <= data.Length);
 
             uint value = data[offset++];
             value = (value << 8) | data[offset++];
@@ -441,11 +417,10 @@ namespace DDS.Net.Connector.EncodersAndDecoders
         /// <param name="offset">Offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <param name="value">4-byte Unsigned Integer to be written to the data buffer.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static void WriteUnsignedDWord(this byte[] data, ref int offset, uint value)
         {
-            data.ThrowIfNotHavingRequiredBytes(ref offset, 4);
+            Debug.Assert(data != null);
+            Debug.Assert(offset + 4 <= data.Length);
 
             data[offset++] = (byte)((value >> 24) & 0x0ff);
             data[offset++] = (byte)((value >> 16) & 0x0ff);
@@ -468,11 +443,10 @@ namespace DDS.Net.Connector.EncodersAndDecoders
         /// <param name="offset">Offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <returns>Unsigned QWord (8-byte Unsigned Integer)</returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static ulong ReadUnsignedQWord(this byte[] data, ref int offset)
         {
-            data.ThrowIfNotHavingRequiredBytes(ref offset, 8);
+            Debug.Assert(data != null);
+            Debug.Assert(offset + 8 <= data.Length);
 
             ulong value = data[offset++];
             value = (value << 8) | data[offset++];
@@ -493,11 +467,10 @@ namespace DDS.Net.Connector.EncodersAndDecoders
         /// <param name="offset">Offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <param name="value">8-byte Unsigned Integer to be written to the data buffer.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static void WriteUnsignedQWord(this byte[] data, ref int offset, ulong value)
         {
-            data.ThrowIfNotHavingRequiredBytes(ref offset, 8);
+            Debug.Assert(data != null);
+            Debug.Assert(offset + 8 <= data.Length);
 
             data[offset++] = (byte)((value >> 56) & 0x0ff);
             data[offset++] = (byte)((value >> 48) & 0x0ff);
@@ -524,11 +497,10 @@ namespace DDS.Net.Connector.EncodersAndDecoders
         /// <param name="offset">Offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <returns>float value</returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static float ReadSingle(this byte[] data, ref int offset)
         {
-            data.ThrowIfNotHavingRequiredBytes(ref offset, 4);
+            Debug.Assert(data != null);
+            Debug.Assert(offset + 4 <= data.Length);
 
             if (BitConverter.IsLittleEndian)
             {
@@ -557,11 +529,10 @@ namespace DDS.Net.Connector.EncodersAndDecoders
         /// <param name="offset">Offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <param name="value">The float value to be written to the data buffer.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static void WriteSingle(this byte[] data, ref int offset, float value)
         {
-            data.ThrowIfNotHavingRequiredBytes(ref offset, 4);
+            Debug.Assert(data != null);
+            Debug.Assert(offset + 4 <= data.Length);
 
             byte[] converted = BitConverter.GetBytes(value);
 
@@ -596,11 +567,10 @@ namespace DDS.Net.Connector.EncodersAndDecoders
         /// <param name="offset">Offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <returns>double value</returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static double ReadDouble(this byte[] data, ref int offset)
         {
-            data.ThrowIfNotHavingRequiredBytes(ref offset, 8);
+            Debug.Assert(data != null);
+            Debug.Assert(offset + 8 <= data.Length);
 
 
             if (BitConverter.IsLittleEndian)
@@ -636,11 +606,10 @@ namespace DDS.Net.Connector.EncodersAndDecoders
         /// <param name="offset">Offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <param name="value">The double value to be written to the data buffer.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static void WriteDouble(this byte[] data, ref int offset, double value)
         {
-            data.ThrowIfNotHavingRequiredBytes(ref offset, 8);
+            Debug.Assert(data != null);
+            Debug.Assert(offset + 8 <= data.Length);
 
             byte[] converted = BitConverter.GetBytes(value);
 

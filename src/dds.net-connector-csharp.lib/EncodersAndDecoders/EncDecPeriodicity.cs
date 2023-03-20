@@ -1,4 +1,5 @@
 ﻿using DDS.Net.Connector.Types.Enumerations;
+using System.Diagnostics;
 
 namespace DDS.Net.Connector.EncodersAndDecoders
 {
@@ -12,11 +13,10 @@ namespace DDS.Net.Connector.EncodersAndDecoders
         /// <param name="offset">Offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <returns><c cref="Periodicity">Periodicity</c></returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static Periodicity ReadPeriodicity(this byte[] data, ref int offset)
         {
-            data.ThrowIfNotHavingRequiredBytes(ref offset, 1);
+            Debug.Assert(data != null);
+            Debug.Assert(offset + 1 <= data.Length);
 
             int v = data[offset++];
 
@@ -35,11 +35,10 @@ namespace DDS.Net.Connector.EncodersAndDecoders
         /// <param name="offset">Offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <param name="value">Value to be written to the buffer.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static void WritePeriodicity(this byte[] data, ref int offset, Periodicity value)
         {
-            data.ThrowIfNotHavingRequiredBytes(ref offset, 1);
+            Debug.Assert(data != null);
+            Debug.Assert(offset + 1 <= data.Length);
 
             data[offset++] = (byte)value;
         }

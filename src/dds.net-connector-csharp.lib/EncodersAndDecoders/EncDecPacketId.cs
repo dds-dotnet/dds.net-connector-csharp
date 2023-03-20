@@ -1,4 +1,5 @@
 ﻿using DDS.Net.Connector.Types.Enumerations;
+using System.Diagnostics;
 
 namespace DDS.Net.Connector.EncodersAndDecoders
 {
@@ -12,11 +13,10 @@ namespace DDS.Net.Connector.EncodersAndDecoders
         /// <param name="offset">offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <returns><c cref="PacketId">PacketId</c></returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static PacketId ReadPacketId(this byte[] data, ref int offset)
         {
-            data.ThrowIfNotHavingRequiredBytes(ref offset, 2);
+            Debug.Assert(data != null);
+            Debug.Assert(offset + 2 <= data.Length);
 
             int v = data[offset++];
             v = (v << 8) | data[offset++];
@@ -36,11 +36,10 @@ namespace DDS.Net.Connector.EncodersAndDecoders
         /// <param name="offset">Offset in the data buffer - updated afterwards to point
         /// to the next element in the buffer.</param>
         /// <param name="value">Value to be written to the buffer.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static void WritePacketId(this byte[] data, ref int offset, PacketId value)
         {
-            data.ThrowIfNotHavingRequiredBytes(ref offset, 2);
+            Debug.Assert(data != null);
+            Debug.Assert(offset + 2 <= data.Length);
 
             int v = (int)value;
 
