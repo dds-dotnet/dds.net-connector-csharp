@@ -158,11 +158,15 @@ namespace DDS.Net.Connector.Interfaces.NetworkClient
                 }
             } // while (isIOThreadStarted)
 
-            try
+            if (socket?.Connected == true)
             {
-                socket?.DisconnectAsync(false);
+                try
+                {
+                    DisconnectedFromServer?.Invoke();
+                    socket?.DisconnectAsync(false);
+                }
+                catch { }
             }
-            catch { }
 
             try
             {
