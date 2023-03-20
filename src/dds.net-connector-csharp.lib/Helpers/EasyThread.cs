@@ -107,7 +107,7 @@
 
                                 exitCounter++;
 
-                                if (exitCounter == 10)
+                                if (exitCounter == 5)
                                 {
                                     break;
                                 }
@@ -119,7 +119,7 @@
                     {
                         try
                         {
-                            thread.Join(1000);
+                            thread.Join(500);
                             thread = null!;
                         }
                         catch { }
