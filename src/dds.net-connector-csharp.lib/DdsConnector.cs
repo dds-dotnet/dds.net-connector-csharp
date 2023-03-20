@@ -100,6 +100,9 @@ namespace DDS.Net.Connector
 
             dataReceiverThread = new(DataReceptionWorker, this);
             periodicUpdateThread = new(PeriodicUpdateWorker, this, Settings.BASE_TIME_SLOT_MS);
+
+            NetworkClient.ConnectedWithServer += OnConnectedWithServer;
+            NetworkClient.DisconnectedFromServer += OnDisconnectedFromServer;
         }
         #endregion
         /***********************************************************************************/
@@ -113,11 +116,13 @@ namespace DDS.Net.Connector
         /// </summary>
         public void Start()
         {
-            NetworkClient.Connect(ServerAddressIPv4, ServerPortTCP);
-
             dataReceiverThread.Start();
             periodicUpdateThread.Start();
+            NetworkClient.Connect(ServerAddressIPv4, ServerPortTCP);
+        }
 
+        private void OnConnectedWithServer()
+        {
             byte[] handshake = new byte[
                         EncDecMessageHeader.GetMessageHeaderSizeOnBuffer() +
                         PacketId.HandShake.GetSizeOnBuffer() +
@@ -133,20 +138,8 @@ namespace DDS.Net.Connector
             DataToServer.Enqueue(new(handshake, offset));
         }
 
-        /// <summary>
-        /// Stopping the connection activity.
-        /// </summary>
-        public void Stop()
+        private void OnDisconnectedFromServer()
         {
-            NetworkClient.Disconnect();
-
-            periodicUpdateThread.Stop();
-
-            UnregisterVariablesFromServer();
-            Thread.Sleep(100);
-
-            dataReceiverThread.Stop();
-
             lock (variablesMutex)
             {
                 foreach (KeyValuePair<string, BaseVariable> v in uploadVariables)
@@ -164,6 +157,21 @@ namespace DDS.Net.Connector
                 uploadVariables.Clear();
                 downloadVariables.Clear();
             }
+        }
+
+        /// <summary>
+        /// Stopping the connection activity.
+        /// </summary>
+        public void Stop()
+        {
+            periodicUpdateThread.Stop();
+
+            UnregisterVariablesFromServer();
+            Thread.Sleep(100);
+
+            dataReceiverThread.Stop();
+
+            NetworkClient.Disconnect();
 
             GC.Collect();
         }
