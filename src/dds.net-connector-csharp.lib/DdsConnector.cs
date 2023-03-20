@@ -172,7 +172,7 @@ namespace DDS.Net.Connector
 
                 PacketFromServer packet = connector.DataFromServer.Dequeue();
 
-                connector.ParsePacket(packet.Data);
+                connector.ParsePacket(packet.Data, packet.Size);
             }
 
             return doneAnything;

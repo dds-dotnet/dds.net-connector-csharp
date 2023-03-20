@@ -8,7 +8,7 @@ namespace DDS.Net.Connector
 {
     public partial class DdsConnector
     {
-        private void ParsePacket(byte[] data)
+        private void ParsePacket(byte[] data, int size)
         {
             int offset = 0;
 
