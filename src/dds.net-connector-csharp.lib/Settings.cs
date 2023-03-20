@@ -10,5 +10,9 @@
         /// Time-slice for updating periodic variables to the server.
         /// </summary>
         internal static int BASE_TIME_SLOT_MS = 50;
+        /// <summary>
+        /// Maximum size of packet being received.
+        /// </summary>
+        internal static int MAX_RECEIVE_PACKET_SIZE = 4096;
     }
 }
