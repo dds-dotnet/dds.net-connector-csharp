@@ -89,7 +89,7 @@
         {
             lock (this)
             {
-                if (!isRunning)
+                if (isRunning)
                 {
                     isRunning = false;
 
