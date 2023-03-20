@@ -170,9 +170,12 @@ namespace DDS.Net.Connector
             {
                 doneAnything = true;
 
-                PacketFromServer packet = connector.DataFromServer.Dequeue();
+                byte[] message = PacketPreprocessor.GetSingleMessage(connector.DataFromServer.Dequeue());
 
-                connector.ParsePacket(packet.Data);
+                if (message != null)
+                {
+                    connector.ParsePacket(message);
+                }
             }
 
             return doneAnything;
