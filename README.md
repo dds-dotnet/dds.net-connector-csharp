@@ -87,11 +87,15 @@ namespace DDS.Net.Connector.WpfApp
                   (ushort)serverConfig.GetInteger("DDS Server/ServerPortTCP"),
                   logger);
 
-            connector.RegisterDoubleProvider("TESTX", MyDoubleProvider, Types.Enumerations.Periodicity.Highest);
-            connector.RegisterDoubleProvider("TESTY", MyDoubleProvider, Types.Enumerations.Periodicity.Highest);
+            connector.RegisterDoubleProvider(
+                "TESTX", MyDoubleProvider, Types.Enumerations.Periodicity.Highest);
+            connector.RegisterDoubleProvider(
+                "TESTY", MyDoubleProvider, Types.Enumerations.Periodicity.Highest);
 
-            connector.RegisterDoubleConsumer("TESTX", MyDoubleConsumer, Types.Enumerations.Periodicity.OnChange);
-            connector.RegisterDoubleConsumer("TESTY", MyDoubleConsumer, Types.Enumerations.Periodicity.OnChange);
+            connector.RegisterDoubleConsumer(
+                "TESTX", MyDoubleConsumer, Types.Enumerations.Periodicity.OnChange);
+            connector.RegisterDoubleConsumer(
+                "TESTY", MyDoubleConsumer, Types.Enumerations.Periodicity.OnChange);
         }
 
         private readonly double circleWidth;
