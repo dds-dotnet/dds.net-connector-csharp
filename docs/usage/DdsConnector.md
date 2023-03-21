@@ -20,4 +20,23 @@ DdsConnector(
 
 
 
-## 
+## Starting / Stopping the connector
+
+The connector can be started and stopped after successful initialization. When *Start* is invoked on *DdsConnector* object, the connector connects with the server for data exchange, *Stop* does the opposite.
+
+```csharp
+DdsConnector connector = new DdsConnector(
+                  "My app name", "127.0.0.1", 44556, new BlankLogger());
+
+// ...
+
+// ...
+
+connector.Start();
+
+// ...
+
+// ...
+
+connector.Stop();
+```
