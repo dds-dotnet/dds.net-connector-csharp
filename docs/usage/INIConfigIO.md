@@ -21,7 +21,7 @@ Instance functions help in reading and writing the INI file:
   * *SaveFile*() - Saves the in-memory data into the given file.
 
 
-  * IEnumerable &lt;string&gt; *GetSectionNames*() - Gets all the section names present in the file.
+  * IEnumerable&lt;string&gt; *GetSectionNames*() - Gets all the section names present in the file.
   
   * string *GetString* (string *key*, string *defaultValue* = "") - Gets a value as a string, default value is returned when the key is not present in the file.
   * int *GetInteger* (string *key*, int *defaultValue* = -1) - Gets a value as an integer, default value is returned when the key is not present in the file.
