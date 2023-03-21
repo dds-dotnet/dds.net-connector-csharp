@@ -26,7 +26,7 @@ The connector can be started and stopped after successful initialization. When *
 
 ```csharp
 DdsConnector connector = new DdsConnector(
-                  "My app name", "127.0.0.1", 44556, new BlankLogger());
+        "My app name", "127.0.0.1", 44556, new BlankLogger());
 
 // ...
 
