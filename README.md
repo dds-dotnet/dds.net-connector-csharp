@@ -53,7 +53,9 @@ The code-behind file:
 ```csharp
 // MainWindow.xaml.cs
 
+using DDS.Net.Connector;
 using DDS.Net.Connector.Helpers;
+using DDS.Net.Connector.Interfaces;
 using DDS.Net.Connector.Interfaces.DefaultLogger;
 using System.Windows;
 using System.Windows.Controls;
@@ -74,7 +76,7 @@ namespace DDS.Net.Connector.WpfApp
             circleWidth = theCircle.Width;
             circleHeight = theCircle.Height;
 
-            logger = new FileLogger("my-log-file.log", Interfaces.LogLevel.Information);
+            logger = new FileLogger("my-log-file.log", LogLevel.Information);
 
             INIConfigIO serverConfig = new("my-config.ini");
 
