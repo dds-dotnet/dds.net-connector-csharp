@@ -11,11 +11,11 @@ DdsConnector(
 ```
 
 > **applicationName** is the name of the application that is using the connector - it sent to the server for identification purposes.
-
+> 
 > **serverIPv4** is the IP address of target server in standard IPv4 format; for example, "127.0.0.1" is a loopback address.
-
+> 
 > **serverPortTCP** is the TCP port number on which the target server is listening for connections.
-
+> 
 > **logger** is interface implementation for [*ILogger*](./ILogger.md), the library includes common logger implementations.
 
 
@@ -86,7 +86,9 @@ For using, it is required to implement requisite methods as per delegates and re
 Here
 
 > **variableName** is case-sensitive name for the variable.
+> 
 > **provider** is the data provider function as per delegate signature.
+> 
 > **periodicity** is enumerated update [Periodicity](./Periodicity.md)
 
   * **RegisterStringProvider** (string *variableName*, StringProvider *provider*, Periodicity *periodicity*)
@@ -129,7 +131,9 @@ For using, it is required to implement requisite methods as per delegates and re
 Here
 
 > **variableName** is case-sensitive name for the variable.
+> 
 > **consumer** is the data consumer function as per delegate signature.
+> 
 > **periodicity** is enumerated update [Periodicity](./Periodicity.md)
 
   * **RegisterStringConsumer** (string *variableName*, StringConsumer *consumer*, Periodicity *periodicity*)
