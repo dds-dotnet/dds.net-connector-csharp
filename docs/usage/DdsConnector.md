@@ -40,3 +40,35 @@ connector.Start();
 
 connector.Stop();
 ```
+
+## Variables' Registration
+
+Following variable types can be registered with the server:
+
+
+| Type              | Represented data                                    |
+|-------------------|-----------------------------------------------------|
+| *String*          | Sequence of characters in Unicode                   |
+| *Boolean*         | A boolean (True or False)                           |
+| *Byte*            | 1-byte Signed Integer                               |
+| *Word*            | 2-byte Signed Integer                               |
+| *DWord*           | 4-byte Signed Integer                               |
+| *QWord*           | 8-byte Signed Integer                               |
+| *Unsigned Byte*   | 1-byte Unsigned Integer                             |
+| *Unsigned Word*   | 2-byte Unsigned Integer                             |
+| *Unsigned DWord*  | 4-byte Unsigned Integer                             |
+| *Unsigned QWord*  | 8-byte Unsigned Integer                             |
+| *Single*          | A single precision (4-byte) Floating-point number   |
+| *Double*          | A double precision (8-byte) Floating-point number   |
+| *Raw Bytes*       | Sequence of bytes                                   |
+
+
+### Providers
+
+Providers provide variable data to the server.
+
+
+### Consumers
+
+Consumers get data from the server provided by any provider.
+
