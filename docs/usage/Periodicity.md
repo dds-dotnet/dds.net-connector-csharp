@@ -10,4 +10,6 @@ DDS.Net.Connector.Types.Enumerations.**Periodicity** specifies the periodicity f
   * *Lowest* - update is done every *BASE_TIME_SLOT_MS* x 16 millisecond
 
 > *BASE_TIME_SLOT_MS* by default is set to *50*.
-        
+
+
+
