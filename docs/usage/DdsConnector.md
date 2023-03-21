@@ -2,7 +2,7 @@
 
 DDS.Net.Connector.**DdsConnector** is the main class for using the connector. Its constructor takes following arguments:
 
-```
+```csharp
 DdsConnector(
             string applicationName,
             string serverIPv4,
