@@ -27,7 +27,7 @@
 
 Using various extensions and helpers available in the library, development of connected application is quite easy. A sample *WPF* application's window goes as follows:
 
-'''xml
+```xml
 <!-- MainWindow.xaml -->
 
 <Window x:Name="mainWindow" x:Class="DDS.Net.Connector.WpfApp.MainWindow"
