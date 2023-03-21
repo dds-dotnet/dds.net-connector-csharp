@@ -72,8 +72,6 @@ namespace DDS.Net.Connector.WpfApp
         {
             InitializeComponent();
 
-            OnWindowResized(this, null!); // Forcing getting size initially
-
             circleWidth = theCircle.Width;
             circleHeight = theCircle.Height;
 
