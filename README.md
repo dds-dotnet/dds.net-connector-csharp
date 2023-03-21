@@ -53,10 +53,11 @@ The code-behind file:
 ```csharp
 // MainWindow.xaml.cs
 
-using DDS.Net.Connector;
 using DDS.Net.Connector.Helpers;
 using DDS.Net.Connector.Interfaces;
 using DDS.Net.Connector.Interfaces.DefaultLogger;
+using DDS.Net.Connector.WpfApp.Configuration;
+using DDS.Net.Connector.WpfApp.InterfaceImpl;
 using System.Windows;
 using System.Windows.Controls;
 
