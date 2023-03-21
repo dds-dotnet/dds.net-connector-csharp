@@ -1,9 +1,8 @@
 ﻿using DDS.Net.Connector.Helpers;
+using DDS.Net.Connector.Interfaces;
 using DDS.Net.Connector.Interfaces.DefaultLogger;
 using DDS.Net.Connector.WpfApp.Configuration;
 using DDS.Net.Connector.WpfApp.InterfaceImpl;
-using System;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -22,8 +21,8 @@ namespace DDS.Net.Connector.WpfApp
             circleHeight = theCircle.Height;
 
             logger = new(
-                new FileLogger(AppConstants.LOG_FILENAME, Interfaces.LogLevel.Information),
-                new TextBlockLogger(logTextBlock, logScrollViewer, Interfaces.LogLevel.Information));
+                new FileLogger(AppConstants.LOG_FILENAME, LogLevel.Information),
+                new TextBlockLogger(logTextBlock, logScrollViewer, LogLevel.Information));
 
             INIConfigIO serverConfig = new(AppConstants.SERVER_CONFIG_FILENAME);
 
