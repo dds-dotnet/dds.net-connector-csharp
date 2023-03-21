@@ -202,3 +202,11 @@ ServerIPv4 = 127.0.0.1
 ServerPortTCP = 44556
 ```
 
+
+
+## Library usage
+
+The [library](./docs/usage/README.md) includes *DDS.Net C# Connector* and various helpers to ease developing connected .NET applications.
+
+
+
