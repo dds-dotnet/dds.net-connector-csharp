@@ -4,10 +4,10 @@ DDS.Net.Connector.**DdsConnector** is the main class for using the connector. It
 
 ```csharp
 DdsConnector(
-            string applicationName,
-            string serverIPv4,
-            ushort serverPortTCP,
-            ILogger logger)
+        string applicationName,
+        string serverIPv4,
+        ushort serverPortTCP,
+        ILogger logger)
 ```
 
 > **applicationName** is the name of the application that is using the connector - it sent to the server for identification purposes.
