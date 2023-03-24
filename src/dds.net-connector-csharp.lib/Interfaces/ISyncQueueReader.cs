@@ -7,6 +7,10 @@
     internal interface ISyncQueueReader<T>
     {
         /// <summary>
+        /// The event is initiated upon availability of data.
+        /// </summary>
+        event Action<T>? DataAvailable;
+        /// <summary>
         /// Checks if the queue has any element to dequeue.
         /// </summary>
         /// <returns>True if any element is available, False otherwise.</returns>
