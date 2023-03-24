@@ -111,7 +111,7 @@ namespace DDS.Net.Connector.Types.Variables.RawBytes
 
         public override void WriteValueOnBuffer(ref byte[] buffer, ref int offset)
         {
-            if (offset + GetValueSizeOnBuffer() >= buffer.Length)
+            if (offset + GetValueSizeOnBuffer() > buffer.Length)
             {
                 throw new Exception(
                     $"Cannot fit {GetValueSizeOnBuffer()} bytes " +

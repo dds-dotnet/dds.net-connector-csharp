@@ -188,7 +188,7 @@ namespace DDS.Net.Connector
                             //- 
                             //- Not enough data is available
                             //- 
-                            if (totalBytes + offset >= data.Length)
+                            if (totalBytes + offset > data.Length)
                             {
                                 if (var != null)
                                 {
