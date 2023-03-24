@@ -19,6 +19,8 @@
         private int _nextWriteIndex;
         private int _nextReadIndex;
 
+        public event Action? DataAvailable;
+
         /// <summary>
         /// Initializes queue with specified size.
         /// </summary>
@@ -113,6 +115,8 @@
 
                 Thread.Sleep(SLEEP_TIME_MS_WHEN_DATA_CANNOT_BE_ENQUEUED);
             }
+
+            DataAvailable?.Invoke();
         }
 
         public void Clear()
