@@ -5,7 +5,7 @@
         /// <summary>
         /// Version for the connector.
         /// </summary>
-        internal static string CONNECTOR_VERSION = "1.1.0";
+        internal static string CONNECTOR_VERSION = "1.1.1";
         /// <summary>
         /// Time-slice for updating periodic variables to the server.
         /// </summary>
