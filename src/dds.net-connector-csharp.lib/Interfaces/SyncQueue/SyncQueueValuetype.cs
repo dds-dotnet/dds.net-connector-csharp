@@ -20,6 +20,8 @@
         private int _nextWriteIndex;
         private int _nextReadIndex;
 
+        public event Action? DataAvailable;
+
         /// <summary>
         /// Initializes queue with specified size.
         /// </summary>
@@ -93,6 +95,8 @@
                 if (_nextWriteIndex == _queue.Length)
                     _nextWriteIndex = 0;
             }
+
+            DataAvailable?.Invoke();
         }
 
         public void Dispose()
