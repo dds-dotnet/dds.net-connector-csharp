@@ -1,7 +1,7 @@
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img src="./.assets/DDS.Net Connector Icon-CS-BG-None.png" width="15%" />
 
 
-# DDS.Net C# Connector - v1.1.0
+# DDS.Net C# Connector - v1.1.1
 
 *DDS.Net C# Connector* intends to be a lightweight and performant connector for connecting distributed C# applications through *DDS.Net Server*. The supported data types are:
 
