@@ -9,7 +9,7 @@
         /// <summary>
         /// The event is initiated upon availability of data.
         /// </summary>
-        event Action<T>? DataAvailable;
+        event Action? DataAvailable;
         /// <summary>
         /// Checks if the queue has any element to dequeue.
         /// </summary>
