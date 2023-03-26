@@ -21,6 +21,14 @@
 |                                                    | *Double*          | A double precision (8-byte) Floating-point number   |
 | ***Raw Bytes***                                    | -                 | Sequence of bytes                                   |
 
+&nbsp;
+
+> Data transfer with the server is only done when there is change in value
+
+> Value subscribers are only invoked upon corresponding value changes
+
+&nbsp;
+
 
 
 ## Sample application
