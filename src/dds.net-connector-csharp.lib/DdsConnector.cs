@@ -176,6 +176,9 @@ namespace DDS.Net.Connector
             GC.Collect();
         }
 
+
+        private PacketPreprocessor packetPreprocessor = new();
+
         private static bool DataReceptionWorker(DdsConnector connector)
         {
             bool doneAnything = false;
@@ -184,11 +187,11 @@ namespace DDS.Net.Connector
             {
                 doneAnything = true;
 
-                PacketPreprocessor.AddData(connector.DataFromServer.Dequeue());
+                connector.packetPreprocessor.AddData(connector.DataFromServer.Dequeue());
 
                 while (true)
                 {
-                    byte[] message = PacketPreprocessor.GetSingleMessage();
+                    byte[] message = connector.packetPreprocessor.GetSingleMessage();
 
                     if (message != null)
                     {
