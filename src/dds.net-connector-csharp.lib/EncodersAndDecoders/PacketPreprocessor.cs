@@ -2,14 +2,14 @@
 
 namespace DDS.Net.Connector.EncodersAndDecoders
 {
-    internal static class PacketPreprocessor
+    internal class PacketPreprocessor
     {
-        private static Mutex mutex = new();
-        private static byte[] previousData = null!;
-        private static int previousDataStartIndex = 0;
-        private static int previousNextWriteIndex = 0;
+        private Mutex mutex = new();
+        private byte[] previousData = null!;
+        private int previousDataStartIndex = 0;
+        private int previousNextWriteIndex = 0;
 
-        internal static void AddData(PacketFromServer packet)
+        internal void AddData(PacketFromServer packet)
         {
             lock (mutex)
             {
@@ -108,7 +108,7 @@ namespace DDS.Net.Connector.EncodersAndDecoders
             }
         }
 
-        internal static byte[] GetSingleMessage()
+        internal byte[] GetSingleMessage()
         {
             lock (mutex)
             {
