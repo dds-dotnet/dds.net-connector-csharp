@@ -7,7 +7,7 @@
     <Nullable>enable</Nullable>
     <PackageId>CronBlocks.DDS.Net.Connector</PackageId>
     <Title>DDS.Net.Connector</Title>
-    <Version>1.1.1</Version>
+    <Version>1.2.0</Version>
     <Authors>CronBlocks</Authors>
     <Description>DDS.Net C# Connector intends to be a lightweight and performant connector for connecting distributed C# applications through DDS.Net Server.</Description>
     <Copyright>CronBlocks</Copyright>
