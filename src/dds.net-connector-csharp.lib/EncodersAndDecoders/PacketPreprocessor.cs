@@ -49,21 +49,14 @@ namespace DDS.Net.Connector.EncodersAndDecoders
                 //- 
                 //- Compacting the buffer
                 //- 
-                if (bufferNextWriteIndex != bufferStartIndex)
+                if (bufferStartIndex > 0)
                 {
-                    int timesShifted = 0;
                     for (int i = 0; i < (bufferNextWriteIndex - bufferStartIndex); i++)
                     {
                         buffer[i] = buffer[bufferStartIndex + i];
-                        timesShifted++;
                     }
 
-                    bufferStartIndex = 0;
-                    bufferNextWriteIndex -= timesShifted;
-                }
-                else
-                {
-                    bufferNextWriteIndex = 0;
+                    bufferNextWriteIndex -= bufferStartIndex;
                     bufferStartIndex = 0;
                 }
 
@@ -162,8 +155,6 @@ namespace DDS.Net.Connector.EncodersAndDecoders
 
                         index++;
                     }
-
-                    previousDataStartIndex = bufferStartIndex;
 
                     return null!;
                 }
