@@ -25,7 +25,7 @@
             Grid.RowSpan="2"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
-            Margin="0,8,10,8">
+            Margin="0,8,10,8" Panel.ZIndex="100">
 
             <TextBlock Text="Test String"/><TextBlock x:Name="testStringValue"/>
             <TextBlock Text="Test Boolean"/><TextBlock x:Name="testBooleanValue"/>
