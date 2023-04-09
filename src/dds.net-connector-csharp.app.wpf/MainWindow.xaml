@@ -16,13 +16,13 @@
             <Ellipse x:Name="theCircle"
                      Canvas.Left="0" Canvas.Right="0"
                      Width="50" Height="50"
-                     Fill="BurlyWood" />
+                     Fill="#FF926121" />
         </Canvas>
 
         <ScrollViewer Name="logScrollViewer" Grid.Row="1">
             <TextBlock Name="logTextBlock"
                        FontSize="14" Padding="15,5,15,5"
-                       Background="Beige" Foreground="#FF5B05AB"
+                       Background="#FFF0F1EA" Foreground="#FF5B05AB"
                        />
         </ScrollViewer>
 
