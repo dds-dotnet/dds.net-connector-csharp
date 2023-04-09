@@ -16,7 +16,7 @@
             <Ellipse x:Name="theCircle"
                      Canvas.Left="0" Canvas.Right="0"
                      Width="50" Height="50"
-                     Fill="Bisque" />
+                     Fill="BurlyWood" />
         </Canvas>
 
         <ScrollViewer Name="logScrollViewer" Grid.Row="1">
