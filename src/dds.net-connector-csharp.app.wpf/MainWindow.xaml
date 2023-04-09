@@ -19,6 +19,28 @@
                      Fill="#FF926121" />
         </Canvas>
 
+        <StackPanel x:Name="theDataPanel"
+            Orientation="Vertical"
+            Width="Auto"
+            Grid.RowSpan="2"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Margin="0,8,10,8">
+
+            <TextBlock Text="Test String"/><TextBlock x:Name="testStringValue"/>
+            <TextBlock Text="Test Boolean"/><TextBlock x:Name="testBooleanValue"/>
+            <TextBlock Text="Test Byte"/><TextBlock x:Name="testByteValue"/>
+            <TextBlock Text="Test Word"/><TextBlock x:Name="testWordValue"/>
+            <TextBlock Text="Test DWord"/><TextBlock x:Name="testDWordValue"/>
+            <TextBlock Text="Test QWord"/><TextBlock x:Name="testQWordValue"/>
+            <TextBlock Text="Test UnsignedByte"/><TextBlock x:Name="testUnsignedByteValue"/>
+            <TextBlock Text="Test UnsignedWord"/><TextBlock x:Name="testUnsignedWordValue"/>
+            <TextBlock Text="Test UnsignedDWord"/><TextBlock x:Name="testUnsignedDWordValue"/>
+            <TextBlock Text="Test UnsignedQWord"/><TextBlock x:Name="testUnsignedQWordValue"/>
+            <TextBlock Text="Test Single"/><TextBlock x:Name="testSingleValue"/>
+            <TextBlock Text="Test Double"/><TextBlock x:Name="testDoubleValue"/>
+        </StackPanel>
+
         <ScrollViewer Name="logScrollViewer" Grid.Row="1">
             <TextBlock Name="logTextBlock"
                        FontSize="14" Padding="15,5,15,5"
