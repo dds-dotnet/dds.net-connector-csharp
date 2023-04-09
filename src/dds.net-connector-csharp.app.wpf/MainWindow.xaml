@@ -8,8 +8,8 @@
         Title="DDS.Net Connected App" Height="450" Width="800" Loaded="OnWindowLoaded" Closing="OnWindowClosing" SizeChanged="OnWindowResized">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*" MaxHeight="280"/>
+            <RowDefinition Height="257*"/>
+            <RowDefinition Height="177*" MaxHeight="280"/>
         </Grid.RowDefinitions>
 
         <Canvas x:Name="theCanvas">
