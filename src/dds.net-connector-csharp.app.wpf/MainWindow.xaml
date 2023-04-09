@@ -12,7 +12,7 @@
             <RowDefinition Height="177*" MaxHeight="280"/>
         </Grid.RowDefinitions>
 
-        <Canvas x:Name="theCanvas">
+        <Canvas x:Name="theCanvas" Background="#FFF6F7FB">
             <Ellipse x:Name="theCircle"
                      Canvas.Left="0" Canvas.Right="0"
                      Width="50" Height="50"
