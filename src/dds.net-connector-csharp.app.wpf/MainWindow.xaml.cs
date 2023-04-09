@@ -32,11 +32,11 @@ namespace DDS.Net.Connector.WpfApp
                             (ushort)serverConfig.GetInteger("DDS Server/ServerPortTCP"),
                             logger);
 
-            connector.RegisterDoubleProvider("TESTX", MyDoubleProvider, Types.Enumerations.Periodicity.Highest);
-            connector.RegisterDoubleProvider("TESTY", MyDoubleProvider, Types.Enumerations.Periodicity.Highest);
+            connector.RegisterDoubleProvider("Circle-X", CircleValuesProvider, Types.Enumerations.Periodicity.Highest);
+            connector.RegisterDoubleProvider("Circle-Y", CircleValuesProvider, Types.Enumerations.Periodicity.Highest);
 
-            connector.RegisterDoubleConsumer("TESTX", MyDoubleConsumer, Types.Enumerations.Periodicity.OnChange);
-            connector.RegisterDoubleConsumer("TESTY", MyDoubleConsumer, Types.Enumerations.Periodicity.OnChange);
+            connector.RegisterDoubleConsumer("Circle-X", CircleValuesConsumer, Types.Enumerations.Periodicity.OnChange);
+            connector.RegisterDoubleConsumer("Circle-Y", CircleValuesConsumer, Types.Enumerations.Periodicity.OnChange);
         }
 
         private readonly double circleWidth;
@@ -45,13 +45,13 @@ namespace DDS.Net.Connector.WpfApp
         double circleX = 0;
         double circleY = 0;
 
-        private void MyDoubleConsumer(string variableName, double variableValue)
+        private void CircleValuesConsumer(string variableName, double variableValue)
         {
-            if (variableName == "TESTX")
+            if (variableName == "Circle-X")
             {
                 circleX = variableValue;
             }
-            else if (variableName == "TESTY")
+            else if (variableName == "Circle-Y")
             {
                 circleY = variableValue;
 
@@ -70,9 +70,9 @@ namespace DDS.Net.Connector.WpfApp
         bool isXIncreasing = true;
         bool isYIncreasing = true;
 
-        private double MyDoubleProvider(string variableName)
+        private double CircleValuesProvider(string variableName)
         {
-            if (variableName == "TESTX")
+            if (variableName == "Circle-X")
             {
                 if (isXIncreasing)
                 {
@@ -94,7 +94,7 @@ namespace DDS.Net.Connector.WpfApp
 
                 return x;
             }
-            if (variableName == "TESTY")
+            if (variableName == "Circle-Y")
             {
                 if (isYIncreasing)
                 {
