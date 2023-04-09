@@ -21,7 +21,7 @@
 
         <StackPanel x:Name="theDataPanel"
             Orientation="Vertical"
-            Width="Auto"
+            Width="300"
             Grid.RowSpan="2"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
