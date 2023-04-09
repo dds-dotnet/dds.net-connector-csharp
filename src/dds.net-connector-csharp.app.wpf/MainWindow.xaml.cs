@@ -3,6 +3,7 @@ using DDS.Net.Connector.Interfaces;
 using DDS.Net.Connector.Interfaces.DefaultLogger;
 using DDS.Net.Connector.WpfApp.Configuration;
 using DDS.Net.Connector.WpfApp.InterfaceImpl;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -37,6 +38,72 @@ namespace DDS.Net.Connector.WpfApp
 
             connector.RegisterDoubleConsumer("Circle-X", CircleValuesConsumer, Types.Enumerations.Periodicity.OnChange);
             connector.RegisterDoubleConsumer("Circle-Y", CircleValuesConsumer, Types.Enumerations.Periodicity.OnChange);
+            
+
+            connector.RegisterStringConsumer("Test-String", TestStringConsumer, Types.Enumerations.Periodicity.OnChange);
+            connector.RegisterBooleanConsumer("Test-Boolean", TestBooleanConsumer, Types.Enumerations.Periodicity.OnChange);
+
+            connector.RegisterByteConsumer("Test-Byte", TestByteConsumer, Types.Enumerations.Periodicity.OnChange);
+            connector.RegisterWordConsumer("Test-Word", TestWordConsumer, Types.Enumerations.Periodicity.OnChange);
+            connector.RegisterDWordConsumer("Test-DWord", TestDWordConsumer, Types.Enumerations.Periodicity.OnChange);
+            connector.RegisterQWordConsumer("Test-QWord", TestQWordConsumer, Types.Enumerations.Periodicity.OnChange);
+
+            connector.RegisterUnsignedByteConsumer("Test-UnsignedByte", TestUnsignedByteConsumer, Types.Enumerations.Periodicity.OnChange);
+            connector.RegisterUnsignedWordConsumer("Test-UnsignedWord", TestUnsignedWordConsumer, Types.Enumerations.Periodicity.OnChange);
+            connector.RegisterUnsignedDWordConsumer("Test-UnsignedDWord", TestUnsignedDWordConsumer, Types.Enumerations.Periodicity.OnChange);
+            connector.RegisterUnsignedQWordConsumer("Test-UnsignedQWord", TestUnsignedQWordConsumer, Types.Enumerations.Periodicity.OnChange);
+            
+            connector.RegisterSingleConsumer("Test-Single", TestSingleConsumer, Types.Enumerations.Periodicity.OnChange);
+            connector.RegisterDoubleConsumer("Test-Double", TestDoubleConsumer, Types.Enumerations.Periodicity.OnChange);
+        }
+
+        private void TestStringConsumer(string variableName, string variableValue)
+        {
+            mainWindow.Dispatcher.Invoke(() => { testStringValue.Text = variableValue; });
+        }
+        private void TestBooleanConsumer(string variableName, bool variableValue)
+        {
+            mainWindow.Dispatcher.Invoke(() => { testBooleanValue.Text = $"{variableValue}"; });
+        }
+        private void TestByteConsumer(string variableName, sbyte variableValue)
+        {
+            mainWindow.Dispatcher.Invoke(() => { testByteValue.Text = $"{variableValue}"; });
+        }
+        private void TestWordConsumer(string variableName, short variableValue)
+        {
+            mainWindow.Dispatcher.Invoke(() => { testWordValue.Text = $"{variableValue}"; });
+        }
+        private void TestDWordConsumer(string variableName, int variableValue)
+        {
+            mainWindow.Dispatcher.Invoke(() => { testDWordValue.Text = $"{variableValue}"; });
+        }
+        private void TestQWordConsumer(string variableName, long variableValue)
+        {
+            mainWindow.Dispatcher.Invoke(() => { testQWordValue.Text = $"{variableValue}"; });
+        }
+        private void TestUnsignedByteConsumer(string variableName, byte variableValue)
+        {
+            mainWindow.Dispatcher.Invoke(() => { testUnsignedByteValue.Text = $"{variableValue}"; });
+        }
+        private void TestUnsignedWordConsumer(string variableName, ushort variableValue)
+        {
+            mainWindow.Dispatcher.Invoke(() => { testUnsignedWordValue.Text = $"{variableValue}"; });
+        }
+        private void TestUnsignedDWordConsumer(string variableName, uint variableValue)
+        {
+            mainWindow.Dispatcher.Invoke(() => { testUnsignedDWordValue.Text = $"{variableValue}"; });
+        }
+        private void TestUnsignedQWordConsumer(string variableName, ulong variableValue)
+        {
+            mainWindow.Dispatcher.Invoke(() => { testUnsignedQWordValue.Text = $"{variableValue}"; });
+        }
+        private void TestSingleConsumer(string variableName, float variableValue)
+        {
+            mainWindow.Dispatcher.Invoke(() => { testSingleValue.Text = $"{variableValue}"; });
+        }
+        private void TestDoubleConsumer(string variableName, double variableValue)
+        {
+            mainWindow.Dispatcher.Invoke(() => { testDoubleValue.Text = $"{variableValue}"; });
         }
 
         private readonly double circleWidth;
