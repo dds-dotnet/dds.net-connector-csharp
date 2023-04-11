@@ -39,6 +39,7 @@
             <TextBlock Text="Test UnsignedQWord"/><TextBlock x:Name="testUnsignedQWordValue"/>
             <TextBlock Text="Test Single"/><TextBlock x:Name="testSingleValue"/>
             <TextBlock Text="Test Double"/><TextBlock x:Name="testDoubleValue"/>
+            <TextBlock Text="Test Bytes"/><TextBlock x:Name="testBytesValue"/>
         </StackPanel>
 
         <ScrollViewer Name="logScrollViewer" Grid.Row="1">

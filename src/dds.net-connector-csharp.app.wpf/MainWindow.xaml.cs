@@ -55,6 +55,8 @@ namespace DDS.Net.Connector.WpfApp
             
             connector.RegisterSingleConsumer("Test-Single", TestSingleConsumer, Types.Enumerations.Periodicity.OnChange);
             connector.RegisterDoubleConsumer("Test-Double", TestDoubleConsumer, Types.Enumerations.Periodicity.OnChange);
+
+            connector.RegisterRawBytesConsumer("Test-Bytes", TestBytesConsumer, Types.Enumerations.Periodicity.OnChange);
         }
 
         private void TestStringConsumer(string variableName, string variableValue)
@@ -105,6 +107,18 @@ namespace DDS.Net.Connector.WpfApp
         {
             mainWindow.Dispatcher.Invoke(() => { testDoubleValue.Text = $"{variableValue}"; });
         }
+        private void TestBytesConsumer(string variableName, byte[] variableValue)
+        {
+            string s = "";
+            foreach (byte b in variableValue)
+            {
+                s += (int)b;
+                s += " | ";
+            }
+
+            mainWindow.Dispatcher.Invoke(() => { testBytesValue.Text = s; });
+        }
+
 
         private readonly double circleWidth;
         private readonly double circleHeight;
