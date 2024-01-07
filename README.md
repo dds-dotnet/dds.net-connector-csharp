@@ -3,6 +3,8 @@
 
 # DDS.Net C# Connector - v1.3.0
 
+Available at [nuget](https://www.nuget.org/packages/CronBlocks.DDS.Net.Connector).
+
 *DDS.Net C# Connector* intends to be a lightweight and performant connector for connecting distributed C# applications through *DDS.Net Server*. The supported data types are:
 
 | Main type                                          | Sub-type          | Represented data                                    |
